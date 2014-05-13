@@ -2,8 +2,11 @@ OwinAngularBoilerplate
 ======================
 
 
-Using lightweight [Owin](http://owin.org/) with [WebApi](http://www.asp.net/web-api) and [NancyMVC](http://nancyfx.org/) with [Identity](http://www.asp.net/identity) together with [Angular](https://angularjs.org/) with [Typescript](http://www.typescriptlang.org/). Plain project for starting up new one and build up your application.
+##What is this?
+Startup boilerplat using lightweight [Owin](http://owin.org/), [Identity](http://www.asp.net/identity) together with [Angular](https://angularjs.org/). 
 
+##Demo
+* [not available yet]()
 
 ##Technologies
 * [Owin](http://owin.org/) ([Katana](https://katanaproject.codeplex.com/) - .NET implementation of OWIN)
@@ -15,5 +18,7 @@ Using lightweight [Owin](http://owin.org/) with [WebApi](http://www.asp.net/web-
 * [Typescript](http://typescript.codeplex.com/)
 * [Bootstrap](http://getbootstrap.com/)
 
-###optional
+###Optional 
 * Identity Reboot
+
+
