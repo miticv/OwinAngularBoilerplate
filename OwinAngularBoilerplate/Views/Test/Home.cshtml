@@ -1,0 +1,14 @@
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<OwinAngularBoilerplate.Models.TestModel>
+@{
+    Layout = "Views/Shared/_Layout.cshtml";
+}
+
+<div class="jumbotron">
+    <h1>Testng view in Nancy</h1>
+    <p class="lead">Here is value from the model: @Model.Name</p>
+</div>
+
+<p>
+    <a href="http://localhost:59690/api/account/UserInfo">UserInfo</a> <br/>
+
+</p>
