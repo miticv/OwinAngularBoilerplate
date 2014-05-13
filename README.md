@@ -2,16 +2,18 @@ OwinAngularBoilerplate
 ======================
 
 
-Using lightweight Owin with WebApi and NancyMVC with Identity together with Angular with Typescript. Plain project for starting up new one and build up your application.
+Using lightweight [Owin](http://owin.org/) with [WebApi](http://www.asp.net/web-api) and [NancyMVC](http://nancyfx.org/) with [Identity](http://www.asp.net/identity) together with [Angular](https://angularjs.org/) with [Typescript](http://www.typescriptlang.org/). Plain project for starting up new one and build up your application.
 
 
 ##Technologies
-* Owin (Microsoft implementation of Katana)
-* WebAPI (web api works nice with OWIN)
-* Nancy MVC (We are not using MVC from Microsoft because it is heavilly dependant on System.Web which adds significant memmory overhead to your IIS server)
-* Identity
-* Angular
-* Angular UI
-* Bootstrap
+* [Owin](http://owin.org/) ([Katana](https://katanaproject.codeplex.com/) - .NET implementation of OWIN)
+* [WebApi](http://www.asp.net/web-api) (.NET Web Api works great with OWIN)
+* [NancyMVC](http://nancyfx.org/) (Not using .NET MVC since it heavilly relies on System.Web)
+* [Identity](http://www.asp.net/identity)
+* [Angular](https://angularjs.org/)
+* [Angular UI](http://angular-ui.github.io/)
+* [Typescript](http://typescript.codeplex.com/)
+* [Bootstrap](http://getbootstrap.com/)
 
-
+###optional
+* Identity Reboot
