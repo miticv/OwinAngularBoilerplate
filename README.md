@@ -19,6 +19,6 @@ Startup boilerplat using lightweight [Owin](http://owin.org/), [Identity](http:/
 * [Bootstrap](http://getbootstrap.com/)
 
 ###Optional 
-* Identity Reboot
+* [Identity Reboot](https://github.com/brockallen/BrockAllen.IdentityReboot) by [Brock Allen](http://brockallen.com/2014/02/11/introducing-identityreboot/)
 
 
