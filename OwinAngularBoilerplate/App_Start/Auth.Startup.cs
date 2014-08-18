@@ -28,7 +28,19 @@ namespace OwinAngularBoilerplate
 
             // Enable the application to use a cookie to store information for the signed in user
             // and to use a cookie to temporarily store information about a user logging in with a third party login provider
-            app.UseCookieAuthentication(new CookieAuthenticationOptions());
+            app.UseCookieAuthentication(new CookieAuthenticationOptions() 
+            //{             
+            // Provider = = new CookieAuthenticationProvider 
+            //    { 
+            //        OnValidateIdentity = SecurityStampValidator
+            //            .OnValidateIdentity<ApplicationUserManager, ApplicationUser, int>( 
+            //                validateInterval: TimeSpan.FromMinutes(30), 
+            //                regenerateIdentityCallback: (manager, user) => 
+            //                    user.GenerateUserIdentityAsync(manager), 
+            //                getUserIdCallback:(id)=>(Int32.Parse(id.GetUserId())))
+            //    } 
+            //}
+            );
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             // Configure the application for OAuth based flow

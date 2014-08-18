@@ -469,11 +469,10 @@
     <Folder Include="app\common\filters\" />
     <Folder Include="app\common\partials\" />
     <Folder Include="app\common\services\" />
+    <Folder Include="app\main\controllers\" />
     <Folder Include="app\main\services\" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="app\main\App.ts" />
-    <TypeScriptCompile Include="app\main\controllers\HomeController.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-translate\angular-translate.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui-bootstrap\angular-ui-bootstrap.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui\angular-ui-router.d.ts" />
