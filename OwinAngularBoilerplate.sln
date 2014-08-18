@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.30324.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OwinAngularBoilerplate", "OwinAngularBoilerplate\OwinAngularBoilerplate.csproj", "{DAE614E2-1266-4EC5-9B27-6CA5BB8E4BB9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTest.csproj", "{62509E6F-B915-493B-95C3-73B864775BB1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{DAE614E2-1266-4EC5-9B27-6CA5BB8E4BB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DAE614E2-1266-4EC5-9B27-6CA5BB8E4BB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DAE614E2-1266-4EC5-9B27-6CA5BB8E4BB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63E2F875-1660-44F2-A74E-082AD421F250}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63E2F875-1660-44F2-A74E-082AD421F250}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63E2F875-1660-44F2-A74E-082AD421F250}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63E2F875-1660-44F2-A74E-082AD421F250}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
