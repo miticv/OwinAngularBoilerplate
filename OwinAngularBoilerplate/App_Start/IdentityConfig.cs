@@ -4,6 +4,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using OwinAngularBoilerplate.Models;
+using System;
 
 namespace OwinAngularBoilerplate
 {
@@ -35,6 +36,7 @@ namespace OwinAngularBoilerplate
                 RequireUppercase = true,
             };
 
+            #region RegisterTwoFactorProvider
             //manager.RegisterTwoFactorProvider("PhoneCode", new PhoneNumberTokenProvider<ApplicationUser, int>
             //{
             //    MessageFormat = "Your security code is: {0}"
@@ -46,7 +48,13 @@ namespace OwinAngularBoilerplate
             //});
             //manager.EmailService = new EmailService();
             //manager.SmsService = new SmsService();
+            #endregion
 
+            #region UserLockoutEnabled
+            manager.UserLockoutEnabledByDefault = true; // Convert.ToBoolean(ConfigurationManager.AppSettings["UserLockoutEnabledByDefault"].ToString());
+            manager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(15); // TimeSpan.FromMinutes(Double.Parse(ConfigurationManager.AppSettings["DefaultAccountLockoutTimeSpan"].ToString()));
+            manager.MaxFailedAccessAttemptsBeforeLockout = 5; // Convert.ToInt32(ConfigurationManager.AppSettings["MaxFailedAccessAttemptsBeforeLockout"].ToString());
+            #endregion
 
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
