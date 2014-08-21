@@ -5,12 +5,22 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using OwinAngularBoilerplate.Models;
 using System;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace OwinAngularBoilerplate
 {
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
 
     public class ApplicationUserManager : UserManager<ApplicationUser, int>
+    
+    // ,IUserStore<ApplicationUser> //already implemented
+    // ,IUserPasswordStore<ApplicationUser>
+    // ,IUserSecurityStampStore<ApplicationUser>
+    // , IUserRoleStore<ApplicationUser, int>
+    // ,IUserLoginStore<CustomUserLogin>
+    // ,IUserClaimStore<CustomUserClaim>
+
     {
         public ApplicationUserManager(IUserStore<ApplicationUser, int> store)
             : base(store)
@@ -63,5 +73,27 @@ namespace OwinAngularBoilerplate
             }
             return manager;
         }
+
     }
+
+
+    // Configure the RoleManager used in the application. RoleManager is defined in the ASP.NET Identity core assembly
+    public class ApplicationRoleManager : RoleManager<CustomRole, int>
+    {
+        public ApplicationRoleManager(IRoleStore<CustomRole, int> roleStore)
+            : base(roleStore)
+        {
+        }
+
+        public static ApplicationRoleManager Create(IdentityFactoryOptions<ApplicationRoleManager> options, IOwinContext context)
+        {
+            var manager = new ApplicationRoleManager(new RoleStore<CustomRole, int, CustomUserRole>(context.Get<ApplicationDbContext>()));
+
+            return manager;
+        }
+    }
+
 }
+
+
+

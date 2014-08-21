@@ -6,6 +6,7 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 //using System.Web;
 using System.Web.Http;
+using System.Linq;
 using System.Web.Http.ModelBinding;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -27,14 +28,16 @@ namespace OwinAngularBoilerplate.Controllers
     {
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
+        private ApplicationRoleManager _roleManager;
 
         public AccountController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager,
+        public AccountController(ApplicationUserManager userManager, ApplicationRoleManager roleManager,
             ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
         {
+            RoleManager = roleManager;
             UserManager = userManager;
             AccessTokenFormat = accessTokenFormat;
         }
@@ -51,7 +54,105 @@ namespace OwinAngularBoilerplate.Controllers
             }
         }
 
+        public ApplicationRoleManager RoleManager
+        {
+            get
+            {
+                return _roleManager ?? Request.GetOwinContext().GetUserManager<ApplicationRoleManager>();
+            }
+            private set
+            {
+                _roleManager = value;
+            }
+        }
+
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
+
+
+        #region roles
+
+        // POST api/Account/AddRole
+        [Route("AddRole")]
+        [HttpPost]
+        [Authorize(Roles="Admin")]
+        public async Task<IHttpActionResult> AddRole(CreateRoleModel role)
+        {
+            CustomRole r = new CustomRole(role.NewRole);
+            IdentityResult result =  await RoleManager.CreateAsync(r);
+
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
+
+            return Ok();
+        }
+
+        // POST api/Account/DeleteRole
+        [Route("DeleteRole")]
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<IHttpActionResult> DeleteRole(DeleteRoleModel role)
+        {
+            CustomRole r = RoleManager.FindByName(role.DeleteRole);
+            IdentityResult result = await RoleManager.DeleteAsync(r);
+
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
+
+            return Ok();
+        }
+
+        // POST api/Account/AddUserToRole
+        [Route("AddUserToRole")]
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<IHttpActionResult> AddUserToRole(UserToRoleModel model)
+        {
+            ApplicationUser user = UserManager.FindByEmail(model.User);
+            IdentityResult result = await UserManager.AddToRoleAsync(user.Id, model.Role);
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
+
+            return Ok();
+        }
+
+        // POST api/Account/RemoveUserRole
+        [Route("RemoveUserRole")]
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<IHttpActionResult> RemoveUserRole(UserToRoleModel model)
+        {
+            ApplicationUser user = UserManager.FindByEmail(model.User);
+            IdentityResult result = await UserManager.RemoveFromRoleAsync(user.Id, model.Role);
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
+
+            return Ok();
+        }
+
+
+        // GET api/Account/GetUserRoles
+        [Route("GetUserRoles")]
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<List<string>> GetUserRoles(string email)
+        {
+
+            ApplicationUser user = UserManager.FindByEmail(email);
+            List<int> rolesId = user.Roles.Select(role => role.RoleId).ToList();
+            return RoleManager.Roles.Where(i => rolesId.Contains(i.Id)).Select(n=>n.Name).ToList<string>();
+            
+        }
+
+        #endregion
+
 
         // GET api/Account/UserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
@@ -380,6 +481,7 @@ namespace OwinAngularBoilerplate.Controllers
             if (disposing)
             {
                 UserManager.Dispose();
+                RoleManager.Dispose();
             }
 
             base.Dispose(disposing);

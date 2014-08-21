@@ -26,4 +26,22 @@ namespace UnitTest
         public string expires { get; set; }
 
     }
+
+    [DataContract]
+    public class ErrorModel
+    {
+        [DataMember(Name = "error")]
+        public string error { get; set; }
+        [DataMember(Name = "error_description")]
+        public string error_description { get; set; }        
+    }
+
+    [DataContract]
+    public class ErrorValidationModel
+    {
+        [DataMember(Name = "Message")]
+        public string Message { get; set; }
+        [DataMember(Name = "ModelState")]
+        public Dictionary<string,string> ModelState { get; set; }
+    }
 }

@@ -81,4 +81,32 @@ namespace OwinAngularBoilerplate.Models
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
+
+    public class CreateRoleModel
+    {
+        [Required]        
+        [Display(Name = "New Role")]
+        public string NewRole { get; set; }
+        
+    }
+
+    public class DeleteRoleModel
+    {
+        [Required]        
+        [Display(Name = "Delete Role")]
+        public string DeleteRole { get; set; }
+        
+    }
+
+    public class UserToRoleModel
+    {
+        [Required]
+        [Display(Name = "Role")]
+        public string Role { get; set; }
+
+        [Required]
+        [Display(Name = "User")]
+        public string User { get; set; }
+    }    
+
 }
