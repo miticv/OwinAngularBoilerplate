@@ -33,7 +33,7 @@ namespace UnitTest
 
             string responseBody = await response.Content.ReadAsStringAsync();
             LoginTokenModel tweb = ServiceStack.Text.JsonSerializer.DeserializeFromString<LoginTokenModel>(responseBody);
-                        
+
             return tweb;
 
         }
@@ -180,7 +180,7 @@ namespace UnitTest
             var tweb = ServiceStack.Text.JsonSerializer.DeserializeFromString<ErrorModel>(responseBody);
 
             Assert.AreEqual(tweb.error, "invalid_grant");
-            Assert.AreEqual(tweb.error_description, "The user name or password is incorrect.");                    
+            Assert.AreEqual(tweb.error_description, "The user name or password is incorrect.");
 
         }
 
@@ -194,6 +194,50 @@ namespace UnitTest
             Assert.AreEqual(HttpStatusCode.MethodNotAllowed, response.StatusCode); /*  is not allowed for Token driven API indentity  */
         }
 
+        [TestMethod]
+        [TestCategory("Roles")]
+        public async Task Roles_Create_Delete_Add_Remove_Unauthorized()
+        {
+            CreateRoleModel modelCreate = new CreateRoleModel()
+            {
+                NewRole = "Admin"
+            };
+
+            string str = String.Format("NewRole={0}", Uri.EscapeUriString(modelCreate.NewRole));
+            StringContent theContent = new StringContent(str, System.Text.Encoding.UTF8, "application/x-www-form-urlencoded");
+            HttpResponseMessage response = await _client.PostAsync("api/Account/AddRole", theContent);
+            Assert.AreEqual(HttpStatusCode.Unauthorized, response.StatusCode);
+
+            DeleteRoleModel modelDelete = new DeleteRoleModel()
+            {
+                DeleteRole = "TestRole"
+            };
+
+            str = String.Format("DeleteRole={0}", Uri.EscapeUriString(modelDelete.DeleteRole));
+            theContent = new StringContent(str, System.Text.Encoding.UTF8, "application/x-www-form-urlencoded");
+            response = await _client.PostAsync("api/Account/DeleteRole", theContent);
+            Assert.AreEqual(HttpStatusCode.Unauthorized, response.StatusCode);
+
+            UserToRoleModel model = new UserToRoleModel()
+            {
+                Role = "Test",
+                User = "miticv@gmail.com"
+            };
+
+            str = String.Format("Role={0}&User={1}", Uri.EscapeUriString(model.Role), Uri.EscapeUriString(model.User));
+            theContent = new StringContent(str, System.Text.Encoding.UTF8, "application/x-www-form-urlencoded");
+            response = await _client.PostAsync("api/Account/AddUserToRole", theContent);
+            Assert.AreEqual(HttpStatusCode.Unauthorized, response.StatusCode);
+
+            str = String.Format("Role={0}&User={1}", Uri.EscapeUriString(model.Role), Uri.EscapeUriString(model.User));
+            theContent = new StringContent(str, System.Text.Encoding.UTF8, "application/x-www-form-urlencoded");
+            response = await _client.PostAsync("api/Account/RemoveUserRole", theContent);
+            Assert.AreEqual(HttpStatusCode.Unauthorized, response.StatusCode);
+
+            response = await _client.GetAsync("api/Account/GetUserRoles" + String.Format("?email={0}", Uri.EscapeUriString(model.User)));
+            Assert.AreEqual(HttpStatusCode.Unauthorized, response.StatusCode);
+
+        }
 
         [TestMethod]
         [TestCategory("Roles")]
@@ -201,7 +245,7 @@ namespace UnitTest
         {
             CreateRoleModel model = new CreateRoleModel()
             {
-               NewRole = "Admin"
+                NewRole = "Admin"
             };
 
             LoginTokenModel token = await getAdminToken();
@@ -220,14 +264,13 @@ namespace UnitTest
             clearToken();
         }
 
-
         [TestMethod]
         [TestCategory("Roles")]
         public async Task Roles_Create_Delete_Role()
         {
             DeleteRoleModel modelDelete = new DeleteRoleModel()
             {
-                 DeleteRole = "TestRole"
+                DeleteRole = "TestRole"
             };
             CreateRoleModel model = new CreateRoleModel()
             {
@@ -269,16 +312,16 @@ namespace UnitTest
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
             string responseBody = await response.Content.ReadAsStringAsync();
             List<string> tweb = ServiceStack.Text.JsonSerializer.DeserializeFromString<List<string>>(responseBody);
-            Assert.AreEqual(false, tweb.Contains(model.Role), String.Format("User {0} belongs to role {1}, can not test. Please remove {0} from {1} first.",model.User, model.Role));
-            
+            Assert.AreEqual(false, tweb.Contains(model.Role), String.Format("User {0} belongs to role {1}, can not test. Please remove {0} from {1} first.", model.User, model.Role));
+
             //Add it to the role:
-            string str = String.Format("Role={0}&User={1}", Uri.EscapeUriString(model.Role), Uri.EscapeUriString(model.User));            
+            string str = String.Format("Role={0}&User={1}", Uri.EscapeUriString(model.Role), Uri.EscapeUriString(model.User));
             StringContent theContent = new StringContent(str, System.Text.Encoding.UTF8, "application/x-www-form-urlencoded");
             response = await _client.PostAsync("api/Account/AddUserToRole", theContent);
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
 
             //check that belong to role:
-            response = await _client.GetAsync("api/Account/GetUserRoles" + String.Format("?email={0}", Uri.EscapeUriString(model.User)) );                                    
+            response = await _client.GetAsync("api/Account/GetUserRoles" + String.Format("?email={0}", Uri.EscapeUriString(model.User)));
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
             responseBody = await response.Content.ReadAsStringAsync();
             tweb = ServiceStack.Text.JsonSerializer.DeserializeFromString<List<string>>(responseBody);
@@ -299,5 +342,82 @@ namespace UnitTest
 
             clearToken();
         }
+
+        [TestMethod]
+        [TestCategory("Claims")]
+        public async Task Claims_Add_Remove_Get_from_User()
+        {
+
+            ClaimUserModel model = new ClaimUserModel()
+            {
+                User = "miticv@gmail.com",
+                ClaimValue = "4",
+                ClaimType = "int"
+            };
+
+            LoginTokenModel token = await getAdminToken();
+            _client.DefaultRequestHeaders.Add("Authorization", String.Format("Bearer {0}", token.access_token));
+
+            //Add it to the user:
+            string str = String.Format("User={0}&ClaimValue={1}&ClaimType={2}", Uri.EscapeUriString(model.User), Uri.EscapeUriString(model.ClaimValue), Uri.EscapeUriString(model.ClaimType));
+            StringContent theContent = new StringContent(str, System.Text.Encoding.UTF8, "application/x-www-form-urlencoded");
+            HttpResponseMessage response = await _client.PostAsync("api/Account/AddClaimToUser", theContent);
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+            //if add existing one - do not duplicate it!
+            theContent = new StringContent(str, System.Text.Encoding.UTF8, "application/x-www-form-urlencoded");
+            response = await _client.PostAsync("api/Account/AddClaimToUser", theContent);
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+
+            //check that claim exist for user:
+            response = await _client.GetAsync("api/Account/GetUserClaims" + String.Format("?email={0}", Uri.EscapeUriString(model.User)));
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+            string responseBody = await response.Content.ReadAsStringAsync();
+            List<CustomUserClaim> tweb = ServiceStack.Text.JsonSerializer.DeserializeFromString<List<CustomUserClaim>>(responseBody);
+            Assert.AreEqual(true, tweb.Where(c => c.ClaimType == model.ClaimType && c.ClaimValue == model.ClaimValue).Count() == 1);
+
+            //remove from the role:
+            str = String.Format("User={0}&ClaimValue={1}&ClaimType={2}", Uri.EscapeUriString(model.User), Uri.EscapeUriString(model.ClaimValue), Uri.EscapeUriString(model.ClaimType));
+            theContent = new StringContent(str, System.Text.Encoding.UTF8, "application/x-www-form-urlencoded");
+            response = await _client.PostAsync("api/Account/RemoveClaimFromUser", theContent);
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+
+            //check that claim doesnt exist for user:
+            response = await _client.GetAsync("api/Account/GetUserClaims" + String.Format("?email={0}", Uri.EscapeUriString(model.User)));
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+            responseBody = await response.Content.ReadAsStringAsync();
+            tweb = ServiceStack.Text.JsonSerializer.DeserializeFromString<List<CustomUserClaim>>(responseBody);
+            Assert.AreEqual(true, tweb.Where(c => c.ClaimType == model.ClaimType && c.ClaimValue == model.ClaimValue).Count() == 0);
+
+            clearToken();
+        }
+
+        [TestMethod]
+        [TestCategory("Claims")]
+        public async Task Claims_Add_Remove_Get_Unauthorized()
+        {
+            ClaimUserModel model = new ClaimUserModel()
+            {
+                User = "miticv@gmail.com",
+                ClaimValue = "4",
+                ClaimType = "int"
+            };
+
+            string str = String.Format("User={0}&ClaimValue={1}&ClaimType={2}", Uri.EscapeUriString(model.User), Uri.EscapeUriString(model.ClaimValue), Uri.EscapeUriString(model.ClaimType));
+            StringContent theContent = new StringContent(str, System.Text.Encoding.UTF8, "application/x-www-form-urlencoded");
+            HttpResponseMessage response = await _client.PostAsync("api/Account/AddClaimToUser", theContent);
+            Assert.AreEqual(HttpStatusCode.Unauthorized, response.StatusCode);
+
+            //check that claim exist for user:
+            response = await _client.GetAsync("api/Account/GetUserClaims" + String.Format("?email={0}", Uri.EscapeUriString(model.User)));
+            Assert.AreEqual(HttpStatusCode.Unauthorized, response.StatusCode);
+
+            //remove from the role:
+            str = String.Format("User={0}&ClaimValue={1}&ClaimType={2}", Uri.EscapeUriString(model.User), Uri.EscapeUriString(model.ClaimValue), Uri.EscapeUriString(model.ClaimType));
+            theContent = new StringContent(str, System.Text.Encoding.UTF8, "application/x-www-form-urlencoded");
+            response = await _client.PostAsync("api/Account/RemoveClaimFromUser", theContent);
+            Assert.AreEqual(HttpStatusCode.Unauthorized, response.StatusCode);
+
+        }
+
     }
 }

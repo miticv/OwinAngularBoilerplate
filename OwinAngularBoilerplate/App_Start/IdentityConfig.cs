@@ -13,14 +13,13 @@ namespace OwinAngularBoilerplate
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
 
     public class ApplicationUserManager : UserManager<ApplicationUser, int>
-    
+
     // ,IUserStore<ApplicationUser> //already implemented
     // ,IUserPasswordStore<ApplicationUser>
     // ,IUserSecurityStampStore<ApplicationUser>
-    // , IUserRoleStore<ApplicationUser, int>
-    // ,IUserLoginStore<CustomUserLogin>
-    // ,IUserClaimStore<CustomUserClaim>
-
+    // ,IUserRoleStore<ApplicationUser, int>
+    // ,IUserLoginStore<ApplicationUser>
+    // ,IUserClaimStore<ApplicationUser>
     {
         public ApplicationUserManager(IUserStore<ApplicationUser, int> store)
             : base(store)

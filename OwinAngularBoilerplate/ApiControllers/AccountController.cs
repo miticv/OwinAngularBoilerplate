@@ -69,16 +69,16 @@ namespace OwinAngularBoilerplate.Controllers
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
 
 
-        #region roles
+        #region Roles
 
         // POST api/Account/AddRole
         [Route("AddRole")]
         [HttpPost]
-        [Authorize(Roles="Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IHttpActionResult> AddRole(CreateRoleModel role)
         {
             CustomRole r = new CustomRole(role.NewRole);
-            IdentityResult result =  await RoleManager.CreateAsync(r);
+            IdentityResult result = await RoleManager.CreateAsync(r);
 
             if (!result.Succeeded)
             {
@@ -137,7 +137,6 @@ namespace OwinAngularBoilerplate.Controllers
             return Ok();
         }
 
-
         // GET api/Account/GetUserRoles
         [Route("GetUserRoles")]
         [HttpGet]
@@ -147,12 +146,68 @@ namespace OwinAngularBoilerplate.Controllers
 
             ApplicationUser user = UserManager.FindByEmail(email);
             List<int> rolesId = user.Roles.Select(role => role.RoleId).ToList();
-            return RoleManager.Roles.Where(i => rolesId.Contains(i.Id)).Select(n=>n.Name).ToList<string>();
-            
+            return RoleManager.Roles.Where(i => rolesId.Contains(i.Id)).Select(n => n.Name).ToList<string>();
+
         }
 
         #endregion
 
+        #region Claims
+
+        // POST api/Account/AddClaimToUser
+        [Route("AddClaimToUser")]
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<IHttpActionResult> AddClaimToUser(ClaimUserModel model)
+        {
+            ApplicationUser user = UserManager.FindByEmail(model.User);
+            if (user.Claims.ToList<CustomUserClaim>().Where(c => c.ClaimType == model.ClaimType && c.ClaimValue == model.ClaimValue).Count() > 0)
+            {
+                return Ok(); //claim already exist for this user.
+            }
+            Claim claim = new Claim(model.ClaimType, model.ClaimValue);
+            IdentityResult result = await UserManager.AddClaimAsync(user.Id, claim);
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
+
+            return Ok();
+        }
+
+        // POST api/Account/AddClaimToUser
+        [Route("RemoveClaimFromUser")]
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<IHttpActionResult> RemoveClaimFromUser(ClaimUserModel model)
+        {
+            ApplicationUser user = UserManager.FindByEmail(model.User);
+            List<CustomUserClaim> claims = user.Claims.Where(c => c.ClaimType == model.ClaimType && c.ClaimValue == model.ClaimValue).ToList<CustomUserClaim>();
+            foreach (CustomUserClaim c in claims)
+            {
+                IdentityResult result = await UserManager.RemoveClaimAsync(user.Id, new Claim(c.ClaimType, c.ClaimValue));
+                if (!result.Succeeded)
+                {
+                    return GetErrorResult(result);
+                }
+            }
+
+            return Ok();
+        }
+
+        // GET api/Account/GetUserClaims
+        [Route("GetUserClaims")]
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<List<CustomUserClaim>> GetUserClaims(string email)
+        {
+
+            ApplicationUser user = UserManager.FindByEmail(email);
+            return user.Claims.ToList<CustomUserClaim>();
+
+        }
+
+        #endregion
 
         // GET api/Account/UserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]

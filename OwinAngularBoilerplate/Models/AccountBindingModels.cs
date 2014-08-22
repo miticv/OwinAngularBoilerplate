@@ -107,6 +107,21 @@ namespace OwinAngularBoilerplate.Models
         [Required]
         [Display(Name = "User")]
         public string User { get; set; }
-    }    
+    }
+
+    public class ClaimUserModel
+    {
+        [Required]
+        [Display(Name = "User")]
+        public string User { get; set; }
+
+        [Required]
+        [Display(Name = "ClaimValue")]
+        public string ClaimValue { get; set; }
+
+        [Required]
+        [Display(Name = "ClaimType")]
+        public string ClaimType { get; set; }
+    } 
 
 }
