@@ -40,49 +40,65 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.0.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.1.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.0.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.1.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.0.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.1.0\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Owin">
-      <HintPath>..\packages\Microsoft.Owin.2.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    <Reference Include="Microsoft.Owin, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.3.0.0\lib\net45\Microsoft.Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Host.SystemWeb">
-      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Cors">
+      <HintPath>..\packages\Microsoft.Owin.Cors.3.0.0\lib\net45\Microsoft.Owin.Cors.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security">
-      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security.Cookies">
-      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.2.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Security, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security.OAuth">
-      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
     </Reference>
-    <Reference Include="Nancy">
-      <HintPath>..\packages\Nancy.0.22.2\lib\net40\Nancy.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
     </Reference>
-    <Reference Include="Nancy.Owin">
-      <HintPath>..\packages\Nancy.Owin.0.22.2\lib\net40\Nancy.Owin.dll</HintPath>
+    <Reference Include="Nancy, Version=0.23.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Nancy.0.23.2\lib\net40\Nancy.dll</HintPath>
+    </Reference>
+    <Reference Include="Nancy.Owin, Version=0.23.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Nancy.Owin.0.23.2\lib\net40\Nancy.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Nancy.ViewEngines.Razor, Version=0.23.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Nancy.Viewengines.Razor.0.23.2\lib\net40\Nancy.ViewEngines.Razor.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
@@ -93,20 +109,25 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Net.Http.Formatting, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.1.2\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Http, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.Cors, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.1.2\lib\net45\System.Web.Http.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.0\lib\net45\System.Web.Cors.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Http.Owin">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Owin.5.1.2\lib\net45\System.Web.Http.Owin.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Razor.Unofficial, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="System.Web.Http, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\System.Web.Razor.Unofficial.2.0.2\lib\net40\System.Web.Razor.Unofficial.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.0\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.Owin, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Owin.5.2.0\lib\net45\System.Web.Http.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.30506.0\lib\net40\System.Web.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
@@ -127,15 +148,6 @@
     <Content Include="packages-Comments.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="fonts\fontawesome-webfont.woff" />
-    <Content Include="fonts\fontawesome-webfont.ttf" />
-    <Content Include="fonts\fontawesome-webfont.eot" />
-    <Content Include="fonts\FontAwesome.otf" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-cookies.js" />
@@ -155,6 +167,10 @@
     <Content Include="Scripts\angular-touch.min.js" />
     <Content Include="Scripts\angular-ui-router.js" />
     <Content Include="Scripts\angular-ui-router.min.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.min.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap.min.js" />
     <Content Include="Scripts\angular-ui\ui-utils-ieshiv.js" />
     <Content Include="Scripts\angular-ui\ui-utils-ieshiv.min.js" />
     <Content Include="Scripts\angular-ui\ui-utils.js" />
@@ -164,6 +180,13 @@
     <Content Include="Scripts\autofill\autofill-event.js" />
     <Content Include="Scripts\bootbox.js" />
     <Content Include="Scripts\bootbox.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
     <Content Include="Scripts\errors.json" />
     <Content Include="Scripts\angular-touch.min.js.map" />
     <Content Include="Scripts\angular-sanitize.min.js.map" />
@@ -175,9 +198,11 @@
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-1.9.0.intellisense.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />
     <Content Include="Scripts\i18n\angular-locale_af-za.js" />
     <Content Include="Scripts\i18n\angular-locale_af.js" />
@@ -327,6 +352,10 @@
     <Content Include="Scripts\i18n\angular-locale_fr-mq.js" />
     <Content Include="Scripts\i18n\angular-locale_fr-ne.js" />
     <Content Include="Scripts\i18n\angular-locale_fr-re.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-rw.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-sn.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-td.js" />
+    <Content Include="Scripts\i18n\angular-locale_fr-tg.js" />
     <Content Include="Scripts\i18n\angular-locale_fr-yt.js" />
     <Content Include="Scripts\i18n\angular-locale_fr.js" />
     <Content Include="Scripts\i18n\angular-locale_gl-es.js" />
@@ -348,6 +377,7 @@
     <Content Include="Scripts\i18n\angular-locale_in.js" />
     <Content Include="Scripts\i18n\angular-locale_is-is.js" />
     <Content Include="Scripts\i18n\angular-locale_is.js" />
+    <Content Include="Scripts\i18n\angular-locale_it-ch.js" />
     <Content Include="Scripts\i18n\angular-locale_it-it.js" />
     <Content Include="Scripts\i18n\angular-locale_it-sm.js" />
     <Content Include="Scripts\i18n\angular-locale_it.js" />
@@ -359,6 +389,7 @@
     <Content Include="Scripts\i18n\angular-locale_ko-kr.js" />
     <Content Include="Scripts\i18n\angular-locale_ko.js" />
     <Content Include="Scripts\i18n\angular-locale_ln-cd.js" />
+    <Content Include="Scripts\i18n\angular-locale_ln-cg.js" />
     <Content Include="Scripts\i18n\angular-locale_ln.js" />
     <Content Include="Scripts\i18n\angular-locale_lt-lt.js" />
     <Content Include="Scripts\i18n\angular-locale_lt.js" />
@@ -368,10 +399,13 @@
     <Content Include="Scripts\i18n\angular-locale_ml.js" />
     <Content Include="Scripts\i18n\angular-locale_mr-in.js" />
     <Content Include="Scripts\i18n\angular-locale_mr.js" />
+    <Content Include="Scripts\i18n\angular-locale_ms-bn.js" />
     <Content Include="Scripts\i18n\angular-locale_ms-my.js" />
     <Content Include="Scripts\i18n\angular-locale_ms.js" />
     <Content Include="Scripts\i18n\angular-locale_mt-mt.js" />
     <Content Include="Scripts\i18n\angular-locale_mt.js" />
+    <Content Include="Scripts\i18n\angular-locale_nl-aw.js" />
+    <Content Include="Scripts\i18n\angular-locale_nl-be.js" />
     <Content Include="Scripts\i18n\angular-locale_nl-cw.js" />
     <Content Include="Scripts\i18n\angular-locale_nl-nl.js" />
     <Content Include="Scripts\i18n\angular-locale_nl-sx.js" />
@@ -381,12 +415,19 @@
     <Content Include="Scripts\i18n\angular-locale_or.js" />
     <Content Include="Scripts\i18n\angular-locale_pl-pl.js" />
     <Content Include="Scripts\i18n\angular-locale_pl.js" />
+    <Content Include="Scripts\i18n\angular-locale_pt-ao.js" />
     <Content Include="Scripts\i18n\angular-locale_pt-br.js" />
+    <Content Include="Scripts\i18n\angular-locale_pt-gw.js" />
+    <Content Include="Scripts\i18n\angular-locale_pt-mz.js" />
     <Content Include="Scripts\i18n\angular-locale_pt-pt.js" />
+    <Content Include="Scripts\i18n\angular-locale_pt-st.js" />
     <Content Include="Scripts\i18n\angular-locale_pt.js" />
+    <Content Include="Scripts\i18n\angular-locale_ro-md.js" />
     <Content Include="Scripts\i18n\angular-locale_ro-ro.js" />
     <Content Include="Scripts\i18n\angular-locale_ro.js" />
+    <Content Include="Scripts\i18n\angular-locale_ru-md.js" />
     <Content Include="Scripts\i18n\angular-locale_ru-ru.js" />
+    <Content Include="Scripts\i18n\angular-locale_ru-ua.js" />
     <Content Include="Scripts\i18n\angular-locale_ru.js" />
     <Content Include="Scripts\i18n\angular-locale_sk-sk.js" />
     <Content Include="Scripts\i18n\angular-locale_sk.js" />
@@ -394,14 +435,23 @@
     <Content Include="Scripts\i18n\angular-locale_sl.js" />
     <Content Include="Scripts\i18n\angular-locale_sq-al.js" />
     <Content Include="Scripts\i18n\angular-locale_sq.js" />
+    <Content Include="Scripts\i18n\angular-locale_sr-cyrl-ba.js" />
+    <Content Include="Scripts\i18n\angular-locale_sr-cyrl-me.js" />
     <Content Include="Scripts\i18n\angular-locale_sr-cyrl-rs.js" />
+    <Content Include="Scripts\i18n\angular-locale_sr-cyrl.js" />
+    <Content Include="Scripts\i18n\angular-locale_sr-latn-ba.js" />
+    <Content Include="Scripts\i18n\angular-locale_sr-latn-me.js" />
     <Content Include="Scripts\i18n\angular-locale_sr-latn-rs.js" />
+    <Content Include="Scripts\i18n\angular-locale_sr-latn.js" />
     <Content Include="Scripts\i18n\angular-locale_sr.js" />
+    <Content Include="Scripts\i18n\angular-locale_sv-fi.js" />
     <Content Include="Scripts\i18n\angular-locale_sv-se.js" />
     <Content Include="Scripts\i18n\angular-locale_sv.js" />
+    <Content Include="Scripts\i18n\angular-locale_sw-ke.js" />
     <Content Include="Scripts\i18n\angular-locale_sw-tz.js" />
     <Content Include="Scripts\i18n\angular-locale_sw.js" />
     <Content Include="Scripts\i18n\angular-locale_ta-in.js" />
+    <Content Include="Scripts\i18n\angular-locale_ta-lk.js" />
     <Content Include="Scripts\i18n\angular-locale_ta.js" />
     <Content Include="Scripts\i18n\angular-locale_te-in.js" />
     <Content Include="Scripts\i18n\angular-locale_te.js" />
@@ -412,12 +462,21 @@
     <Content Include="Scripts\i18n\angular-locale_tr.js" />
     <Content Include="Scripts\i18n\angular-locale_uk-ua.js" />
     <Content Include="Scripts\i18n\angular-locale_uk.js" />
+    <Content Include="Scripts\i18n\angular-locale_ur-in.js" />
     <Content Include="Scripts\i18n\angular-locale_ur-pk.js" />
     <Content Include="Scripts\i18n\angular-locale_ur.js" />
     <Content Include="Scripts\i18n\angular-locale_vi-vn.js" />
     <Content Include="Scripts\i18n\angular-locale_vi.js" />
     <Content Include="Scripts\i18n\angular-locale_zh-cn.js" />
     <Content Include="Scripts\i18n\angular-locale_zh-hans-cn.js" />
+    <Content Include="Scripts\i18n\angular-locale_zh-hans-hk.js" />
+    <Content Include="Scripts\i18n\angular-locale_zh-hans-mo.js" />
+    <Content Include="Scripts\i18n\angular-locale_zh-hans-sg.js" />
+    <Content Include="Scripts\i18n\angular-locale_zh-hans.js" />
+    <Content Include="Scripts\i18n\angular-locale_zh-hant-hk.js" />
+    <Content Include="Scripts\i18n\angular-locale_zh-hant-mo.js" />
+    <Content Include="Scripts\i18n\angular-locale_zh-hant-tw.js" />
+    <Content Include="Scripts\i18n\angular-locale_zh-hant.js" />
     <Content Include="Scripts\i18n\angular-locale_zh-hk.js" />
     <Content Include="Scripts\i18n\angular-locale_zh-tw.js" />
     <Content Include="Scripts\i18n\angular-locale_zh.js" />
@@ -428,10 +487,6 @@
     <Content Include="Scripts\jquery-1.9.0.min.map" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
-    <Content Include="Scripts\ui-bootstrap-0.10.0.js" />
-    <Content Include="Scripts\ui-bootstrap-0.10.0.min.js" />
-    <Content Include="Scripts\ui-bootstrap-tpls-0.10.0.js" />
-    <Content Include="Scripts\ui-bootstrap-tpls-0.10.0.min.js" />
     <Content Include="Scripts\version.json" />
     <Content Include="Scripts\toastr.min.js.map" />
     <None Include="Views\Shared\_Layout.cshtml" />
@@ -519,8 +574,8 @@
   <PropertyGroup>
     <PostBuildEvent>
 if $(ConfigurationName) == Debug (
-xcopy /s /y /R "$(SolutionDir)packages\Nancy.Viewengines.Razor.0.22.2\BuildProviders\Nancy.ViewEngines.Razor.BuildProviders.dll" "$(ProjectDir)bin\"
-xcopy /s /y /R "$(SolutionDir)packages\Nancy.Viewengines.Razor.0.22.2\lib\Net40\Nancy.ViewEngines.Razor.dll" "$(ProjectDir)bin\"
+xcopy /s /y /R "$(SolutionDir)packages\Nancy.Viewengines.Razor.0.23.2\BuildProviders\Nancy.ViewEngines.Razor.BuildProviders.dll" "$(ProjectDir)bin\"
+xcopy /s /y /R "$(SolutionDir)packages\Nancy.Viewengines.Razor.0.23.2\lib\Net40\Nancy.ViewEngines.Razor.dll" "$(ProjectDir)bin\"
 )</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

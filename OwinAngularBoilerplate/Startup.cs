@@ -14,7 +14,8 @@ namespace OwinAngularBoilerplate
         {
             ConfigureAuth(app);
             ConfigureWebApi(app);
-            ConfigureNancy(app);
+            ConfigureNancy(app);           
+            app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
         }
     }
 }
