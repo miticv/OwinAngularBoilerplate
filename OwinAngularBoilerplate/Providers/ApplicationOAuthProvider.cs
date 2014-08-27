@@ -32,13 +32,37 @@ namespace OwinAngularBoilerplate.Providers
         {
             var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
 
-            ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
-
-            if (user == null)
-            {
+            ApplicationUser userExists = await userManager.FindByNameAsync(context.UserName);
+            if (userExists == null)
+            {   //username not exist!
                 context.SetError("invalid_grant", "The user name or password is incorrect.");
                 return;
             }
+            if (await userManager.IsLockedOutAsync(userExists.Id))
+            {
+                context.SetError("invalid_grant", "The user is locked out.");
+                return;
+            }
+            //if (!await userManager.IsEmailConfirmedAsync(userExists.Id))
+            //{
+            //    context.SetError("invalid_grant", "The Email is not confirmed.");
+            //    return;
+            //}
+
+            ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
+            if (user == null)
+            {
+                //password incorrect            
+                await userManager.AccessFailedAsync(userExists.Id); //increase lock count
+                if (await userManager.IsLockedOutAsync(userExists.Id))
+                {
+                    context.SetError("invalid_grant", "The user is locked out.");
+                    return;
+                }                
+                context.SetError("invalid_grant", "The user name or password is incorrect.");
+                return;
+            }
+            
 
             ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager,
                OAuthDefaults.AuthenticationType);

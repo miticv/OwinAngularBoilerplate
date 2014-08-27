@@ -17,6 +17,8 @@ namespace UnitTest
     [TestClass]
     public class Account : BaseHandler
     {
+
+        #region private functions
         private async Task<LoginTokenModel> getAdminToken()
         {
             TokenRequestModel model = new TokenRequestModel()
@@ -43,7 +45,7 @@ namespace UnitTest
             _client.DefaultRequestHeaders.Remove("Authorization");
             Assert.AreEqual(false, _client.DefaultRequestHeaders.Contains("Authorization"));
         }
-
+        #endregion
 
         [TestMethod]
         [TestCategory("UserInfo")]
@@ -59,7 +61,7 @@ namespace UnitTest
         {
             RegisterBindingModel model = new RegisterBindingModel()
             {
-                Email = String.Format("unittest_{0:yyyy/MM/dd_HH-mm-ss}@testing.registration.com", DateTime.Now),
+                Email = String.Format("unittest_{0:yyyy/MM/dd_HH-mm-ss-fff}@testing.registration.com", DateTime.Now),
                 Password = "Test!23",
                 ConfirmPassword = "Test!23"
             };
@@ -79,7 +81,7 @@ namespace UnitTest
         {
             RegisterBindingModel model = new RegisterBindingModel()
             {
-                Email = String.Format("unittest_{0:yyyy/MM/dd_HH-mm-ss}@testing.registration.com", DateTime.Now),
+                Email = String.Format("unittest_{0:yyyy/MM/dd_HH-mm-ss-fff}@testing.registration.com", DateTime.Now),
                 Password = "Test!23",
                 ConfirmPassword = "Test!23"
             };
@@ -112,7 +114,7 @@ namespace UnitTest
                 if (i == triedToLock)
                 {
                     //Assert.AreEqual(tweb.error, "invalid_grant");
-                    Assert.AreNotEqual(tweb.error_description, "The user name or password is incorrect.", "User is not locked!");
+                    Assert.AreEqual(tweb.error_description, "The user is locked out.", "User is not locked!");
                 }
                 //else
                 //{
@@ -160,29 +162,28 @@ namespace UnitTest
 
         }
 
-        [TestMethod]
-        [TestCategory("UserInfo")]
-        public async Task UserInfo_Wrong_Login()
-        {
+        //[TestMethod]
+        //[TestCategory("UserInfo")]
+        //public async Task UserInfo_Email_Not_Confirmed()
+        //{
 
-            TokenRequestModel wrongLoginModel = new TokenRequestModel()
-            {
-                username = "miticv@gmail.com",
-                password = "123",
-                grant_type = "password"
-            };
-            string str = String.Format("username={0}&password={1}&grant_type={2}", Uri.EscapeUriString(wrongLoginModel.username), Uri.EscapeUriString(wrongLoginModel.password), Uri.EscapeUriString(wrongLoginModel.grant_type));
+        //    TokenRequestModel wrongLoginModel = new TokenRequestModel()
+        //    {
+        //        username = "test@user.com",  //user whose lockout is not enabled 
+        //        password = "Test!23",
+        //        grant_type = "password"
+        //    };
+        //    string str = String.Format("username={0}&password={1}&grant_type={2}", Uri.EscapeUriString(wrongLoginModel.username), Uri.EscapeUriString(wrongLoginModel.password), Uri.EscapeUriString(wrongLoginModel.grant_type));
 
-            StringContent theContent = new StringContent(str, System.Text.Encoding.UTF8, "application/x-www-form-urlencoded");
-            HttpResponseMessage response = await _client.PostAsync("Token", theContent);
-            Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);
-            string responseBody = await response.Content.ReadAsStringAsync();
-            var tweb = ServiceStack.Text.JsonSerializer.DeserializeFromString<ErrorModel>(responseBody);
+        //    StringContent theContent = new StringContent(str, System.Text.Encoding.UTF8, "application/x-www-form-urlencoded");
+        //    HttpResponseMessage response = await _client.PostAsync("Token", theContent);
+        //    Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+        //    string responseBody = await response.Content.ReadAsStringAsync();
+        //    var tweb = ServiceStack.Text.JsonSerializer.DeserializeFromString<ErrorModel>(responseBody);
 
-            Assert.AreEqual(tweb.error, "invalid_grant");
-            Assert.AreEqual(tweb.error_description, "The user name or password is incorrect.");
+        //    Assert.AreEqual(tweb.error_description, "The Email is not confirmed.");
 
-        }
+        //}
 
 
         [TestMethod]
@@ -375,7 +376,7 @@ namespace UnitTest
             List<CustomUserClaim> tweb = ServiceStack.Text.JsonSerializer.DeserializeFromString<List<CustomUserClaim>>(responseBody);
             Assert.AreEqual(true, tweb.Where(c => c.ClaimType == model.ClaimType && c.ClaimValue == model.ClaimValue).Count() == 1);
 
-            //remove from the role:
+            //remove from the user:
             str = String.Format("User={0}&ClaimValue={1}&ClaimType={2}", Uri.EscapeUriString(model.User), Uri.EscapeUriString(model.ClaimValue), Uri.EscapeUriString(model.ClaimType));
             theContent = new StringContent(str, System.Text.Encoding.UTF8, "application/x-www-form-urlencoded");
             response = await _client.PostAsync("api/Account/RemoveClaimFromUser", theContent);

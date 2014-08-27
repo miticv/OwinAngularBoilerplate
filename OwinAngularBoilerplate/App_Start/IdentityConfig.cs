@@ -7,6 +7,7 @@ using OwinAngularBoilerplate.Models;
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using Microsoft.Owin.Security;
 
 namespace OwinAngularBoilerplate
 {
@@ -60,6 +61,7 @@ namespace OwinAngularBoilerplate
             #endregion
 
             #region UserLockoutEnabled
+            
             manager.UserLockoutEnabledByDefault = true; // Convert.ToBoolean(ConfigurationManager.AppSettings["UserLockoutEnabledByDefault"].ToString());
             manager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(15); // TimeSpan.FromMinutes(Double.Parse(ConfigurationManager.AppSettings["DefaultAccountLockoutTimeSpan"].ToString()));
             manager.MaxFailedAccessAttemptsBeforeLockout = 5; // Convert.ToInt32(ConfigurationManager.AppSettings["MaxFailedAccessAttemptsBeforeLockout"].ToString());
@@ -68,7 +70,9 @@ namespace OwinAngularBoilerplate
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
-                manager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser, int>(dataProtectionProvider.Create("ASP.NET Identity"));
+                manager.UserTokenProvider = 
+                    new DataProtectorTokenProvider<ApplicationUser, int>(
+                        dataProtectionProvider.Create("ASP.NET Identity"));
             }
             return manager;
         }
