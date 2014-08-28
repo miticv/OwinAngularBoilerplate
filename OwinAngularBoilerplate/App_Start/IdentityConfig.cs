@@ -96,6 +96,106 @@ namespace OwinAngularBoilerplate
         }
     }
 
+    #region 2 factor authorization
+    public class EmailService : IIdentityMessageService
+    {
+        public Task SendAsync(IdentityMessage message)
+        {
+            // Credentials:
+            var credentialUserName = "yourAccount@gmail.com";
+            var sentFrom = "yourAccount@gmail.com";
+            var pwd = "yourApssword";
+
+            // Configure the client:
+            System.Net.Mail.SmtpClient client =
+                new System.Net.Mail.SmtpClient("smtp.gmail.com");
+
+            client.Port = 587; //465
+            client.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
+            client.UseDefaultCredentials = false;
+
+            // Create the credentials:
+            System.Net.NetworkCredential credentials =
+                new System.Net.NetworkCredential(credentialUserName, pwd);
+
+            client.EnableSsl = true;
+            client.Credentials = credentials;
+
+            // Create the message:
+            var mail =
+                new System.Net.Mail.MailMessage(sentFrom, message.Destination);
+
+            mail.Subject = message.Subject;
+            mail.Body = message.Body;
+
+            // Send:
+            return client.SendMailAsync(mail);
+        }
+
+        /**
+         * 
+         if (result.Succeeded)
+{
+    var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+    var callbackUrl = 
+        Url.Action("ConfirmEmail", "Account", 
+            new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+
+    await UserManager.SendEmailAsync(user.Id, "Confirm your account", 
+        "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
+
+    // This should not be deployed in production:
+    ViewBag.Link = callbackUrl;
+    return View("DisplayEmail");
+}
+
+AddErrors(result);
+         * 
+         * 
+         * 
+         [AllowAnonymous]
+public async Task<ActionResult> VerifyCode(string provider, string returnUrl)
+{
+    // Require that the user has already logged in via username/password or external login
+    if (!await SignInHelper.HasBeenVerified())
+    {
+        return View("Error");
+    }
+
+    var user = 
+        await UserManager.FindByIdAsync(await SignInHelper.GetVerifiedUserIdAsync());
+
+    if (user != null)
+    {
+        ViewBag.Status = 
+            "For DEMO purposes the current " 
+            + provider 
+            + " code is: " 
+            + await UserManager.GenerateTwoFactorTokenAsync(user.Id, provider);
+    }
+    return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl });
+}
+         * 
+         * 
+         */
+    }
+
+    //public class SmsService : IIdentityMessageService
+    //{
+    //    public Task SendAsync(IdentityMessage message)
+    //    {
+    //        string AccountSid = "YourTwilioAccountSID";
+    //        string AuthToken = "YourTwilioAuthToken";
+    //        string twilioPhoneNumber = "YourTwilioPhoneNumber";
+
+    //        var twilio = new TwilioRestClient(AccountSid, AuthToken);
+    //        twilio.SendSmsMessage(twilioPhoneNumber, message.Destination, message.Body);
+
+    //        // Twilio does not return an async Task, so we need this:
+    //        return Task.FromResult(0);
+    //    }
+    //}
+    #endregion
 }
 
 
