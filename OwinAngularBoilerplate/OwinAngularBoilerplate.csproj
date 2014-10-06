@@ -134,6 +134,7 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="app\App.ts" />
     <TypeScriptCompile Include="app\TEMP\App.ts" />
     <Content Include="Content\app\login.css" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -540,7 +541,6 @@
     <Folder Include="app\test\" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="app\App.ts" />
     <TypeScriptCompile Include="app\main\controllers\LogInController.ts" />
     <TypeScriptCompile Include="app\main\interfaces\Interfaces.ts" />
     <TypeScriptCompile Include="app\main\model\LoginModels.ts" />

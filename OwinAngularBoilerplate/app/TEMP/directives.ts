@@ -2,7 +2,7 @@
      
 'use strict';
 
-module app.directives {
+module Main.app.directives {
 
     export class MyDirective implements IDirective {
         template = '<div></div>';
@@ -15,4 +15,4 @@ module app.directives {
 
 }
 
-app.registerDirective('MyDirective', []);
+Main.app.registerDirective('MyDirective', []);

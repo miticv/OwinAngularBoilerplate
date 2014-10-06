@@ -2,7 +2,7 @@
 
 'use strict';
 
-module app.services {
+module Main.app.services {
 
     export class MyService implements IService {
         private meaningOfLife = 42;
@@ -16,4 +16,4 @@ module app.services {
 
 }
 
-app.registerService('MyService', []);
+Main.app.registerService('MyService', []);
