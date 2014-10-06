@@ -11,45 +11,69 @@
     <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
 
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-
-                </ul>
-            </div>
-        </div>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav"></ul>
+      </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+  </div>
+  <div class="container body-content">
+    @RenderBody()
+    <hr />
+    <footer>
+      <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+    </footer>
+  </div>
 
-    
-    <script src="~/Scripts/jquery-1.9.0.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="~/Scripts/toastr.min.js"></script>
-    <script src="~/Scripts/bootbox.min.js"></script>
 
-    <script src="~/Scripts/angular.min.js"></script>
-    <script src="~/Scripts/angular-ui-router.min.js"></script>
-    <script src="~/Scripts/ui-bootstrap-tpls-0.10.0.min.js"></script>
-    <script src="~/Scripts/angular-ui/ui-utils.min.js"></script>
+  <script src="~/Scripts/jquery-1.9.0.min.js"></script>
+  <script src="~/Scripts/bootstrap.min.js"></script>
+  <script src="~/Scripts/toastr.min.js"></script>
+  <script src="~/Scripts/bootbox.min.js"></script>
 
-    <!-- if not supporting IE9: remove autofill-event.js and upgrade jquery to 2 -->
-    <script src="~/Scripts/autofill/autofill-event.js"></script>
+  <script src="~/Scripts/angular.min.js"></script>
+  <script src="~/Scripts/angular-ui-router.min.js"></script>
 
+  <script src="~/Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
+  <script src="~/Scripts/angular-ui/ui-utils.min.js"></script>
+  
+
+  <!-- if not supporting IE9: remove autofill-event.js and upgrade jquery to 2 -->
+  <script src="~/Scripts/autofill/autofill-event.js"></script>
+
+  
+  @*<script src="~/app/_all.js"></script>
+  <script src="~/app/App.js"></script>
+  <script src="~/app/main/services/LoginService.js"></script>
+  <script src="~/app/main/controllers/LogInController.js"></script>
+  <script src="~/app/main/interfaces/Interfaces.js"></script>
+  <script src="~/app/main/model/LoginModels.js"></script>*@
+
+
+  <script src="~/app/TEMP/_all.js"></script>
+  <script src="~/app/TEMP/App.js"></script>
+  <script src="~/app/TEMP/directives.js"></script>
+  <script src="~/app/TEMP/filters.js"></script>
+  <script src="~/app/TEMP/services.js"></script>
+  <script src="~/app/TEMP/MyController.js"></script>
+
+  <script>
+
+    $(document).ready(function () {
+          //var main=new main.app();
+          angular.bootstrap(document, ['app']);
+          });
+
+  </script>
 
 </body>
 </html>

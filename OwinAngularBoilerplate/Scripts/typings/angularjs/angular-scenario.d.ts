@@ -145,14 +145,15 @@ declare module angularScenario {
     }
 }
 
-declare var describe: angularScenario.RunFunctionWithDescription;
-declare var ddescribe: angularScenario.RunFunctionWithDescription;
-declare var xdescribe: angularScenario.RunFunctionWithDescription;
-declare var beforeEach: angularScenario.RunFunction;
-declare var afterEach: angularScenario.RunFunction;
-declare var it: angularScenario.RunFunctionWithDescription;
-declare var iit: angularScenario.RunFunctionWithDescription;
-declare var xit: angularScenario.RunFunctionWithDescription;
+/* removed below since it is defined in jasmine framework, and we use jasmine for unit testing */
+//declare var describe: angularScenario.RunFunctionWithDescription;
+//declare var ddescribe: angularScenario.RunFunctionWithDescription;
+//declare var xdescribe: angularScenario.RunFunctionWithDescription;
+//declare var beforeEach: angularScenario.RunFunction;
+//declare var afterEach: angularScenario.RunFunction;
+//declare var it: angularScenario.RunFunctionWithDescription;
+//declare var iit: angularScenario.RunFunctionWithDescription;
+//declare var xit: angularScenario.RunFunctionWithDescription;
 declare var pause: angularScenario.PauseFunction;
 declare var sleep: angularScenario.SleepFunction;
 declare function browser(): angularScenario.Browser;

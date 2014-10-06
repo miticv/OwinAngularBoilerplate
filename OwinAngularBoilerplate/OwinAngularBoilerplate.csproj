@@ -134,12 +134,16 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="app\TEMP\App.ts" />
+    <Content Include="Content\app\login.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\jasmine\jasmine.css" />
+    <Content Include="Content\jasmine\jasmine_favicon.png" />
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
@@ -482,6 +486,14 @@
     <Content Include="Scripts\i18n\angular-locale_zh.js" />
     <Content Include="Scripts\i18n\angular-locale_zu-za.js" />
     <Content Include="Scripts\i18n\angular-locale_zu.js" />
+    <Content Include="Scripts\jasmine-samples\Player.js" />
+    <Content Include="Scripts\jasmine-samples\PlayerSpec.js" />
+    <Content Include="Scripts\jasmine-samples\Song.js" />
+    <Content Include="Scripts\jasmine-samples\SpecHelper.js" />
+    <Content Include="Scripts\jasmine\boot.js" />
+    <Content Include="Scripts\jasmine\console.js" />
+    <Content Include="Scripts\jasmine\jasmine-html.js" />
+    <Content Include="Scripts\jasmine\jasmine.js" />
     <Content Include="Scripts\jquery-1.9.0.js" />
     <Content Include="Scripts\jquery-1.9.0.min.js" />
     <Content Include="Scripts\jquery-1.9.0.min.map" />
@@ -489,6 +501,7 @@
     <Content Include="Scripts\toastr.min.js" />
     <Content Include="Scripts\toastr.min.js.map" />
     <Content Include="Scripts\version.json" />
+    <Content Include="Views\Jasmine\SpecRunner.cshtml" />
     <None Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Test\Home.cshtml" />
     <None Include="Web.Debug.config">
@@ -508,7 +521,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\Nancy.Startup.cs" />
     <Compile Include="App_Start\WebApi.Startup.cs" />
-    <Compile Include="Controllers\TestHomeNancy.cs" />
+    <Compile Include="Controllers\NancyController.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -524,10 +537,20 @@
     <Folder Include="app\common\filters\" />
     <Folder Include="app\common\partials\" />
     <Folder Include="app\common\services\" />
-    <Folder Include="app\main\controllers\" />
-    <Folder Include="app\main\services\" />
+    <Folder Include="app\test\" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="app\App.ts" />
+    <TypeScriptCompile Include="app\main\controllers\LogInController.ts" />
+    <TypeScriptCompile Include="app\main\interfaces\Interfaces.ts" />
+    <TypeScriptCompile Include="app\main\model\LoginModels.ts" />
+    <TypeScriptCompile Include="app\main\services\LoginService.ts" />
+    <TypeScriptCompile Include="app\TEMP\directives.ts" />
+    <TypeScriptCompile Include="app\TEMP\filters.ts" />
+    <TypeScriptCompile Include="app\TEMP\MyController.ts" />
+    <TypeScriptCompile Include="app\TEMP\services.ts" />
+    <TypeScriptCompile Include="app\TEMP\_all.ts" />
+    <TypeScriptCompile Include="app\_all.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-translate\angular-translate.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui-bootstrap\angular-ui-bootstrap.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui\angular-ui-router.d.ts" />
@@ -540,7 +563,9 @@
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-scenario.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\bootbox\bootbox.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\jasmine\jasmine.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\karma-jasmine\karma-jasmine.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\toastr\toastr.d.ts" />
   </ItemGroup>
   <PropertyGroup>
@@ -548,6 +573,9 @@
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptTarget>ES3</TypeScriptTarget>
+  </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
