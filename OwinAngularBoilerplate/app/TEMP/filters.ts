@@ -2,13 +2,13 @@
 
 'use strict';
 
-module Main.app.filters {
+module app.filters {
 
     export class RangeTo implements IFilter {
         filter(start: number, end: number) {
             var out = [];
-            for (var i = start; i < end; ++i) out.push(i)
-            return out
+            for (var i = start; i < end; ++i) out.push(i);
+            return out;
         }
     }
 
@@ -20,5 +20,5 @@ module Main.app.filters {
 
 }
 
-Main.app.registerFilter('RangeTo', []);
-Main.app.registerFilter('Splice', []);
+app.registerFilter('RangeTo', []);
+app.registerFilter('Splice', []);

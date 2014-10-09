@@ -136,6 +136,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="app\App.ts" />
     <TypeScriptCompile Include="app\TEMP\App.ts" />
+    <Content Include="app\main\partials\login.html" />
     <Content Include="Content\app\login.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />

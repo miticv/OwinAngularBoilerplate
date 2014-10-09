@@ -1,11 +1,16 @@
 ﻿/// <reference path="_all.ts" />
 'use strict';
 
-module Main.app.controllers {
+module app.controllers {
 
     export class MyController implements IController {
+
+        public message: string;
+        public test: string;
+
         constructor(private $scope, private myService) {
-            $scope.message = myService.someMethod();
+           this.message = myService.someMethod();
+           this.test = "1234";
 
         }
     }
@@ -13,4 +18,4 @@ module Main.app.controllers {
 }
 
 // Remember to pass all the services used by the constructor of the Controller.
-Main.app.registerController('MyController', ['$scope', 'myService']);
+app.registerController('MyController', ['$scope', 'myService']);

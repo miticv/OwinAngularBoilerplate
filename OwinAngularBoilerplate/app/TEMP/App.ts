@@ -1,7 +1,7 @@
 ﻿/// <reference path="_all.ts" />
 
 'use strict';
-module Main {
+
     // Create and register modules
     var modules = ['app.controllers', 'app.directives', 'app.filters', 'app.services'];
     modules.forEach((module) => angular.module(module, []));
@@ -20,11 +20,16 @@ module Main {
                     controller: function ($scope) {
                         $scope.title = 'My Contacts';
                     }
+                }).
+                state("login", {
+                    url: "/login",
+                    controller: "app.controllers.MyController",
+                    templateUrl: '/app/main/partials/login.html'
                 });
         }
     ]);
 
-    export module app {
+    module app {
         export module controllers { }
         export module directives { }
         export module filters { }
@@ -85,8 +90,6 @@ module Main {
         export function registerService(className: string, services = []) {
             var service = className[0].toLowerCase() + className.slice(1);
             services.push(() => new app.services[className]());
-            angular.module('app.services').factory(service, services);
+            angular.module('app').factory(service, services);
         }
     }
-
-}
