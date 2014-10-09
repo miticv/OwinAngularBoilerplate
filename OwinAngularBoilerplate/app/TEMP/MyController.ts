@@ -3,6 +3,8 @@
 
 module app.controllers {
 
+
+    
     export class MyController implements IController {
 
         public message: string;
@@ -11,7 +13,7 @@ module app.controllers {
         constructor(private $scope, private myService) {
            this.message = myService.someMethod();
            this.test = "1234";
-
+            
         }
     }
 

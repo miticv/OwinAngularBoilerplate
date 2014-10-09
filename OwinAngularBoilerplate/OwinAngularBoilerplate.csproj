@@ -546,8 +546,11 @@
     <TypeScriptCompile Include="app\main\interfaces\Interfaces.ts" />
     <TypeScriptCompile Include="app\main\model\LoginModels.ts" />
     <TypeScriptCompile Include="app\main\services\LoginService.ts" />
+    <TypeScriptCompile Include="app\TEMP\common.ts" />
     <TypeScriptCompile Include="app\TEMP\directives.ts" />
     <TypeScriptCompile Include="app\TEMP\filters.ts" />
+    <TypeScriptCompile Include="app\TEMP\global.ts" />
+    <TypeScriptCompile Include="app\TEMP\interfaces.ts" />
     <TypeScriptCompile Include="app\TEMP\MyController.ts" />
     <TypeScriptCompile Include="app\TEMP\services.ts" />
     <TypeScriptCompile Include="app\TEMP\_all.ts" />

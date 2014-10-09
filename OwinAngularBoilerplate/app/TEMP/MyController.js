@@ -19,4 +19,4 @@ var app;
 
 // Remember to pass all the services used by the constructor of the Controller.
 app.registerController('MyController', ['$scope', 'myService']);
-//# sourceMappingURL=mycontroller.js.map
+//# sourceMappingURL=MyController.js.map
