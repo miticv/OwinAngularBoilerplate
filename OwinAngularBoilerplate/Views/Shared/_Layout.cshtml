@@ -45,38 +45,31 @@
 
   <script src="~/Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
   <script src="~/Scripts/angular-ui/ui-utils.min.js"></script>
-  
+
 
   <!-- if not supporting IE9: remove autofill-event.js and upgrade jquery to 2 -->
   <script src="~/Scripts/autofill/autofill-event.js"></script>
 
-  
-  @*<script src="~/app/_all.js"></script>
-  <script src="~/app/App.js"></script>
-  <script src="~/app/main/services/LoginService.js"></script>
-  <script src="~/app/main/controllers/LogInController.js"></script>
-  <script src="~/app/main/interfaces/Interfaces.js"></script>
-  <script src="~/app/main/model/LoginModels.js"></script>*@
+  <script src="~/app/main/common.js"></script>
+  <script src="~/app/main/global.js"></script>  
 
-
-  @*<script src="~/app/TEMP/_all.js"></script>*@  
-
-  <script src="~/app/TEMP/global.js"></script>
-  <script src="~/app/TEMP/common.js"></script>
-  <script src="~/app/TEMP/interfaces.js"></script>
-  <script src="~/app/TEMP/App.js"></script>
-  <script src="~/app/TEMP/directives.js"></script>
-  <script src="~/app/TEMP/filters.js"></script>
-  <script src="~/app/TEMP/services.js"></script>
-  <script src="~/app/TEMP/MyController.js"></script>
+  <script src="~/app/main/interfaces/interfaces.js"></script>
+  <script src="~/app/main/models/models.js"></script>
+  <script src="~/app/main/App.js"></script>
+  <script src="~/app/main/directives/directives.js"></script>
+  <script src="~/app/main/filters/filters.js"></script>
+  <script src="~/app/main/services/services.js"></script>
+  <script src="~/app/main/controllers/controllers.js"></script>
 
   <script>
 
     $(document).ready(function () {
-          angular.bootstrap(document, ['app']);
-          });
+      //var main = new app.App();
+      angular.bootstrap(document, ['app']);
+    });
 
   </script>
 
 </body>
+
 </html>

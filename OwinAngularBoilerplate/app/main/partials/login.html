@@ -28,7 +28,7 @@
     </div>
   </div>
 
-  <div class="row omb_row-sm-offset-3" ng-controller="app.controllers.MyController as lc">
+  <div class="row omb_row-sm-offset-3" ng-controller="app.controllers.LogInController as lc">
     <div class="col-xs-12 col-sm-6">
       <form class="omb_loginForm" action="" autocomplete="off" method="POST">
         <div class="input-group">
@@ -41,12 +41,9 @@
           <span class="input-group-addon"><i class="fa fa-lock"></i></span>
           <input type="password" class="form-control" ng-model="lc.password" name="password" placeholder="Password">
         </div>
-
         <br />
 
-        {{ lc.message }} {{ lc.test }}
-
-        <button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="">Login</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="lc.LogMeIn()">Login</button>
       </form>
     </div>
   </div>
@@ -63,6 +60,3 @@
     </div>
   </div>
 </div>
-<h2>Sample custom filter</h2>
-
-<my-directive></my-directive>

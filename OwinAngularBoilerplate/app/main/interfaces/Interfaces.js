@@ -1,2 +1,2 @@
-﻿/// <reference path="../../_all.ts" />
-//# sourceMappingURL=Interfaces.js.map
+﻿/// <reference path="../_all.ts" />
+//# sourceMappingURL=interfaces.js.map

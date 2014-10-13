@@ -1,11 +1,31 @@
-﻿ /// <reference path="../../_all.ts" />
+﻿/// <reference path="../_all.ts" />
 
-module Main.DemoApp.interfaces {
-    
-     export interface ILogInScope extends ng.IScope {
-        Login: Main.DemoApp.models.Login;
-        ErrorMessage: string;
-        LogMeIn(): void;    
-     }
+module app {
 
- }
+    export interface IController {
+        
+
+    }
+
+    export interface ILogInController {
+        LogMeIn: () => void;
+
+    }
+
+    export interface IDirective {
+        restrict: string;
+        link($scope: ng.IScope, element: JQuery, attrs: ng.IAttributes): any;
+    }
+
+    export interface IFilter {
+        filter(input: any, ...args: any[]): any;
+    }
+
+    export interface IService {
+
+    }
+
+    export interface ILogInScope extends ng.IScope {
+        LogMeIn: Function;
+    }
+}
