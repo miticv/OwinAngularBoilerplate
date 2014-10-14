@@ -26,11 +26,18 @@ module app {
             $urlRouterProvider.otherwise('/error');
 
             $stateProvider.
+                state("home", {
+                    url: "/",
+                    template: '<div>{{title}}</div>',
+                    controller: function ($scope) {
+                        $scope.title = 'home page';
+                    }
+                }).
                 state("test", {
                     url: "/test",
-                    template: '<h1>{{title}}</h1>',
+                    templateUrl: '/app/main/partials/test.html',
                     controller: function ($scope) {
-                        $scope.title = 'My Contacts';
+                        $scope.title = 'Test';
                     }
                 }).
                 state("login", {
