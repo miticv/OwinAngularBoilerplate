@@ -3,31 +3,23 @@
 var app;
 (function (app) {
     (function (filters) {
-        var RangeTo = (function () {
-            function RangeTo() {
+        var ToLowerCaseFilter = (function () {
+            function ToLowerCaseFilter() {
             }
-            RangeTo.prototype.filter = function (start, end) {
-                var out = [];
-                for (var i = start; i < end; ++i)
-                    out.push(i);
-                return out;
+            ToLowerCaseFilter.Factory = function () {
+                return function (input) {
+                    var result = "";
+                    if (input)
+                        result = input.toLowerCase();
+                    return result;
+                };
             };
-            return RangeTo;
+            ToLowerCaseFilter.$inject = ['$filter'];
+            return ToLowerCaseFilter;
         })();
-        filters.RangeTo = RangeTo;
-
-        var Splice = (function () {
-            function Splice() {
-            }
-            Splice.prototype.filter = function (input, start, howMany) {
-                return input.splice(start, howMany);
-            };
-            return Splice;
-        })();
-        filters.Splice = Splice;
+        filters.ToLowerCaseFilter = ToLowerCaseFilter;
     })(app.filters || (app.filters = {}));
     var filters = app.filters;
 })(app || (app = {}));
-app.application.filter('RangeTo', app.filters.RangeTo);
-app.application.filter('Splice', app.filters.Splice);
+app.application.filter("tolowercase", [app.filters.ToLowerCaseFilter.Factory]);
 //# sourceMappingURL=filters.js.map
