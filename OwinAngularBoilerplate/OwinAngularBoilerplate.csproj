@@ -134,10 +134,14 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="app\main\AppClass.ts" />
-    <TypeScriptCompile Include="app\main\App.ts" />
-    <Content Include="app\main\UserAccount\login.html" />
-    <Content Include="app\main\test\test.html" />
+    <TypeScriptCompile Include="app\blocks\logger\logger.module.ts" />
+    <TypeScriptCompile Include="app\blocks\logger\logger.ts" />
+    <TypeScriptCompile Include="app\core\config.ts" />
+    <TypeScriptCompile Include="app\core\constants.ts" />
+    <TypeScriptCompile Include="app\core\core.module.ts" />
+    <TypeScriptCompile Include="app\App.ts" />
+    <Content Include="app\useraccount\login.html" />
+    <Content Include="app\test\test.html" />
     <Content Include="Content\app\login.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -500,6 +504,10 @@
     <Content Include="Scripts\jquery-1.9.0.js" />
     <Content Include="Scripts\jquery-1.9.0.min.js" />
     <Content Include="Scripts\jquery-1.9.0.min.map" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
     <Content Include="Scripts\toastr.min.js.map" />
@@ -534,26 +542,20 @@
     <Compile Include="Results\ChallengeResults.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="app\common\controllers\" />
-    <Folder Include="app\common\directives\" />
-    <Folder Include="app\common\filters\" />
-    <Folder Include="app\common\partials\" />
-    <Folder Include="app\common\services\" />
-    <Folder Include="app\common\values\" />
-    <Folder Include="app\main\interfaces\" />
-    <Folder Include="app\test\" />
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="app\main\common.ts" />
-    <TypeScriptCompile Include="app\main\directives\directives.ts" />
-    <TypeScriptCompile Include="app\main\filters\filters.ts" />
-    <TypeScriptCompile Include="app\main\global.ts" />
-    <TypeScriptCompile Include="app\main\UserAccount\interfaces.ts" />
-    <TypeScriptCompile Include="app\main\UserAccount\models.ts" />
-    <TypeScriptCompile Include="app\main\UserAccount\controllers.ts" />
-    <TypeScriptCompile Include="app\main\UserAccount\services.ts" />
-    <TypeScriptCompile Include="app\main\_all.ts" />
+    <TypeScriptCompile Include="app\core\interfaces.ts" />
+    <TypeScriptCompile Include="app\useraccount\config.route.ts" />
+    <TypeScriptCompile Include="app\useraccount\useraccount.module.ts" />
+    <TypeScriptCompile Include="app\widgets\common.ts" />
+    <TypeScriptCompile Include="app\widgets\directives.ts" />
+    <TypeScriptCompile Include="app\widgets\filters.ts" />
+    <TypeScriptCompile Include="app\useraccount\interfaces.ts" />
+    <TypeScriptCompile Include="app\useraccount\models.ts" />
+    <TypeScriptCompile Include="app\useraccount\controllers.ts" />
+    <TypeScriptCompile Include="app\useraccount\services.ts" />
+    <TypeScriptCompile Include="app\widgets\widgets.module.ts" />
+    <TypeScriptCompile Include="app\_all.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-translate\angular-translate.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui-bootstrap\angular-ui-bootstrap.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui\angular-ui-router.d.ts" />
@@ -569,6 +571,7 @@
     <TypeScriptCompile Include="Scripts\typings\jasmine\jasmine.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\karma-jasmine\karma-jasmine.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\moment\moment.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\toastr\toastr.d.ts" />
   </ItemGroup>
   <PropertyGroup>

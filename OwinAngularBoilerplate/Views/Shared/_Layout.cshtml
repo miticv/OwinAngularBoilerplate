@@ -41,6 +41,7 @@
   <script src="~/Scripts/jquery-1.9.0.min.js"></script>
   <script src="~/Scripts/bootstrap.min.js"></script>
   <script src="~/Scripts/toastr.min.js"></script>
+  <script src="~/Scripts/moment.min.js"></script>
   <script src="~/Scripts/bootbox.min.js"></script>
 
   <script src="~/Scripts/angular.js"></script>
@@ -53,18 +54,26 @@
   <!-- if not supporting IE9: remove autofill-event.js and upgrade jquery to 2 -->
   <script src="~/Scripts/autofill/autofill-event.js"></script>
 
-  <script src="~/app/main/common.js"></script>
-  <script src="~/app/main/global.js"></script>  
+  <!-- typescript interfaces do not needed to be included-->
+  <script src="~/app/App.js"></script>
 
+  <script src="~/app/blocks/logger/logger.module.js"></script>
+  <script src="~/app/blocks/logger/logger.js"></script>
 
-  <script src="~/app/main/App.js"></script>
-  <script src="~/app/main/directives/directives.js"></script>
-  <script src="~/app/main/filters/filters.js"></script>
+  <script src="~/app/core/core.module.js"></script>
+  <script src="~/app/core/constants.js"></script>
+  <script src="~/app/core/config.js"></script>
 
-  <script src="~/app/main/UserAccount/interfaces.js"></script>
-  <script src="~/app/main/UserAccount/models.js"></script>
-  <script src="~/app/main/UserAccount/services.js"></script>
-  <script src="~/app/main/UserAccount/controllers.js"></script>
+  <script src="~/app/widgets/widgets.module.js"></script>
+  <script src="~/app/widgets/common.js"></script>
+  <script src="~/app/widgets/directives.js"></script>
+  <script src="~/app/widgets/filters.js"></script>
+
+  <script src="~/app/useraccount/useraccount.module.js"></script>
+  <script src="~/app/useraccount/config.route.js"></script>
+  <script src="~/app/useraccount/models.js"></script>
+  <script src="~/app/useraccount/services.js"></script>
+  <script src="~/app/useraccount/controllers.js"></script>
 
   <script>
 
