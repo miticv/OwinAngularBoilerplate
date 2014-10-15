@@ -4,7 +4,7 @@ var app;
 (function (app) {
     (function (controllers) {
         var LogInController = (function () {
-            function LogInController($scope, loginService) {
+            function LogInController(loginService) {
                 this.LogMeIn = function () {
                     var self = this;
                     var model = new app.models.Login();
@@ -16,10 +16,9 @@ var app;
                     });
                 };
                 var self = this;
-                self.$scope = $scope;
                 self.dataSvc = loginService;
             }
-            LogInController.$inject = ['$scope', 'loginService'];
+            LogInController.$inject = ['loginService'];
             return LogInController;
         })();
         controllers.LogInController = LogInController;

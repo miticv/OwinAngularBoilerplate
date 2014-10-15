@@ -4,10 +4,11 @@
 module app.controllers {
 
     export class LogInController implements ILogInController {
-
-        private $scope: any; 
+                                                              
         private dataSvc: ng.IServiceProvider;
         private tokenData: app.models.Token;
+
+        LogmeIn: Function;
 
         LogMeIn = function () {
             var self = this;                       
@@ -20,10 +21,9 @@ module app.controllers {
             });
         }
 
-        static $inject = ['$scope', 'loginService'];
-        constructor($scope: any, loginService: ng.IServiceProvider) {
-            var self = this;            
-            self.$scope = $scope;                        
+        static $inject = ['loginService'];
+        constructor( loginService: ng.IServiceProvider) {
+            var self = this;                                   
             self.dataSvc = loginService;
         }
     }  

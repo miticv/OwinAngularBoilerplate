@@ -136,7 +136,8 @@
   <ItemGroup>
     <TypeScriptCompile Include="app\main\AppClass.ts" />
     <TypeScriptCompile Include="app\main\App.ts" />
-    <Content Include="app\main\partials\login.html" />
+    <Content Include="app\main\UserAccount\login.html" />
+    <Content Include="app\main\test\test.html" />
     <Content Include="Content\app\login.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -539,6 +540,8 @@
     <Folder Include="app\common\filters\" />
     <Folder Include="app\common\partials\" />
     <Folder Include="app\common\services\" />
+    <Folder Include="app\common\values\" />
+    <Folder Include="app\main\interfaces\" />
     <Folder Include="app\test\" />
   </ItemGroup>
   <ItemGroup>
@@ -546,10 +549,10 @@
     <TypeScriptCompile Include="app\main\directives\directives.ts" />
     <TypeScriptCompile Include="app\main\filters\filters.ts" />
     <TypeScriptCompile Include="app\main\global.ts" />
-    <TypeScriptCompile Include="app\main\interfaces\interfaces.ts" />
-    <TypeScriptCompile Include="app\main\models\models.ts" />
-    <TypeScriptCompile Include="app\main\controllers\controllers.ts" />
-    <TypeScriptCompile Include="app\main\services\services.ts" />
+    <TypeScriptCompile Include="app\main\UserAccount\interfaces.ts" />
+    <TypeScriptCompile Include="app\main\UserAccount\models.ts" />
+    <TypeScriptCompile Include="app\main\UserAccount\controllers.ts" />
+    <TypeScriptCompile Include="app\main\UserAccount\services.ts" />
     <TypeScriptCompile Include="app\main\_all.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-translate\angular-translate.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui-bootstrap\angular-ui-bootstrap.d.ts" />

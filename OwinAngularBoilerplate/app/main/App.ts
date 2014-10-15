@@ -41,9 +41,10 @@ module app {
                     }
                 }).
                 state("login", {
-                    url: "/login",
-                    controller: "app.controllers.LogInController",
-                    templateUrl: '/app/main/partials/login.html',
+                    url: '/login',
+                    controller: 'app.controllers.LogInController',
+                    controllerAs: 'login',
+                    templateUrl: '/app/main/UserAccount/login.html',
 
                 });
         }

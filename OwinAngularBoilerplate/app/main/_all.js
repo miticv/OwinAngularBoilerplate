@@ -6,17 +6,17 @@
 /// <reference path="common.ts" />
 /// <reference path="global.ts" />
 //#######  interfaces #######
-/// <reference path="interfaces/interfaces.ts" />
+/// <reference path="UserAccount/interfaces.ts" />
 //#######    models   #######
-/// <reference path="models/models.ts" />
+/// <reference path="UserAccount/models.ts" />
 //#######   filters   #######
 /// <reference path="filters/filters.ts" />
 //#######   services  #######
-/// <reference path="services/services.ts" />
+/// <reference path="UserAccount/services.ts" />
 //#######  directives #######
 /// <reference path="directives/directives.ts" />
 //####### controllers #######
-/// <reference path="controllers/controllers.ts" />
+/// <reference path="UserAccount/controllers.ts" />
 //#######     app     #######
 /// <reference path="app.ts" />
 //###/ <reference path="appClass.ts" />
