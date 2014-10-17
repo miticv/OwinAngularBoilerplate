@@ -3,7 +3,7 @@ OwinAngularBoilerplate
 
 
 ##What is this?
-Startup boilerplat using lightweight [Owin](http://owin.org/), [Identity](http://www.asp.net/identity) together with [Angular](https://angularjs.org/) with [Typescript](http://typescript.codeplex.com/). 
+Startup boilerplate using lightweight [Owin](http://owin.org/), [Identity](http://www.asp.net/identity) together with [Angular](https://angularjs.org/) with [Typescript](http://typescript.codeplex.com/). 
 
 ##Technologies
 * [Owin](http://owin.org/) ([Katana](https://katanaproject.codeplex.com/) - .NET implementation of OWIN)
