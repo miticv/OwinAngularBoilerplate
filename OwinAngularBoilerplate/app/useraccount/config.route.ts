@@ -16,10 +16,9 @@ module app.useraccount {
         $stateProvider: ng.ui.IStateProvider,
         $urlRouterProvider: ng.ui.IUrlRouterProvider) {
 
-        $urlRouterProvider.otherwise('/error');
+        //$urlRouterProvider.otherwise('/error');
 
         $stateProvider.
-        //state("home", {
         //    url: "/",
         //    template: '<div>{{title}}</div>',
         //    controller: function ($scope) {

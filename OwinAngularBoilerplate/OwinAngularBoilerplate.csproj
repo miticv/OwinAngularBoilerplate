@@ -134,6 +134,9 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="app\blocks\exception\exception.module.ts" />
+    <TypeScriptCompile Include="app\blocks\exception\exception.provider.ts" />
+    <TypeScriptCompile Include="app\blocks\exception\exception.ts" />
     <TypeScriptCompile Include="app\blocks\logger\logger.module.ts" />
     <TypeScriptCompile Include="app\blocks\logger\logger.ts" />
     <TypeScriptCompile Include="app\core\config.ts" />
@@ -545,6 +548,9 @@
   <ItemGroup />
   <ItemGroup>
     <TypeScriptCompile Include="app\core\interfaces.ts" />
+    <TypeScriptCompile Include="app\test\config.route.ts" />
+    <TypeScriptCompile Include="app\test\controllers.ts" />
+    <TypeScriptCompile Include="app\test\test.module.ts" />
     <TypeScriptCompile Include="app\useraccount\config.route.ts" />
     <TypeScriptCompile Include="app\useraccount\useraccount.module.ts" />
     <TypeScriptCompile Include="app\widgets\common.ts" />

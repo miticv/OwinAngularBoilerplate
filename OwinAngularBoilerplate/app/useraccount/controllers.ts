@@ -12,7 +12,7 @@ module app.useraccount {
         LogmeIn: Function;
 
         LogMeIn = function () {
-            var self = this;                       
+            var self = this;            
             var model = new models.Login();
             model.username = self.username;
             model.password = self.password;

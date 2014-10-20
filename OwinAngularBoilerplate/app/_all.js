@@ -14,6 +14,8 @@
 /// <reference path="core/interfaces.ts" />
 //#######  blocks #######
 /// <reference path="blocks/logger/logger.ts" />
+/// <reference path="blocks/exception/exception.provider.ts" />
+/// <reference path="blocks/exception/exception.ts" />
 //#######  widgets #######
 /// <reference path="widgets/directives.ts" />
 /// <reference path="widgets/filters.ts" />
@@ -22,5 +24,6 @@
 /// <reference path="UserAccount/models.ts" />
 /// <reference path="UserAccount/services.ts" />
 /// <reference path="UserAccount/controllers.ts" />
-//#######     app     #######
+//#######    test     #######
+/// <reference path="test/controllers.ts" />
 //# sourceMappingURL=_all.js.map

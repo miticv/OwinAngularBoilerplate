@@ -17,6 +17,8 @@
 
 //#######  blocks #######
 /// <reference path="blocks/logger/logger.ts" />
+/// <reference path="blocks/exception/exception.provider.ts" />
+/// <reference path="blocks/exception/exception.ts" />
 
 //#######  widgets #######
 /// <reference path="widgets/directives.ts" />
@@ -28,5 +30,5 @@
 /// <reference path="UserAccount/services.ts" />
 /// <reference path="UserAccount/controllers.ts" />
 
-//#######     app     #######
-
+//#######    test     #######
+/// <reference path="test/controllers.ts" />

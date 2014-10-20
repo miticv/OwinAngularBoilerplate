@@ -6,7 +6,8 @@ var app;
     angular.module('app', [
         'app.core',
         'app.widgets',
-        'app.useraccount'
+        'app.useraccount',
+        'app.test'
     ]);
 })(app || (app = {}));
 //# sourceMappingURL=App.js.map

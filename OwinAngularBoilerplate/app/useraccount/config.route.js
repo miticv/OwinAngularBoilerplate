@@ -11,8 +11,7 @@ var app;
             '$urlRouterProvider'];
 
         function UserAccountConfig($stateProvider, $urlRouterProvider) {
-            $urlRouterProvider.otherwise('/error');
-
+            //$urlRouterProvider.otherwise('/error');
             $stateProvider.state("login", {
                 url: '/login',
                 controller: 'app.useraccount.LogInController',
