@@ -27,10 +27,25 @@ namespace UnitTest
          * Create user:  username = "miticv@gmail.com", password = "Test!234"
          * Create role: "Admin"
          * Add above user to Admin role!!!
-         * 
+         * Also add role: "Test" it is used for testing
          * Then test cases will run fine :) 
-         */       
+         */
+        [TestMethod]
+        [TestCategory("UserInfo")]
+        public async Task UserInfo_Register_AdminUSer()
+        {
+            RegisterBindingModel model = new RegisterBindingModel()
+            {
+                Email = "miticv@gmail.com",
+                Password = "Test!234",
+                ConfirmPassword = "Test!234"
+            };
 
+            string str = ServiceStack.Text.JsonSerializer.SerializeToString(model, typeof(RegisterBindingModel));
+            StringContent theContent = new StringContent(str, System.Text.Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await _client.PostAsync("api/Account/Register", theContent);
+
+        }
         #endregion
 
         #region private functions

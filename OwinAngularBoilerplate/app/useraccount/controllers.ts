@@ -26,8 +26,8 @@ module app.useraccount {
             });
         }
 
-        static $inject = ['loginService', 'logger'];
-        constructor(loginService: ng.IServiceProvider, logger: ILogger) {
+        static $inject = ['$scope', 'loginService', 'logger'];
+        constructor(scope: any, loginService: ng.IServiceProvider, logger: ILogger) {
             var self = this;                                   
             self.dataSvc = loginService;
             self.logger = logger;

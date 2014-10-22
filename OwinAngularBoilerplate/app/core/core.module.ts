@@ -7,13 +7,14 @@ module app {
         /*
          *  Angular Modules
          */
-        //'ngResource',
+        //'ngResource', 'ngAnimate', 'ngRoute', 'ngSanitize',
         'ui.router',
         /*
          * Our reusable cross app code modules
          */
         'blocks.logger',
-        'blocks.exception'
+        'blocks.exception',
+        'blocks.router'
     ]);
 
 }

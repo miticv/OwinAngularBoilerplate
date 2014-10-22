@@ -145,7 +145,6 @@ declare module angularScenario {
     }
 }
 
-/* removed below since it is defined in jasmine framework, and we use jasmine for unit testing */
 //declare var describe: angularScenario.RunFunctionWithDescription;
 //declare var ddescribe: angularScenario.RunFunctionWithDescription;
 //declare var xdescribe: angularScenario.RunFunctionWithDescription;

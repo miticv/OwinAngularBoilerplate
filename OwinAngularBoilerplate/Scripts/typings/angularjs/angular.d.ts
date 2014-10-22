@@ -150,12 +150,12 @@ declare module ng {
 
         /**
          * Creates a deep copy of source, which should be an object or an array.
-         * 
+         *
          * - If no destination is supplied, a copy of the object or array is created.
          * - If a destination is provided, all of its elements (for array) or properties (for objects) are deleted and then all elements/properties from the source are copied to it.
          * - If source is not an object or array (inc. null and undefined), source is returned.
          * - If source is identical to 'destination' an exception will be thrown.
-         * 
+         *
          * @param source The source that will be used to make a copy. Can be any type, including primitives, null, and undefined.
          * @param destination Destination into which the source is copied. If provided, must be of the same type as source.
          */
@@ -163,7 +163,7 @@ declare module ng {
 
         /**
          * Wraps a raw DOM element or HTML string as a jQuery element.
-         * 
+         *
          * If jQuery is available, angular.element is an alias for the jQuery function. If jQuery is not available, angular.element delegates to Angular's built-in subset of jQuery, called "jQuery lite" or "jqLite."
          */
         element: IAugmentedJQueryStatic;
@@ -237,7 +237,7 @@ declare module ng {
             major: number;
             minor: number;
             dot: number;
-            codename: string;
+            codeName: string;
         };
     }
 
@@ -290,14 +290,14 @@ declare module ng {
         controller(object: Object): IModule;
         /**
          * Register a new directive with the compiler.
-         * 
+         *
          * @param name Name of the directive in camel-case (i.e. ngBind which will match as ng-bind)
          * @param directiveFactory An injectable directive factory function.
          */
         directive(name: string, directiveFactory: IDirectiveFactory): IModule;
         /**
          * Register a new directive with the compiler.
-         * 
+         *
          * @param name Name of the directive in camel-case (i.e. ngBind which will match as ng-bind)
          * @param directiveFactory An injectable directive factory function.
          */
@@ -424,6 +424,7 @@ declare module ng {
         // Documentation states viewValue and modelValue to be a string but other
         // types do work and it's common to use them.
         $setViewValue(value: any): void;
+        $setPristine(): void;
         $validate(): void;
         $setTouched(): void;
         $setUntouched(): void;
@@ -445,6 +446,7 @@ declare module ng {
         $untouched: boolean;
 
         $validators: IModelValidators;
+        $asyncValidators: IAsyncModelValidators;
 
         $pristine: boolean;
         $dirty: boolean;
@@ -454,6 +456,10 @@ declare module ng {
 
     interface IModelValidators {
         [index: string]: (...args: any[]) => boolean;
+    }
+
+    interface IAsyncModelValidators {
+        [index: string]: (...args: any[]) => ng.IPromise<boolean>;
     }
 
     interface IModelParser {
@@ -482,22 +488,20 @@ declare module ng {
         $digest(): void;
         $emit(name: string, ...args: any[]): IAngularEvent;
 
-        // Documentation says exp is optional, but actual implementaton counts on it
-        $eval(expression: string, args?: Object): any;
-        $eval(expression: (scope: IScope) => any, args?: Object): any;
+        $eval(expression?: string, args?: Object): any;
+        $eval(expression?: (scope: IScope) => any, args?: Object): any;
 
-        // Documentation says exp is optional, but actual implementaton counts on it
-        $evalAsync(expression: string): void;
-        $evalAsync(expression: (scope: IScope) => any): void;
+        $evalAsync(expression?: string): void;
+        $evalAsync(expression?: (scope: IScope) => any): void;
 
         // Defaults to false by the implementation checking strategy
         $new(isolate?: boolean): IScope;
 
         /**
          * Listens on events of a given type. See $emit for discussion of event life cycle.
-         * 
-         * The event listener function format is: function(event, args...). 
-         * 
+         *
+         * The event listener function format is: function(event, args...).
+         *
          * @param name Event name to listen on.
          * @param listener Function to call when the event is emitted.
          */
@@ -589,6 +593,35 @@ declare module ng {
     interface IIntervalService {
         (func: Function, delay: number, count?: number, invokeApply?: boolean): IPromise<any>;
         cancel(promise: IPromise<any>): boolean;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // AngularProvider
+    // see http://docs.angularjs.org/api/ng/provider/$animateProvider
+    ///////////////////////////////////////////////////////////////////////////
+    interface IAnimateProvider {
+        /**
+         * Registers a new injectable animation factory function.
+         *
+         * @param name The name of the animation.
+         * @param factory The factory function that will be executed to return the animation object.
+         */
+        register(name: string, factory: () => IAnimateCallbackObject): void;
+
+        /**
+         * Gets and/or sets the CSS class expression that is checked when performing an animation.
+         *
+         * @param expression The className expression which will be checked against all animations.
+         * @returns The current CSS className expression value. If null then there is no expression value.
+         */
+        classNameFilter(expression?: RegExp): RegExp;
+    }
+
+    /**
+     * The animation object which contains callback functions for each event that is expected to be animated.
+     */
+    interface IAnimateCallbackObject {
+        eventFn(element: Node, doneFn: () => void): Function;
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -721,7 +754,7 @@ declare module ng {
         /**
          * Change path when called with parameter and return $location.
          * Note: Path should always begin with forward slash (/), this method will add the forward slash if it is missing.
-         * 
+         *
          * @param path New path
          */
         path(path: string): ILocationService;
@@ -731,30 +764,38 @@ declare module ng {
         replace(): ILocationService;
 
         /**
-         * Return search part (as object) of current url 
+         * Return search part (as object) of current url
          */
         search(): any;
 
         /**
          * Change search part when called with parameter and return $location.
-         * 
+         *
          * @param search When called with a single argument the method acts as a setter, setting the search component of $location to the specified value.
-         * 
+         *
          * If the argument is a hash object containing an array of values, these values will be encoded as duplicate search parameters in the url.
          */
         search(search: any): ILocationService;
 
         /**
          * Change search part when called with parameter and return $location.
-         * 
+         *
          * @param search New search params
-         * @param paramValue If search is a string, then paramValue will override only a single search property. If paramValue is null, the property specified via the first argument will be deleted.
+         * @param paramValue If search is a string or a Number, then paramValue will override only a single search property. If paramValue is null, the property specified via the first argument will be deleted.
          */
         search(search: string, paramValue: string): ILocationService;
 
         /**
          * Change search part when called with parameter and return $location.
-         * 
+         *
+         * @param search New search params
+         * @param paramValue If search is a string or a Number, then paramValue will override only a single search property. If paramValue is null, the property specified via the first argument will be deleted.
+         */
+        search(search: string, paramValue: number): ILocationService;
+
+        /**
+         * Change search part when called with parameter and return $location.
+         *
          * @param search New search params
          * @param paramValue If paramValue is an array, it will override the property of the search component of $location specified via the first argument.
          */
@@ -762,7 +803,7 @@ declare module ng {
 
         /**
          * Change search part when called with parameter and return $location.
-         * 
+         *
          * @param search New search params
          * @param paramValue If paramValue is true, the property specified via the first argument will be added with no value nor trailing equal sign.
          */
@@ -892,7 +933,7 @@ declare module ng {
 
         /**
          * Allows you to observe either the fulfillment or rejection of a promise, but to do so without modifying the final value. This is useful to release resources or do some clean-up that needs to be done whether the promise was rejected or resolved. See the full specification for more information.
-         * 
+         *
          * Because finally is a reserved word in JavaScript and reserved keywords are not supported as property names by ES3, you'll need to invoke the method like promise['finally'](callback) to make your code IE8 and Android 2.x compatible.
          */
         finally<TResult>(finallyCallback: () => any): IPromise<TResult>;
@@ -1275,6 +1316,29 @@ declare module ng {
         resourceUrlWhitelist(whitelist: any[]): void;
     }
 
+    /**
+     * $templateRequest service
+     * see http://docs.angularjs.org/api/ng/service/$templateRequest
+     */
+    interface ITemplateRequestService {
+        /**
+         * Downloads a template using $http and, upon success, stores the
+         * contents inside of $templateCache.
+         *
+         * If the HTTP request fails or the response data of the HTTP request is
+         * empty then a $compile error will be thrown (unless
+         * {ignoreRequestError} is set to true).
+         *
+         * @param tpl                  The template URL.
+         * @param ignoreRequestError   Whether or not to ignore the exception
+         *                             when the request fails or the template is
+         *                             empty.
+         *
+         * @return   A promise whose value is the template content.
+         */
+        (tpl: string, ignoreRequestError?: boolean): IPromise<string>;
+    }
+
     ///////////////////////////////////////////////////////////////////////////
     // Directive
     // see http://docs.angularjs.org/api/ng.$compileProvider#directive
@@ -1349,7 +1413,7 @@ declare module ng {
         find(selector: string): IAugmentedJQuery;
         find(element: any): IAugmentedJQuery;
         find(obj: JQuery): IAugmentedJQuery;
-
+        controller(): any;
         controller(name: string): any;
         injector(): any;
         scope(): IScope;
