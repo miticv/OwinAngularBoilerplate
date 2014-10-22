@@ -18,6 +18,21 @@ namespace UnitTest
     public class Account : BaseHandler
     {
 
+        #region Initialization
+#warning "Read this note before running test cases"
+        /**
+         * 
+         * !!!!!!!!IMPORTANT!!!!!!!!!
+         * 
+         * Create user:  username = "miticv@gmail.com", password = "Test!234"
+         * Create role: "Admin"
+         * Add above user to Admin role!!!
+         * 
+         * Then test cases will run fine :) 
+         */       
+
+        #endregion
+
         #region private functions
         private async Task<LoginTokenModel> getAdminToken()
         {
