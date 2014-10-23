@@ -8,15 +8,9 @@ module app.test {
         module('app.test').
         config(UserAccountConfig);
 
-    UserAccountConfig.$inject = [
-        '$stateProvider',
-        '$urlRouterProvider'];
+    UserAccountConfig.$inject = ['$stateProvider'];
 
-    function UserAccountConfig(
-        $stateProvider: ng.ui.IStateProvider,
-        $urlRouterProvider: ng.ui.IUrlRouterProvider) {
-
-        //$urlRouterProvider.otherwise('/error');
+    function UserAccountConfig( $stateProvider: ng.ui.IStateProvider) {
 
         $stateProvider.
         state("test", {
@@ -26,6 +20,7 @@ module app.test {
                 $scope.title = 'Test';
             }
         });
+
     }
 
 }

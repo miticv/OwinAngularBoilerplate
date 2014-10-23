@@ -8,30 +8,11 @@ module app.useraccount {
         module('app.useraccount').
         config(UserAccountConfig);
 
-    UserAccountConfig.$inject = [
-        '$stateProvider',
-        '$urlRouterProvider'];
+    UserAccountConfig.$inject = ['$stateProvider'];
 
-    function UserAccountConfig(
-        $stateProvider: ng.ui.IStateProvider,
-        $urlRouterProvider: ng.ui.IUrlRouterProvider) {
-
-        //$urlRouterProvider.otherwise('/error');
+    function UserAccountConfig($stateProvider: ng.ui.IStateProvider) {
 
         $stateProvider.
-        //    url: "/",
-        //    template: '<div>{{title}}</div>',
-        //    controller: function ($scope) {
-        //        $scope.title = 'home page';
-        //    }
-        //}).
-        //state("test", {
-        //    url: "/test",
-        //    templateUrl: '/app/main/partials/test.html',
-        //    controller: function ($scope) {
-        //        $scope.title = 'Test';
-        //    }
-        //}).
             state("login", {
                 url: '/login',
                 controller: 'app.useraccount.LogInController',

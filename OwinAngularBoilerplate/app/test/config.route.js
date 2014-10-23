@@ -6,12 +6,9 @@ var app;
 
         angular.module('app.test').config(UserAccountConfig);
 
-        UserAccountConfig.$inject = [
-            '$stateProvider',
-            '$urlRouterProvider'];
+        UserAccountConfig.$inject = ['$stateProvider'];
 
-        function UserAccountConfig($stateProvider, $urlRouterProvider) {
-            //$urlRouterProvider.otherwise('/error');
+        function UserAccountConfig($stateProvider) {
             $stateProvider.state("test", {
                 url: "/test",
                 templateUrl: '/app/test/test.html',
