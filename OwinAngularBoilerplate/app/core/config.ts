@@ -10,7 +10,6 @@ module app {
         toastr.options.positionClass = 'toast-bottom-right';
     }
 
-
     angular.module('app.core').value('config', config);
 
     var config = {

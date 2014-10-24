@@ -12,32 +12,11 @@ var app;
         (function (services) {
             var BaseService = (function () {
                 function BaseService($http, $q) {
-                    app.log.debug("BaseService consturctor called");
-                    this.apiPath = 'token';
+                    //log.debug("BaseService consturctor called");
+                    //this.apiPath = 'token';
                     this.httpService = $http;
                     this.qService = $q;
                 }
-                BaseService.prototype.$post = function (model) {
-                    var self = this;
-                    var config = {
-                        url: self.apiPath,
-                        dataType: 'json',
-                        method: 'POST',
-                        data: app.common.querifyObject(model),
-                        headers: {
-                            "Content-Type": "application/x-www-form-urlencoded"
-                        }
-                    };
-
-                    var deferred = self.qService.defer();
-                    self.httpService(config).then(function (result) {
-                        self.data = result.data;
-                        deferred.resolve(self.data);
-                    }, function (error) {
-                        deferred.reject(error);
-                    });
-                    return deferred.promise;
-                };
                 BaseService.$inject = ['$http', '$q'];
                 return BaseService;
             })();

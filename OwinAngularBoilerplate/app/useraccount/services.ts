@@ -12,39 +12,17 @@ module app.useraccount.services {
 
         static $inject = ['$http', '$q'];
         constructor($http: ng.IHttpService, $q: ng.IQService) {
-            log.debug("BaseService consturctor called");
-            this.apiPath = 'token';
+            //log.debug("BaseService consturctor called");
+            //this.apiPath = 'token';
             this.httpService = $http;
             this.qService = $q;
-        }
-
-        $post(model: any): ng.IPromise<any> {
-            var self = this;
-            var config: ng.IRequestConfig = {
-                url: self.apiPath,
-                dataType: 'json',
-                method: 'POST',
-                data: common.querifyObject(model),
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded"
-                }
-            };
-
-            var deferred = self.qService.defer();
-            self.httpService(config).then(
-                function (result: any) {
-                    self.data = result.data;
-                    deferred.resolve(self.data);
-                }, function (error) {
-                    deferred.reject(error);
-                });
-            return deferred.promise;
         }
 
     }
 
 
     export class LoginService extends BaseService { //implements ng.IServiceProvider
+
 
         $post(model: models.Login): ng.IPromise<any> {
             var self = this;

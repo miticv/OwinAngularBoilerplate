@@ -19,6 +19,7 @@ var app;
         //function stateNotFound($injector, $location) {
         //   // $rootScope.$broadcast('$stateNotFound');
         //}
+        //#region define home page - as escape page also
         $stateProvider.state("home", {
             url: "/",
             template: '<div>{{title}}</div>',
@@ -27,6 +28,7 @@ var app;
             }
         });
 
+        //#endregion define home page - as escape page also
         //#region allow case insensitive urls
         $urlRouterProvider.rule(routerRule);
 
@@ -54,6 +56,7 @@ var app;
             //evt.targetScope.$state.current.name
             //evt.currentScope.$state.current.name
             //#region Handle page not found!
+            /* path = get current page from the url  */
             var path = window.location.href.substring(window.location.href.indexOf(window.location.host) + window.location.host.length).replace('/#', '');
             var normalized = path.toLowerCase();
 

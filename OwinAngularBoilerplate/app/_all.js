@@ -16,6 +16,7 @@
 /// <reference path="blocks/logger/logger.ts" />
 /// <reference path="blocks/exception/exception.provider.ts" />
 /// <reference path="blocks/exception/exception.ts" />
+/// <reference path="blocks/router/router.ts" />
 //#######  widgets #######
 /// <reference path="widgets/directives.ts" />
 /// <reference path="widgets/filters.ts" />

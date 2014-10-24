@@ -20,13 +20,12 @@ module app {
         //#endregion Angular 1.3.0 - register controllers with typescript fix
 
         //$urlRouterProvider.otherwise(stateNotFound);
-
         //stateNotFound.$inject = ['$injector', '$location']
         //function stateNotFound($injector, $location) {
         //   // $rootScope.$broadcast('$stateNotFound');
-
         //}
 
+        //#region define home page - as escape page also
         $stateProvider.
             state("home", {
                 url: "/",
@@ -35,6 +34,7 @@ module app {
                     $scope.title = 'home page';
                 }
             });
+        //#endregion define home page - as escape page also
 
         //#region allow case insensitive urls
         $urlRouterProvider.rule(routerRule);
@@ -67,7 +67,7 @@ module app {
             //evt.currentScope.$state.current.name
 
             //#region Handle page not found!
-
+            /* path = get current page from the url  */
             var path = window.location.href.substring(window.location.href.indexOf(window.location.host) + window.location.host.length).replace('/#', '');
             var normalized = path.toLowerCase();
             //var path = $location.path(), normalized = path.toLowerCase(); /* this always returns normalized url so can not use */
