@@ -4,7 +4,7 @@
 module app.useraccount.services {
 
     export class BaseService {
-        public apiPath: string;
+        //public apiPath: string;
         public data: any;
         public httpService: ng.IHttpService;
         public qService: ng.IQService;
@@ -21,15 +21,15 @@ module app.useraccount.services {
     }
 
 
-    export class LoginService extends BaseService { //implements ng.IServiceProvider
+    export class AccountService extends BaseService { //implements ng.IServiceProvider
 
 
-        $post(model: models.Login): ng.IPromise<any> {
+        $login(model: models.Login): ng.IPromise<any> {
             var self = this;
             var deferred = self.qService.defer();
             model.grant_type = 'password';
             var config: ng.IRequestConfig = {                 
-                url: self.apiPath,                 
+                url: 'token',                 
                 dataType: 'json',
                 method: 'POST',
                 data: common.querifyObject(model),
@@ -50,11 +50,33 @@ module app.useraccount.services {
             return deferred.promise;
         }
 
+        $register(model: models.Register): ng.IPromise<any> {
+            var self = this;
+            var deferred = self.qService.defer();            
+            var config: ng.IRequestConfig = {
+                url: 'api/account/Register',
+                dataType: 'json',
+                method: 'POST',
+                data: model
+            };
+
+            self.httpService(config). //post(self.apiPath, model)
+                then(
+                function (result: any) {
+                    self.data = result.data;
+                    deferred.resolve(self.data);
+                }, function (error) {
+                    deferred.reject(error);
+                });
+
+            return deferred.promise;
+        }
+
         static $inject = ['$http', '$q'];
         constructor($http: ng.IHttpService, $q: ng.IQService) {
             super($http, $q);
             //log.debug("LoginService consturctor called");
-            this.apiPath = 'token';
+            //this.apiPath = 'token';
 
         }
 
@@ -62,4 +84,4 @@ module app.useraccount.services {
 
 }
 
-angular.module('app.useraccount').service('loginService', app.useraccount.services.LoginService);
+angular.module('app.useraccount').service('accountService', app.useraccount.services.AccountService);

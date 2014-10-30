@@ -1,25 +1,58 @@
 ﻿/// <reference path="../_all.ts" />
-     
+
 'use strict';
 
-//#region Way 1
 module app.widgets {
 
+    ngMatch.$inject = ['$parse'];
+    export function ngMatch($parse): ng.IDirective {
+        var directive: ng.IDirective = <ng.IDirective>{};
+
+        directive.restrict = 'A';
+        directive.require = '?ngModel';
+        //directive.scope = {};
+        directive.link = function link(scope: ng.IScope, elem: JQuery, attrs: ng.IAttributes, ctrl) {
+            // if ngModel is not defined, we don't need to do anything
+            if (!ctrl) return;
+            if (!attrs['ngMatch']) return;
+
+            var valueToMatch = $parse(attrs['ngMatch']);
+
+            var validator = function (value) {
+                var temp = valueToMatch(scope),
+                    v = value === temp;
+                ctrl.$setValidity('match', v);
+                return value;
+            }
+
+            ctrl.$parsers.unshift(validator);
+            ctrl.$formatters.push(validator);
+            attrs.$observe('ngMatch', function () {
+                validator(ctrl.$viewValue);
+            });
+
+        };
+        return directive;
+    }
+}
+angular.module("app.widgets", []).directive('ngMatch', app.widgets.ngMatch);
+
+//#region Test Directive 1
+module app.widgets {
     export class MyDirective1 implements ng.IDirective {
-         
+
         public restrict = 'E';
         public template = '<div></div>';
         public link($scope: ng.IScope, element: JQuery, attrs: ng.IAttributes) {
             element.text('this is the MyDirective1 directive')
-        }        
+        }
     }
 }
-//angular.module('app.widgets').directive('myDirective1', function (): ng.IDirective { return new app.directives.MyDirective1() });
 angular.module('app.widgets').directive('myDirective1', () => new app.widgets.MyDirective1());
 //#endregion
 
 
-//#region Way 2
+//#region Test Directive 2
 angular.module('app.widgets').directive('myDirective2', function (): ng.IDirective {
     return {
         restrict: 'E',

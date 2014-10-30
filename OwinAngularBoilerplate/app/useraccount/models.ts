@@ -8,6 +8,12 @@ module app.useraccount.models {
         grant_type: string;
     }
 
+    export class Register {
+        email: string;
+        password: string;
+        confirmPassword: string;
+    }
+
     export class Token {
         access_token: string;
         token_type: string;

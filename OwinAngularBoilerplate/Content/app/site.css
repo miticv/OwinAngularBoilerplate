@@ -1,0 +1,21 @@
+﻿
+
+
+form input{
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+
+form input.ng-invalid-pattern,
+form input.ng-invalid-match
+{
+  background-color:lightpink;
+
+}
+
+form button[disabled]:hover,
+form input[disabled]:hover
+{
+  cursor:not-allowed;
+}

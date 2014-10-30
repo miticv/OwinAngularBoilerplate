@@ -134,6 +134,7 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="app\blocks\exception\apiError.ts" />
     <TypeScriptCompile Include="app\blocks\exception\exception.module.ts" />
     <TypeScriptCompile Include="app\blocks\exception\exception.provider.ts" />
     <TypeScriptCompile Include="app\blocks\exception\exception.ts" />
@@ -147,7 +148,8 @@
     <TypeScriptCompile Include="app\App.ts" />
     <Content Include="app\useraccount\login.html" />
     <Content Include="app\test\test.html" />
-    <Content Include="Content\app\login.css" />
+    <Content Include="app\useraccount\register.html" />
+    <Content Include="Content\app\site.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -968,6 +970,8 @@
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\r.js" />
+    <Content Include="Scripts\require.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
     <Content Include="Scripts\toastr.min.js.map" />
@@ -985,6 +989,7 @@
     <TypeScriptCompile Include="Scripts\typings\angular-ui-bootstrap\angular-ui-bootstrap.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui\angular-ui-router.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\bootbox\bootbox.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\requirejs\require.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\toastr\toastr.d.ts" />
   </ItemGroup>
   <ItemGroup>

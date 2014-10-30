@@ -10,6 +10,13 @@ var app;
             })();
             models.Login = Login;
 
+            var Register = (function () {
+                function Register() {
+                }
+                return Register;
+            })();
+            models.Register = Register;
+
             var Token = (function () {
                 function Token() {
                 }

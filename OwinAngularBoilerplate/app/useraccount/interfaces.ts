@@ -3,12 +3,15 @@
 module app.useraccount {
 
 
-    export interface ILogInController {
-        LogMeIn: () => void;
+    export interface IAccountController {
+        //LogMeIn: () => void;
+        //RegisterMe: () => void;
+        message: string;
 
     }
 
-    export interface ILogInScope extends ng.IScope {
-        LogMeIn: Function;
-    }
+    //export interface ILogInScope extends ng.IScope {
+    //    LogMeIn: Function;
+    //    RegisterMe: Function;
+    //}
 }

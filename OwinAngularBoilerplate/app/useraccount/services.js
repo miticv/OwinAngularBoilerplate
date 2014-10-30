@@ -22,20 +22,19 @@ var app;
             })();
             services.BaseService = BaseService;
 
-            var LoginService = (function (_super) {
-                __extends(LoginService, _super);
-                function LoginService($http, $q) {
+            var AccountService = (function (_super) {
+                __extends(AccountService, _super);
+                function AccountService($http, $q) {
                     _super.call(this, $http, $q);
-
                     //log.debug("LoginService consturctor called");
-                    this.apiPath = 'token';
+                    //this.apiPath = 'token';
                 }
-                LoginService.prototype.$post = function (model) {
+                AccountService.prototype.$login = function (model) {
                     var self = this;
                     var deferred = self.qService.defer();
                     model.grant_type = 'password';
                     var config = {
-                        url: self.apiPath,
+                        url: 'token',
                         dataType: 'json',
                         method: 'POST',
                         data: app.common.querifyObject(model),
@@ -54,15 +53,35 @@ var app;
                     return deferred.promise;
                 };
 
-                LoginService.$inject = ['$http', '$q'];
-                return LoginService;
+                AccountService.prototype.$register = function (model) {
+                    var self = this;
+                    var deferred = self.qService.defer();
+                    var config = {
+                        url: 'api/account/Register',
+                        dataType: 'json',
+                        method: 'POST',
+                        data: model
+                    };
+
+                    self.httpService(config).then(function (result) {
+                        self.data = result.data;
+                        deferred.resolve(self.data);
+                    }, function (error) {
+                        deferred.reject(error);
+                    });
+
+                    return deferred.promise;
+                };
+
+                AccountService.$inject = ['$http', '$q'];
+                return AccountService;
             })(BaseService);
-            services.LoginService = LoginService;
+            services.AccountService = AccountService;
         })(useraccount.services || (useraccount.services = {}));
         var services = useraccount.services;
     })(app.useraccount || (app.useraccount = {}));
     var useraccount = app.useraccount;
 })(app || (app = {}));
 
-angular.module('app.useraccount').service('loginService', app.useraccount.services.LoginService);
+angular.module('app.useraccount').service('accountService', app.useraccount.services.AccountService);
 //# sourceMappingURL=services.js.map

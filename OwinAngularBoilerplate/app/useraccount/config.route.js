@@ -14,6 +14,11 @@ var app;
                 controller: 'app.useraccount.LogInController',
                 controllerAs: 'login',
                 templateUrl: '/app/useraccount/login.html'
+            }).state("register", {
+                url: '/register',
+                controller: 'app.useraccount.RegisterController',
+                controllerAs: 'register',
+                templateUrl: '/app/useraccount/register.html'
             });
         }
     })(app.useraccount || (app.useraccount = {}));
