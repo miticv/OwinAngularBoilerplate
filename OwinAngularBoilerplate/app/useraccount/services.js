@@ -29,6 +29,7 @@ var app;
                     //log.debug("LoginService consturctor called");
                     //this.apiPath = 'token';
                 }
+                //token
                 AccountService.prototype.$login = function (model) {
                     var self = this;
                     var deferred = self.qService.defer();
@@ -53,6 +54,7 @@ var app;
                     return deferred.promise;
                 };
 
+                //api/account/Register
                 AccountService.prototype.$register = function (model) {
                     var self = this;
                     var deferred = self.qService.defer();
@@ -61,6 +63,29 @@ var app;
                         dataType: 'json',
                         method: 'POST',
                         data: model
+                    };
+
+                    self.httpService(config).then(function (result) {
+                        self.data = result.data;
+                        deferred.resolve(self.data);
+                    }, function (error) {
+                        deferred.reject(error);
+                    });
+
+                    return deferred.promise;
+                };
+
+                //api/account/UserInfo
+                AccountService.prototype.$userInfo = function () {
+                    var self = this;
+                    var deferred = self.qService.defer();
+                    var config = {
+                        url: 'api/account/UserInfo',
+                        dataType: 'json',
+                        method: 'GET',
+                        headers: {
+                            "Authorization": "Bearer " + localStorage.getItem('token')
+                        }
                     };
 
                     self.httpService(config).then(function (result) {

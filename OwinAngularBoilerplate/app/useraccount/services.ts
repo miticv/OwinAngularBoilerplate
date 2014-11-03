@@ -23,7 +23,7 @@ module app.useraccount.services {
 
     export class AccountService extends BaseService { //implements ng.IServiceProvider
 
-
+        //token
         $login(model: models.Login): ng.IPromise<any> {
             var self = this;
             var deferred = self.qService.defer();
@@ -50,6 +50,7 @@ module app.useraccount.services {
             return deferred.promise;
         }
 
+        //api/account/Register
         $register(model: models.Register): ng.IPromise<any> {
             var self = this;
             var deferred = self.qService.defer();            
@@ -71,6 +72,32 @@ module app.useraccount.services {
 
             return deferred.promise;
         }
+
+        //api/account/UserInfo
+        $userInfo(): ng.IPromise<any> {
+            var self = this;
+            var deferred = self.qService.defer();
+            var config: ng.IRequestConfig = {
+                url: 'api/account/UserInfo',
+                dataType: 'json',
+                method: 'GET',
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem('token')
+                }
+            };
+
+            self.httpService(config). 
+                then(
+                function (result: any) {
+                    self.data = result.data;
+                    deferred.resolve(self.data);
+                }, function (error) {
+                    deferred.reject(error);
+                });
+
+            return deferred.promise;
+        }
+
 
         static $inject = ['$http', '$q'];
         constructor($http: ng.IHttpService, $q: ng.IQService) {

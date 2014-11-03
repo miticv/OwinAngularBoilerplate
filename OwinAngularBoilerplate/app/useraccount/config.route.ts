@@ -24,7 +24,18 @@ module app.useraccount {
                 controller: 'app.useraccount.RegisterController',
                 controllerAs: 'register',
                 templateUrl: '/app/useraccount/register.html',
-        });
+            }).
+            state("userhome", {
+                url: '/userhome',
+                controller: 'app.useraccount.UserController',
+                controllerAs: 'user',
+                templateUrl: '/app/useraccount/userhome.html',
+                resolve: {
+                    'auth': ['accountService', function (accountService) {
+                        return accountService.$userInfo();
+                    }]
+                }
+            });
     }
 
 }

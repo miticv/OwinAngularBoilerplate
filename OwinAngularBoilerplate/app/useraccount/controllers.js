@@ -10,7 +10,6 @@ var app;
                     var model = new useraccount.models.Login();
                     model.username = self.username;
                     model.password = self.password;
-                    this.originalForm = angular.copy(model);
                     self.dataSvc.$login(model).then(function (data) {
                         self.tokenData = data;
                         localStorage.setItem("token", self.tokenData.access_token);
@@ -37,7 +36,6 @@ var app;
                     model.email = self.username;
                     model.password = self.password;
                     model.confirmPassword = self.confirmPassword;
-                    this.originalForm = angular.copy(model);
                     self.dataSvc.$register(model).then(function (data) {
                         self.tokenData = data;
                         self.logger.success("Registered!");
@@ -61,9 +59,38 @@ var app;
             return RegisterController;
         })();
         useraccount.RegisterController = RegisterController;
+
+        var UserController = (function () {
+            function UserController(scope, accountService, logger) {
+                this.getData = function () {
+                    var self = this;
+                    self.dataSvc.$userInfo().then(function (data) {
+                        self.test = data;
+                    }, function (err) {
+                        var returnArray = (new app.ApiErrorHelper()).getModelError(err.data);
+                        var errorVisible = false;
+                        for (var error in returnArray) {
+                            self.logger.error(returnArray[error].modelError, "No Access");
+                            errorVisible = true;
+                        }
+                        if (!errorVisible) {
+                            self.logger.error("No Access");
+                        }
+                    });
+                };
+                var self = this;
+                self.dataSvc = accountService;
+                self.logger = logger;
+                self.getData();
+            }
+            UserController.$inject = ['$scope', 'accountService', 'logger'];
+            return UserController;
+        })();
+        useraccount.UserController = UserController;
     })(app.useraccount || (app.useraccount = {}));
     var useraccount = app.useraccount;
 })(app || (app = {}));
 angular.module('app.useraccount').controller('loginController', app.useraccount.LogInController);
 angular.module('app.useraccount').controller('registerController', app.useraccount.RegisterController);
+angular.module('app.useraccount').controller('userController', app.useraccount.UserController);
 //# sourceMappingURL=controllers.js.map

@@ -149,6 +149,7 @@
     <Content Include="app\useraccount\login.html" />
     <Content Include="app\test\test.html" />
     <Content Include="app\useraccount\register.html" />
+    <Content Include="app\useraccount\userhome.html" />
     <Content Include="Content\app\site.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />

@@ -6,7 +6,7 @@ module app.useraccount {
     export interface IAccountController {
         //LogMeIn: () => void;
         //RegisterMe: () => void;
-        message: string;
+        //message: string;
 
     }
 

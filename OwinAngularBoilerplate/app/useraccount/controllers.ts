@@ -4,8 +4,7 @@
 module app.useraccount {
 
     export class LogInController implements IAccountController {
-
-        public originalForm: any;                                                              
+                                                             
         private dataSvc: ng.IServiceProvider;
         private tokenData: models.Token;
         private logger: ILogger;
@@ -15,7 +14,6 @@ module app.useraccount {
             var model = new models.Login();
             model.username = self.username;
             model.password = self.password;
-            this.originalForm = angular.copy(model);
             self.dataSvc.$login(model).then(function (data) {
                 self.tokenData = data;
                 localStorage.setItem("token", self.tokenData.access_token);
@@ -37,7 +35,6 @@ module app.useraccount {
   
     export class RegisterController implements IAccountController {
 
-        public originalForm: any;
         private dataSvc: ng.IServiceProvider;
         private tokenData: models.Token;
         private logger: ILogger;
@@ -49,7 +46,6 @@ module app.useraccount {
             model.email = self.username;
             model.password = self.password;
             model.confirmPassword = self.confirmPassword;
-            this.originalForm = angular.copy(model);
             self.dataSvc.$register(model).then(function (data) {
                 self.tokenData = data;
                 self.logger.success("Registered!");
@@ -75,7 +71,43 @@ module app.useraccount {
             //SAVE: ng-disabled="readOnly || clientForm.$invalid || !isClientFormChanged()"
         }
     }  
+   
+    export class UserController implements IAccountController {
+
+        private dataSvc: ng.IServiceProvider;
+        private tokenData: models.Token;
+        private logger: ILogger;
+
+
+
+        getData = function () { 
+            var self = this;
+            self.dataSvc.$userInfo().then(function (data) {
+                self.test = data;
+            }, function (err: app.ApiError) {
+                var returnArray = (new ApiErrorHelper()).getModelError(err.data);
+                var errorVisible = false;
+                for (var error in returnArray) {
+                    self.logger.error(returnArray[error].modelError, "No Access");
+                    errorVisible = true;
+                }
+                if (!errorVisible) {
+                    self.logger.error("No Access");
+                }                   
+            });
+        }
+
+
+        static $inject = ['$scope', 'accountService', 'logger'];
+        constructor(scope: any, accountService: ng.IServiceProvider, logger: ILogger) {
+            var self = this;
+            self.dataSvc = accountService;
+            self.logger = logger;
+            self.getData();
+        }
+    }  
     
 }
 angular.module('app.useraccount').controller('loginController', app.useraccount.LogInController);
 angular.module('app.useraccount').controller('registerController', app.useraccount.RegisterController);
+angular.module('app.useraccount').controller('userController', app.useraccount.UserController);
