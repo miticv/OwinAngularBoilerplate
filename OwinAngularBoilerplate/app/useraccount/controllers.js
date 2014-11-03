@@ -4,7 +4,7 @@ var app;
 (function (app) {
     (function (useraccount) {
         var LogInController = (function () {
-            function LogInController(scope, accountService, logger) {
+            function LogInController(scope, accountService, logger, location) {
                 this.LogMeIn = function () {
                     var self = this;
                     var model = new useraccount.models.Login();
@@ -14,6 +14,7 @@ var app;
                         self.tokenData = data;
                         localStorage.setItem("token", self.tokenData.access_token);
                         self.logger.success("Logged in!");
+                        self.location.path('/userhome');
                     }, function (err) {
                         localStorage.removeItem("token");
                         self.logger.error("Wrong credentials!");
@@ -22,8 +23,9 @@ var app;
                 var self = this;
                 self.dataSvc = accountService;
                 self.logger = logger;
+                self.location = location;
             }
-            LogInController.$inject = ['$scope', 'accountService', 'logger'];
+            LogInController.$inject = ['$scope', 'accountService', 'logger', '$location'];
             return LogInController;
         })();
         useraccount.LogInController = LogInController;

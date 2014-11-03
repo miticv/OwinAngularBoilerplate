@@ -8,6 +8,7 @@ module app.useraccount {
         private dataSvc: ng.IServiceProvider;
         private tokenData: models.Token;
         private logger: ILogger;
+        private location: any;
 
         LogMeIn = function () {            
             var self = this;            
@@ -18,6 +19,7 @@ module app.useraccount {
                 self.tokenData = data;
                 localStorage.setItem("token", self.tokenData.access_token);
                 self.logger.success("Logged in!");
+                self.location.path('/userhome');
             }, function (err) {
                 localStorage.removeItem("token");  
                 self.logger.error("Wrong credentials!");
@@ -25,11 +27,12 @@ module app.useraccount {
         }
 
 
-        static $inject = ['$scope', 'accountService', 'logger'];
-        constructor(scope: any, accountService: ng.IServiceProvider, logger: ILogger) {
+        static $inject = ['$scope', 'accountService', 'logger', '$location'];
+        constructor(scope: any, accountService: ng.IServiceProvider, logger: ILogger, location: any) {
             var self = this;                                   
             self.dataSvc = accountService;
-            self.logger = logger;            
+            self.logger = logger;
+            self.location = location;            
         }
     }  
   

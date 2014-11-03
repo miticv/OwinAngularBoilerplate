@@ -88,15 +88,14 @@ module app {
         });
 
         $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
-            //any errors in resolve functions: javascript errors, non-existent services, etc...            
+            //any errors in resolve functions: javascript errors, non-existent services, 401, etc...            
 
             if (error.status === 401) {
                 if (error.data.Message) {
                     logger.error(error.data.Message);
                 } else {
                     logger.error('No Access');
-                }
-                $location.path('/login');
+                }                
                 return;
             }
 
