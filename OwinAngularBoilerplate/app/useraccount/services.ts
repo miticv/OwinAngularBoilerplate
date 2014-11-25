@@ -82,7 +82,7 @@ module app.useraccount.services {
                 dataType: 'json',
                 method: 'GET',
                 headers: {
-                    "Authorization": "Bearer " + JSON.parse(localStorage.getItem('authorizationData')).access_token
+                    "Authorization": "Bearer " + JSON.parse(sessionStorage.getItem('authorizationData')).access_token
                 }
             };
 

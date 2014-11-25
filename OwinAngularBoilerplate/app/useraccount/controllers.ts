@@ -18,11 +18,11 @@ module app.useraccount {
             self.dataSvc.$login(model).then(function (data) {
                 self.tokenData = data;
                 self.tokenData.useRefreshTokens = true;
-                localStorage.setItem("authorizationData", JSON.stringify(self.tokenData));
+                sessionStorage.setItem("authorizationData", JSON.stringify(self.tokenData));
                 self.logger.success("Logged in!");
                 self.location.path('/userhome');
             }, function (err) {
-                localStorage.removeItem("authorizationData");  
+                sessionStorage.removeItem("authorizationData");  
                 self.logger.error("Wrong credentials!");
             });
         }
