@@ -12,11 +12,12 @@ var app;
                     model.password = self.password;
                     self.dataSvc.$login(model).then(function (data) {
                         self.tokenData = data;
-                        localStorage.setItem("token", self.tokenData.access_token);
+                        self.tokenData.useRefreshTokens = true;
+                        localStorage.setItem("authorizationData", JSON.stringify(self.tokenData));
                         self.logger.success("Logged in!");
                         self.location.path('/userhome');
                     }, function (err) {
-                        localStorage.removeItem("token");
+                        localStorage.removeItem("authorizationData");
                         self.logger.error("Wrong credentials!");
                     });
                 };
