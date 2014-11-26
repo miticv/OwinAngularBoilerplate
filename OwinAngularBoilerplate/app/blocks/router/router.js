@@ -4,8 +4,8 @@ var app;
 (function (app) {
     angular.module('app').config(routeConfig).run(routehelper);
 
-    routeConfig.$inject = ['$controllerProvider', '$stateProvider', '$urlRouterProvider'];
-    function routeConfig($controllerProvider, $stateProvider, $urlRouterProvider) {
+    routeConfig.$inject = ['$controllerProvider', '$stateProvider', '$urlRouterProvider', '$httpProvider'];
+    function routeConfig($controllerProvider, $stateProvider, $urlRouterProvider, $httpProvider) {
         //#region Angular 1.3.0 - register controllers with typescript fix
         /* https://github.com/angular/angular.js/issues/8296
         * http://www.lcube.se/angular-js-controller-error-argument-is-not-a-function/
@@ -19,6 +19,8 @@ var app;
         //function stateNotFound($injector, $location) {
         //   // $rootScope.$broadcast('$stateNotFound');
         //}
+        $httpProvider.interceptors.push('interceptor');
+
         //#region define home page - as escape page also
         $stateProvider.state("home", {
             url: "/",

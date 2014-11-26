@@ -82,10 +82,7 @@ var app;
                     var config = {
                         url: 'api/account/UserInfo',
                         dataType: 'json',
-                        method: 'GET',
-                        headers: {
-                            "Authorization": "Bearer " + JSON.parse(sessionStorage.getItem('authorizationData')).access_token
-                        }
+                        method: 'GET'
                     };
 
                     self.httpService(config).then(function (result) {

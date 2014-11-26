@@ -80,10 +80,7 @@ module app.useraccount.services {
             var config: ng.IRequestConfig = {
                 url: 'api/account/UserInfo',
                 dataType: 'json',
-                method: 'GET',
-                headers: {
-                    "Authorization": "Bearer " + JSON.parse(sessionStorage.getItem('authorizationData')).access_token
-                }
+                method: 'GET' //we are passing token header with the injector
             };
 
             self.httpService(config). 

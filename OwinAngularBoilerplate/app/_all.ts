@@ -17,6 +17,7 @@
 
 //#######  blocks #######
 /// <reference path="blocks/logger/logger.ts" />
+/// <reference path="blocks/interceptor/interceptor.ts" />
 /// <reference path="blocks/exception/exception.provider.ts" />
 /// <reference path="blocks/exception/exception.ts" />
 /// <reference path="blocks/exception/apierror.ts" />

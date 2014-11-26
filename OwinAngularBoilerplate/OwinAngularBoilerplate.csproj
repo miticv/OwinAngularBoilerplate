@@ -138,6 +138,8 @@
     <TypeScriptCompile Include="app\blocks\exception\exception.module.ts" />
     <TypeScriptCompile Include="app\blocks\exception\exception.provider.ts" />
     <TypeScriptCompile Include="app\blocks\exception\exception.ts" />
+    <TypeScriptCompile Include="app\blocks\interceptor\interceptor.ts" />
+    <TypeScriptCompile Include="app\blocks\interceptor\interceptor.module.ts" />
     <TypeScriptCompile Include="app\blocks\logger\logger.module.ts" />
     <TypeScriptCompile Include="app\blocks\logger\logger.ts" />
     <TypeScriptCompile Include="app\blocks\router\router.module.ts" />

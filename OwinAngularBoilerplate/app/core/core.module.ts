@@ -13,6 +13,7 @@ module app {
          * Our reusable cross app code modules
          */
         'blocks.logger',
+        'blocks.interceptor',
         'blocks.exception',
         'blocks.router'
     ]);

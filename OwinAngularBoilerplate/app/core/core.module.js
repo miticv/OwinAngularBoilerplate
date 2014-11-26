@@ -5,6 +5,7 @@ var app;
     angular.module('app.core', [
         'ui.router',
         'blocks.logger',
+        'blocks.interceptor',
         'blocks.exception',
         'blocks.router'
     ]);
