@@ -29,7 +29,7 @@ namespace OwinAngularBoilerplate
 
             // Enable the application to use a cookie to store information for the signed in user
             // and to use a cookie to temporarily store information about a user logging in with a third party login provider
-            app.UseCookieAuthentication(new CookieAuthenticationOptions() 
+            //app.UseCookieAuthentication(new CookieAuthenticationOptions() 
             //{             
             // Provider = = new CookieAuthenticationProvider 
             //    { 
@@ -41,7 +41,7 @@ namespace OwinAngularBoilerplate
             //                getUserIdCallback:(id)=>(Int32.Parse(id.GetUserId())))
             //    } 
             //}
-            );
+            //);
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             // Configure the application for OAuth based flow
@@ -52,11 +52,16 @@ namespace OwinAngularBoilerplate
                 Provider = new ApplicationOAuthProvider(PublicClientId),
                 AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromMinutes(int.Parse(ConfigurationManager.AppSettings["ExpirationInMinutes"])),
-                AllowInsecureHttp = true
+                AllowInsecureHttp = true,
+                RefreshTokenProvider = new SimpleRefreshTokenProvider()
             };
 
             // Enable the application to use bearer tokens to authenticate users
-            app.UseOAuthBearerTokens(OAuthOptions);
+            //app.UseOAuthBearerTokens(OAuthOptions);
+
+            app.UseOAuthAuthorizationServer(OAuthOptions);
+            app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
+
 
             // Uncomment the following lines to enable logging in with third party login providers
             //app.UseMicrosoftAccountAuthentication(

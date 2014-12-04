@@ -498,6 +498,20 @@ namespace OwinAngularBoilerplate.Controllers
             return Ok();
         }
 
+        //public async Task<ApplicationUser> FindUser(string userName, string password)
+        //{
+        //    ApplicationUser user = await UserManager.FindAsync(userName, password);
+        //    return user;
+        //}
+
+        // GET api/Account/getHashedValue
+        [Route("GetHashedValue")]
+        [AllowAnonymous]
+        public async Task<string> GetHashedValue(string value)
+        {
+            return Helper.GetHash(value);
+        }
+
         // POST api/Account/RegisterExternal
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]

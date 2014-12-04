@@ -3,6 +3,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
+using System.Data.Entity;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace OwinAngularBoilerplate.Models
 {
@@ -31,6 +34,19 @@ namespace OwinAngularBoilerplate.Models
         }
     }
 
+    public class AuthRefreshTokenContext : IdentityDbContext<ApplicationUser, CustomRole, int, CustomUserLogin, CustomUserRole, CustomUserClaim>
+    {        
+
+        public AuthRefreshTokenContext()
+            : base("DefaultConnection")
+        {
+           
+        }
+
+        public DbSet<Client> Clients { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
+    }
+
 
     //New drived classes 
     public class CustomUserRole : IdentityUserRole<int> { }
@@ -56,5 +72,7 @@ namespace OwinAngularBoilerplate.Models
         {
         }
     } 
+
+    
 
 }
