@@ -6,6 +6,7 @@ module app.useraccount.models {
         username: string;
         password: string;
         grant_type: string;
+        client_id: string;
     }
 
     export class Register {
@@ -18,9 +19,11 @@ module app.useraccount.models {
         access_token: string;
         token_type: string;
         expires_in: number;
+        refresh_token: string;
         userName: string;
         '.issued': string;
         '.expires': string;
+        'as:client_id': string;
     }
 
     export class UserInfo {

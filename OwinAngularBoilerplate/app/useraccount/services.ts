@@ -28,6 +28,7 @@ module app.useraccount.services {
             var self = this;
             var deferred = self.qService.defer();
             model.grant_type = 'password';
+            model.client_id = 'app';
             var config: ng.IRequestConfig = {                 
                 url: 'token',                 
                 dataType: 'json',

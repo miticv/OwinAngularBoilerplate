@@ -17,6 +17,7 @@ using Microsoft.Owin.Security.OAuth;
 using OwinAngularBoilerplate.Models;
 using OwinAngularBoilerplate.Providers;
 using OwinAngularBoilerplate.Results;
+using OwinAngularBoilerplate.Repository;
 
 //http://www.asp.net/identity/overview/extensibility/change-primary-key-for-users-in-aspnet-identity
 
@@ -29,6 +30,7 @@ namespace OwinAngularBoilerplate.Controllers
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
         private ApplicationRoleManager _roleManager;
+        private RefreshTokenRepository _refreshTokenManager;
 
         public AccountController()
         {
@@ -65,6 +67,19 @@ namespace OwinAngularBoilerplate.Controllers
                 _roleManager = value;
             }
         }
+
+        public RefreshTokenRepository RefreshTokenManager
+        {
+            get
+            {
+                return _refreshTokenManager ?? new RefreshTokenRepository();
+            }
+            private set
+            {
+                _refreshTokenManager = value;
+            }
+        }
+
 
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
 
@@ -505,6 +520,32 @@ namespace OwinAngularBoilerplate.Controllers
         //}
 
         // GET api/Account/getHashedValue
+
+#warning remove anonimous when done developing and add Admin
+        //[Authorize(Users = "Admin")]
+        [AllowAnonymous]
+        [Route("GetAllRefreshTokens")]
+        public IHttpActionResult GetAllRefreshTokens()
+        {
+            return Ok(RefreshTokenManager.GetAllRefreshTokens().Select(s => new { s.ClientId, s.Id, s.Subject, s.IssuedUtc, s.ExpiresUtc }));
+        }
+
+#warning remove anonimous when done developing and add Admin
+        //[Authorize(Users = "Admin")]
+        [AllowAnonymous]
+        [Route("DeleteRefreshToken")]
+        public async Task<IHttpActionResult> DeleteRefreshToken(string tokenId)
+        {
+            var result = await RefreshTokenManager.RemoveRefreshToken(tokenId);
+            if (result)
+            {
+                return Ok();
+            }
+            return BadRequest("Token Id does not exist");
+
+        }
+
+
         [Route("GetHashedValue")]
         [AllowAnonymous]
         public async Task<string> GetHashedValue(string value)
@@ -551,6 +592,7 @@ namespace OwinAngularBoilerplate.Controllers
             {
                 UserManager.Dispose();
                 RoleManager.Dispose();
+                RefreshTokenManager.Dispose();
             }
 
             base.Dispose(disposing);

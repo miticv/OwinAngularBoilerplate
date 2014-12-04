@@ -14,12 +14,12 @@
       <input type="password" class="form-control" placeholder="Password"
              data-ng-model="login.password"
              data-ng-required="true">
-      <div class="checkbox">
+      <!--<div class="checkbox">
         <label>
           <input type="checkbox" 
                  data-ng-model="login.useRefreshTokens"><strong> Use Refresh Tokens</strong>
         </label>
-      </div>
+      </div>-->
       <button class="btn btn-lg btn-info btn-block" type="submit"
               ng-disabled="loginForm.$invalid"
               data-ng-click="login.LogMeIn()">

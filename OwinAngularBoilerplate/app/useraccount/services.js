@@ -34,6 +34,7 @@ var app;
                     var self = this;
                     var deferred = self.qService.defer();
                     model.grant_type = 'password';
+                    model.client_id = 'app';
                     var config = {
                         url: 'token',
                         dataType: 'json',
