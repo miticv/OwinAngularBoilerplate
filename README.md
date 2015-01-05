@@ -5,6 +5,9 @@ OwinAngularBoilerplate
 ##What is this?
 Startup boilerplate using lightweight [Owin](http://owin.org/), [Identity](http://www.asp.net/identity) together with [Angular](https://angularjs.org/) with [Typescript](http://typescript.codeplex.com/). 
 
+##Best practices
+* For angular it follows [angular js styleguide](https://github.com/johnpapa/angularjs-styleguide)
+
 ##Technologies
 * [Owin](http://owin.org/) ([Katana](https://katanaproject.codeplex.com/) - .NET implementation of OWIN)
 * [WebApi](http://www.asp.net/web-api) (.NET Web Api works great with OWIN)
