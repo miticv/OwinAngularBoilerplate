@@ -11,7 +11,7 @@
 
   <div data-ng-include="'app/layout/header.html'"></div>
 
-  <div class="container body-content" style="margin-top:80px;">
+  <div class="container body-content ui-view-container" style="margin-top:80px;">
     <!--<div class="jumbotron">
       <h1>Testing view in Nancy</h1>
       <p class="lead">Here is value from the model: @Model.Name</p>
@@ -19,7 +19,7 @@
     <!--<a href="/api/account/UserInfo">UserInfo</a> <br />
     <a href="/testRunner">Test Runner</a> <br />-->
 
-    <div data-ui-view ng-animate="'wave'"></div>
+    <div ui-view></div>
     <!---->
     <!--<div ngplus-overlay
          ngplus-overlay-delay-in="50"
@@ -29,11 +29,12 @@
 
       <div class="page-spinner-message overlay-message">{{vm.busyMessage}}</div>
     </div>-->
-
-
-    <hr />
+    <!--<hr />
     <footer>
+
+    </footer>-->
+    <article class="navbar navbar navbar-fixed-bottom text-center">
       <p>&copy; 2014 - My ASP.NET Application</p>
-    </footer>
+    </article>
   </div>
 </div>

@@ -9,7 +9,7 @@ module app {
          */
         //'ngResource', 'ngRoute', 'ngSanitize',
         'ngAnimate',
-        'ngplus',
+        //'ngplus',
         'ui.router', 
         /*
          * Our reusable cross app code modules
