@@ -10,6 +10,13 @@ var app;
             })();
             models.Login = Login;
 
+            var Refresh = (function () {
+                function Refresh() {
+                }
+                return Refresh;
+            })();
+            models.Refresh = Refresh;
+
             var Register = (function () {
                 function Register() {
                 }

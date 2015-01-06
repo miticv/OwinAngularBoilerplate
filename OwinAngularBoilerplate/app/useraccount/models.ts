@@ -9,6 +9,13 @@ module app.useraccount.models {
         client_id: string;
     }
 
+    export class Refresh {
+        username: string;
+        refresh_token: string;
+        grant_type: string;
+        client_id: string;
+    }
+
     export class Register {
         email: string;
         password: string;

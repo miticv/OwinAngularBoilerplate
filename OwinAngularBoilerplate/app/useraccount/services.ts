@@ -96,6 +96,36 @@ module app.useraccount.services {
             return deferred.promise;
         }
 
+        //token (refresh)
+        $refresh(model: models.Refresh): ng.IPromise<any> {
+            var self = this;
+            var model: models.Refresh;
+            var deferred = self.qService.defer();
+            model.grant_type = 'refresh_token';
+            model.client_id = 'app';
+
+            var config: ng.IRequestConfig = {
+                url: 'token',
+                dataType: 'json',
+                method: 'POST',
+                data: common.querifyObject(model),
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                }
+            };
+
+            self.httpService(config).
+                then(
+                function (result: any) {
+                    self.data = result.data;
+                    deferred.resolve(self.data);
+                }, function (error) {
+                    deferred.reject(error);
+                });
+
+            return deferred.promise;
+        }
+
 
         static $inject = ['$http', '$q'];
         constructor($http: ng.IHttpService, $q: ng.IQService) {

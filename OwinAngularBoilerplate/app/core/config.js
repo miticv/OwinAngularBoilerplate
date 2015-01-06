@@ -9,11 +9,11 @@ var app;
         toastr.options.positionClass = 'toast-bottom-right';
     }
 
-    angular.module('app.core').value('config', config);
-
     var config = {
         appTitle: 'Angular Typescript Template',
         version: '1.0.0'
     };
+
+    angular.module('app.core').value('config', config);
 })(app || (app = {}));
 //# sourceMappingURL=config.js.map

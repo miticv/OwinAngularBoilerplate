@@ -2,17 +2,18 @@
 @{
     Layout = "Views/Shared/_Layout.cshtml";
 }
-<div class="jumbotron">
-    <h1>Testng view in Nancy</h1>
-    <p class="lead">Here is value from the model: @Model.Name</p>
-</div>
 
 
-
-
-<p >
-    @*<a href="/api/account/UserInfo">UserInfo</a> <br/>
-  <a href="/testRunner">Test Runner</a> <br />*@
-  
-  <div ui-view></div>
-</p>
+  <div>
+    <div data-ng-include="'app/layout/layout.html'"></div>
+    <div id="splash-page" data-ng-show="false">
+      <div class="page-splash">
+        <div class="page-splash-message">
+          Angular Modular Demo @Model.Name
+        </div>
+        <div class="progress progress-striped active page-progress-bar">
+          <div class="bar"></div>
+        </div>
+      </div>
+    </div>
+  </div>

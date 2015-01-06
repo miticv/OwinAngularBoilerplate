@@ -96,6 +96,34 @@ var app;
                     return deferred.promise;
                 };
 
+                //token (refresh)
+                AccountService.prototype.$refresh = function (model) {
+                    var self = this;
+                    var model;
+                    var deferred = self.qService.defer();
+                    model.grant_type = 'refresh_token';
+                    model.client_id = 'app';
+
+                    var config = {
+                        url: 'token',
+                        dataType: 'json',
+                        method: 'POST',
+                        data: app.common.querifyObject(model),
+                        headers: {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        }
+                    };
+
+                    self.httpService(config).then(function (result) {
+                        self.data = result.data;
+                        deferred.resolve(self.data);
+                    }, function (error) {
+                        deferred.reject(error);
+                    });
+
+                    return deferred.promise;
+                };
+
                 AccountService.$inject = ['$http', '$q'];
                 return AccountService;
             })(BaseService);

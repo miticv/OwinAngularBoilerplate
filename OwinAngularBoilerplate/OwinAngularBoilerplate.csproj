@@ -149,10 +149,14 @@
     <TypeScriptCompile Include="app\core\constants.ts" />
     <TypeScriptCompile Include="app\core\core.module.ts" />
     <TypeScriptCompile Include="app\App.ts" />
+    <Content Include="app\layout\header.html" />
+    <Content Include="app\layout\layout.html" />
     <Content Include="app\useraccount\login.html" />
     <Content Include="app\test\test.html" />
     <Content Include="app\useraccount\register.html" />
     <Content Include="app\useraccount\userhome.html" />
+    <Content Include="Content\animate.css" />
+    <Content Include="Content\animate.min.css" />
     <Content Include="Content\app\site.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -160,6 +164,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\images\busy.gif" />
     <Content Include="Content\jasmine\jasmine.css" />
     <Content Include="Content\jasmine\jasmine_favicon.png" />
     <Content Include="Content\toastr.css" />
@@ -179,6 +184,8 @@
     <Content Include="Scripts\angular-csp.css" />
     <Content Include="Scripts\angular-loader.js" />
     <Content Include="Scripts\angular-loader.min.js" />
+    <Content Include="Scripts\angular-marked.js" />
+    <Content Include="Scripts\angular-marked.min.js" />
     <Content Include="Scripts\angular-messages.js" />
     <Content Include="Scripts\angular-messages.min.js" />
     <Content Include="Scripts\angular-mocks.js" />
@@ -970,10 +977,12 @@
     <Content Include="Scripts\jquery-1.9.0.js" />
     <Content Include="Scripts\jquery-1.9.0.min.js" />
     <Content Include="Scripts\jquery-1.9.0.min.map" />
+    <Content Include="Scripts\marked.js" />
     <Content Include="Scripts\moment-with-locales.js" />
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\ngplus\ngplus-overlay.js" />
     <Content Include="Scripts\r.js" />
     <Content Include="Scripts\require.js" />
     <Content Include="Scripts\toastr.js" />
@@ -981,6 +990,7 @@
     <Content Include="Scripts\toastr.min.js.map" />
     <Content Include="Views\Jasmine\SpecRunner.cshtml" />
     <Content Include="Scripts\version.json" />
+    <Content Include="tslint.json" />
     <None Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Test\Home.cshtml" />
     <None Include="Web.Debug.config">
@@ -989,10 +999,13 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <TypeScriptCompile Include="app\layout\controllers.ts" />
+    <TypeScriptCompile Include="app\layout\layout.module.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-translate\angular-translate.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui-bootstrap\angular-ui-bootstrap.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui\angular-ui-router.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\bootbox\bootbox.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\marked\marked.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\requirejs\require.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\toastr\toastr.d.ts" />
   </ItemGroup>

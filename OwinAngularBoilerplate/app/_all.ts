@@ -33,5 +33,8 @@
 /// <reference path="UserAccount/services.ts" />
 /// <reference path="UserAccount/controllers.ts" />
 
+//#######  Layout #######
+/// <reference path="layout/layout.module.ts" />
+
 //#######    test     #######
 /// <reference path="test/controllers.ts" />

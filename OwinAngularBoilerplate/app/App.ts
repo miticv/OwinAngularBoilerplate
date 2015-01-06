@@ -15,8 +15,9 @@ module app {
         /*
          * Feature areaa
          */
+        'app.layout',
         'app.useraccount',
-        'app.test'
+        'app.test'        
     ]);
 
 }

@@ -19,3 +19,160 @@ form input[disabled]:hover
 {
   cursor:not-allowed;
 }
+
+
+/*#region ngAnimate */
+
+.animate-enter {
+	-webkit-transition: 1s linear all; /* Chrome */
+	transition: 1s linear all;
+	opacity: 0;
+}
+ 
+.animate-enter.animate-enter-active {
+	opacity: 1;
+}
+
+/*#endregion*/
+
+/*#region ngplus */
+
+.ngplus-overlay-background {
+    top: 0px;
+    left: 0px;
+    padding-left: 100px;
+    position: absolute;
+    z-index: 10000;
+    height: 100%;
+    width: 100%;
+    background-color: #808080;
+    opacity: 0.2;
+}
+
+.ngplus-overlay-content {
+    position: absolute;
+    /*border: 1px solid #000;*/
+    /*background-color: #fff;*/
+    font-weight: bold;
+    height: 100px;
+    width: 300px;
+    height: 15em;
+    width: 20em;
+    z-index: 10000;
+    text-align: center;
+}
+/*#endregion */
+
+/*#region  dissolve-animation*/
+.dissolve-animation.ng-hide-remove,
+.dissolve-animation.ng-hide-add {
+    display: inline !important;
+    -webkit-transition: 0.5s linear all;
+    -moz-transition: 0.5s linear all;
+    -o-transition: 0.5s linear all;
+    transition: 0.5s linear all;
+}
+
+.dissolve-animation.ng-hide-remove.ng-hide-remove-active,
+.dissolve-animation.ng-hide-add {
+    opacity: 1;
+}
+
+.dissolve-animation.ng-hide-add.ng-hide-add-active,
+.dissolve-animation.ng-hide-remove {
+    opacity: 0;
+}
+
+/*#endregion */
+
+/*#region shuffle-animation*/
+
+.shuffle-animation.ng-enter,
+.shuffle-animation.ng-leave {
+    position: relative;
+}
+
+.shuffle-animation.ng-enter {
+    -moz-transition: ease-out all 0.3s 0.4s;
+    -o-transition: ease-out all 0.3s 0.4s;
+    -webkit-transition: ease-out all 0.3s 0.4s;
+    transition: ease-out all 0.3s 0.4s;
+    left: 2em;
+    opacity: 0;
+}
+
+    .shuffle-animation.ng-enter.ng-enter-active {
+        left: 0;
+        opacity: 1;
+    }
+
+.shuffle-animation.ng-leave {
+    -moz-transition: 0.3s ease-out all;
+    -o-transition: 0.3s ease-out all;
+    -webkit-transition: 0.3s ease-out all;
+    transition: 0.3s ease-out all;
+    left: 0;
+    opacity: 1;
+}
+
+.shuffle-animation.ng-leave.ng-leave-active {
+    left: 2em;
+    opacity: 0;
+}
+/*#endregion*/
+
+/*#region fader-animation */
+.fader-animation.ng-enter,
+.fader-animation.ng-leave,
+.fader-animation.ng-move {
+    position: relative;
+}
+
+.fader-animation.ng-enter,
+.fader-animation.ng-leave {
+    -webkit-transition: cubic-bezier(0.250, 0.460, 0.450, 0.940) all 0.5s;
+    -moz-transition: cubic-bezier(0.250, 0.460, 0.450, 0.940) all 0.5s;
+    -o-transition: cubic-bezier(0.250, 0.460, 0.450, 0.940) all 0.5s;
+    transition: cubic-bezier(0.250, 0.460, 0.450, 0.940) all 0.5s;
+    opacity: 1;
+}
+
+.fader-animation.ng-enter,
+.fader-animation.ng-leave.ng-leave-active {
+    opacity: 0;
+}
+
+    .fader-animation.ng-enter.ng-enter-active {
+        opacity: 1;
+    }
+
+.fader-animation.ng-move {
+  opacity:0.5;
+}
+.fader-animation.ng-move.ng-move-active {
+  opacity:1;
+}
+
+/*#endregion*/
+
+
+.wave-enter, .wave-leave {
+    -webkit-transition:all 5s;
+    -moz-transition:all 5s;
+    -o-transition:all 5s;
+    transition:all 5s;
+}
+.wave-enter {
+    position:absolute;
+    left:100%;
+}
+.wave-enter-active {
+    left:0;
+}
+.wave-leave {
+    position:absolute;
+    left:0;
+}
+.wave-leave-active {
+    left:-100%;
+}

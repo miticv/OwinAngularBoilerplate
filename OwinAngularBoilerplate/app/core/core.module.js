@@ -3,6 +3,8 @@
 var app;
 (function (app) {
     angular.module('app.core', [
+        'ngAnimate',
+        'ngplus',
         'ui.router',
         'blocks.logger',
         'blocks.interceptor',

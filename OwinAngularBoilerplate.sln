@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OwinAngularBoilerplate", "OwinAngularBoilerplate\OwinAngularBoilerplate.csproj", "{DAE614E2-1266-4EC5-9B27-6CA5BB8E4BB9}"
 EndProject
@@ -11,6 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		Readme.txt = Readme.txt
 		RefreshTokenTables.sql = RefreshTokenTables.sql
+		WebEssentials-Settings.json = WebEssentials-Settings.json
 	EndProjectSection
 EndProject
 Global
