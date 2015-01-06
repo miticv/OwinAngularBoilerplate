@@ -7,6 +7,7 @@ Startup boilerplate using lightweight [Owin](http://owin.org/), [Identity](http:
 
 ##Best practices
 * For angular it follows [angular js styleguide](https://github.com/johnpapa/angularjs-styleguide) organising modules by [features](http://www.pluralsight.com/courses/angularjs-patterns-clean-code).
+* For animation is using [animate.css](http://daneden.github.io/animate.css/)
 
 ##Technologies
 * [Owin](http://owin.org/) ([Katana](https://katanaproject.codeplex.com/) - .NET implementation of OWIN)
