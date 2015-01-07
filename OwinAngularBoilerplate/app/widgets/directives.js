@@ -2,7 +2,9 @@
 'use strict';
 var app;
 (function (app) {
+    //#region ng-match
     (function (widgets) {
+        /** ng-match used for validating confirm password field **/
         ngMatch.$inject = ['$parse'];
         function ngMatch($parse) {
             var directive = {};
@@ -42,6 +44,32 @@ angular.module("app.widgets", []).directive('ngMatch', app.widgets.ngMatch);
 
 var app;
 (function (app) {
+    //#endregion
+    //#region animation
+    (function (widgets) {
+        /** ng-match used for validating confirm password field **/
+        widgets.ngMatch.$inject = [];
+        function ngUiViewAnimate() {
+            var directive = {};
+
+            directive.restrict = 'A';
+            directive.link = function link(scope, elem, attrs) {
+                if (!attrs.$attr['ngUiViewAnimate'])
+                    return;
+                $(elem.children()).addClass('animated');
+                $(elem.children()).addClass(attrs['ngUiViewAnimate']);
+            };
+            return directive;
+        }
+        widgets.ngUiViewAnimate = ngUiViewAnimate;
+    })(app.widgets || (app.widgets = {}));
+    var widgets = app.widgets;
+})(app || (app = {}));
+angular.module("app.widgets", []).directive('ngUiViewAnimate', app.widgets.ngUiViewAnimate);
+
+var app;
+(function (app) {
+    //#endregion
     //#region Test Directive 1
     (function (widgets) {
         var MyDirective1 = (function () {

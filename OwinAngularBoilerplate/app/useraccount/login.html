@@ -6,17 +6,17 @@
     </div>
     <div class="col-md-4" ng-form="loginForm">
       <h2 class="form-login-heading">Login</h2>
-      <input type="text" class="form-control" placeholder="Email address" 
-             data-ng-model="login.username" 
-             data-ng-required="true" 
-             autofocus 
+      <input type="text" class="form-control" placeholder="Email address"
+             data-ng-model="login.username"
+             data-ng-required="true"
+             autofocus
              ng-pattern="/^[a-zA-Z0-9][a-zA-Z0-9_.+\-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]{2,9}|^([nN](/)?[aA])$/">
       <input type="password" class="form-control" placeholder="Password"
              data-ng-model="login.password"
              data-ng-required="true">
       <!--<div class="checkbox">
         <label>
-          <input type="checkbox" 
+          <input type="checkbox"
                  data-ng-model="login.useRefreshTokens"><strong> Use Refresh Tokens</strong>
         </label>
       </div>-->

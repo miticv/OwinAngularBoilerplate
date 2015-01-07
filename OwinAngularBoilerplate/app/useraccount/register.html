@@ -3,7 +3,7 @@
     <div class="col-md-2">
       &nbsp;
     </div>
-    <div class="col-md-4" 
+    <div class="col-md-4"
          ng-form="registerForm">
       <h2 class="form-login-heading">Register</h2>
       <input type="text" class="form-control" placeholder="Email address"
@@ -21,7 +21,7 @@
       <button class="btn btn-lg btn-info btn-block" type="submit"
               data-ng-disabled="registerForm.$invalid"
               data-ng-click="register.RegisterMe()">
-              Submit
+        Submit
       </button>
       <div data-ng-hide="register.message == null || register.message == undefined"
            data-ng-class="(register.savedSuccessfully) ? 'alert alert-success' : 'alert alert-danger'">
