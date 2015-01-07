@@ -40,19 +40,19 @@ module app.widgets {
 angular.module("app.widgets", []).directive('ngMatch', app.widgets.ngMatch);
 //#endregion
 
-//#region animation
+//#region ng-ui-view-animate
 module app.widgets {
 
-    /** ng-match used for validating confirm password field **/
     ngMatch.$inject = [];
     export function ngUiViewAnimate(): ng.IDirective {
         var directive: ng.IDirective = <ng.IDirective>{};
 
         directive.restrict = 'A';
         directive.link = function link(scope: ng.IScope, elem: JQuery, attrs: ng.IAttributes) {
-            if (!attrs.$attr['ngUiViewAnimate']) return;    
+            if (!attrs['ngUiViewAnimate']) return;    
             $(elem.children()).addClass('animated');    
             $(elem.children()).addClass(attrs['ngUiViewAnimate']);
+
         };
         return directive;
     }
@@ -73,8 +73,7 @@ module app.widgets {
 }
 angular.module('app.widgets').directive('myDirective1', () => new app.widgets.MyDirective1());
 //#endregion
-
-
+  
 //#region Test Directive 2
 angular.module('app.widgets').directive('myDirective2', function (): ng.IDirective {
     return {

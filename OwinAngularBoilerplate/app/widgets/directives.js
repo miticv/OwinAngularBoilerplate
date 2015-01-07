@@ -45,16 +45,15 @@ angular.module("app.widgets", []).directive('ngMatch', app.widgets.ngMatch);
 var app;
 (function (app) {
     //#endregion
-    //#region animation
+    //#region ng-ui-view-animate
     (function (widgets) {
-        /** ng-match used for validating confirm password field **/
         widgets.ngMatch.$inject = [];
         function ngUiViewAnimate() {
             var directive = {};
 
             directive.restrict = 'A';
             directive.link = function link(scope, elem, attrs) {
-                if (!attrs.$attr['ngUiViewAnimate'])
+                if (!attrs['ngUiViewAnimate'])
                     return;
                 $(elem.children()).addClass('animated');
                 $(elem.children()).addClass(attrs['ngUiViewAnimate']);
