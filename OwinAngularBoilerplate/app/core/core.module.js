@@ -5,6 +5,7 @@ var app;
     angular.module('app.core', [
         'ngAnimate',
         'ui.router',
+        'blocks.cache',
         'blocks.logger',
         'blocks.interceptor',
         'blocks.exception',

@@ -13,6 +13,7 @@
 /// <reference path="core/config.ts" />
 /// <reference path="core/interfaces.ts" />
 //#######  blocks #######
+/// <reference path="blocks/cache/cache.ts" />
 /// <reference path="blocks/logger/logger.ts" />
 /// <reference path="blocks/interceptor/interceptor.ts" />
 /// <reference path="blocks/exception/exception.provider.ts" />

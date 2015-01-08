@@ -9,6 +9,7 @@ module app.layout {
         private config: any;
         private timeout: any;
         private scope: any;
+        private location: any;
         private dataSvc: ng.IServiceProvider;
 
         private title: string;
@@ -36,6 +37,7 @@ module app.layout {
             var self = this;
             self.isLoggedIn = false;
             sessionStorage.removeItem('authorizationData');
+            self.dataSvc.$logout();
             self.location.path('/login');
         }
 
@@ -63,8 +65,8 @@ module app.layout {
 
 
 
-        static $inject = ['$timeout', 'logger', '$scope', 'accountService'];
-        constructor($timeout: any, logger: ILogger, $scope: any, accountService: ng.IServiceProvider) {
+        static $inject = ['$timeout', 'logger', '$scope', '$location', 'accountService'];
+        constructor($timeout: any, logger: ILogger, $scope: any, $location: any, accountService: ng.IServiceProvider) {
             var self = this;
 
             self.isLoggedIn = false;
@@ -72,6 +74,7 @@ module app.layout {
             //self.config = config;
             self.timeout = $timeout;
             self.scope = $scope;
+            self.location = $location;
             self.dataSvc = accountService;
 
             self.title = 'test';      //   config.appTitle; 
@@ -80,6 +83,12 @@ module app.layout {
             self.showSplash = true;
             self.getData();
             //self.activate();
+
+            $scope.$on(app.EVENTS.cacheUpdated, function (e, kvp) {
+                if (kvp.key === app.EVENTS.cacheKeyLoggedIn) {
+                    self.isLoggedIn = kvp.newValue;
+                }
+            });
         }     
     }
 

@@ -11,23 +11,22 @@ var app;
     (function (useraccount) {
         (function (services) {
             var BaseService = (function () {
-                function BaseService($http, $q) {
+                function BaseService($http, $q, NotifyingCache) {
                     //log.debug("BaseService consturctor called");
                     //this.apiPath = 'token';
                     this.httpService = $http;
                     this.qService = $q;
+                    this.notifyingCache = NotifyingCache;
                 }
-                BaseService.$inject = ['$http', '$q'];
+                BaseService.$inject = ['$http', '$q', 'NotifyingCache'];
                 return BaseService;
             })();
             services.BaseService = BaseService;
 
             var AccountService = (function (_super) {
                 __extends(AccountService, _super);
-                function AccountService($http, $q) {
-                    _super.call(this, $http, $q);
-                    //log.debug("LoginService consturctor called");
-                    //this.apiPath = 'token';
+                function AccountService($http, $q, NotifyingCache) {
+                    _super.call(this, $http, $q, NotifyingCache);
                 }
                 //token
                 AccountService.prototype.$login = function (model) {
@@ -47,8 +46,10 @@ var app;
 
                     self.httpService(config).then(function (result) {
                         self.data = result.data;
+                        self.notifyingCache.put(app.EVENTS.cacheKeyLoggedIn, true);
                         deferred.resolve(self.data);
                     }, function (error) {
+                        self.notifyingCache.put(app.EVENTS.cacheKeyLoggedIn, false);
                         deferred.reject(error);
                     });
 
@@ -88,8 +89,10 @@ var app;
 
                     self.httpService(config).then(function (result) {
                         self.data = result.data;
+                        self.notifyingCache.put(app.EVENTS.cacheKeyLoggedIn, true);
                         deferred.resolve(self.data);
                     }, function (error) {
+                        self.notifyingCache.put(app.EVENTS.cacheKeyLoggedIn, false);
                         deferred.reject(error);
                     });
 
@@ -116,15 +119,22 @@ var app;
 
                     self.httpService(config).then(function (result) {
                         self.data = result.data;
+                        self.notifyingCache.put(app.EVENTS.cacheKeyLoggedIn, true);
                         deferred.resolve(self.data);
                     }, function (error) {
+                        self.notifyingCache.put(app.EVENTS.cacheKeyLoggedIn, false);
                         deferred.reject(error);
                     });
 
                     return deferred.promise;
                 };
 
-                AccountService.$inject = ['$http', '$q'];
+                AccountService.prototype.$logout = function () {
+                    var self = this;
+                    self.notifyingCache.put(app.EVENTS.cacheKeyLoggedIn, false);
+                };
+
+                AccountService.$inject = ['$http', '$q', 'NotifyingCache'];
                 return AccountService;
             })(BaseService);
             services.AccountService = AccountService;

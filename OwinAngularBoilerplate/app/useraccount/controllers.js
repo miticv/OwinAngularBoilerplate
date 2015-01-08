@@ -7,21 +7,26 @@ var app;
             function LogInController(scope, accountService, logger, location) {
                 this.LogMeIn = function () {
                     var self = this;
+                    self.working = true;
                     var model = new useraccount.models.Login();
                     model.username = self.username;
                     model.password = self.password;
                     self.dataSvc.$login(model).then(function (data) {
+                        self.working = false;
                         self.tokenData = data;
                         self.tokenData.useRefreshTokens = true;
                         sessionStorage.setItem("authorizationData", JSON.stringify(self.tokenData));
                         self.logger.success("Logged in!");
                         self.location.path('/userhome');
                     }, function (err) {
+                        self.working = false;
                         sessionStorage.removeItem("authorizationData");
                         self.logger.error("Wrong credentials!");
                     });
                 };
                 var self = this;
+                self.working = false;
+
                 self.dataSvc = accountService;
                 self.logger = logger;
                 self.location = location;

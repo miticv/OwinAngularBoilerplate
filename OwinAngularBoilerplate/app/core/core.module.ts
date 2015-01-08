@@ -14,6 +14,7 @@ module app {
         /*
          * Our reusable cross app code modules
          */
+        'blocks.cache',
         'blocks.logger',
         'blocks.interceptor',
         'blocks.exception',

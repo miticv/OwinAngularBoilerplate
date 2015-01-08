@@ -8,14 +8,16 @@ module app.useraccount.services {
         public data: any;
         public httpService: ng.IHttpService;
         public qService: ng.IQService;
+        public notifyingCache: any;
 
 
-        static $inject = ['$http', '$q'];
-        constructor($http: ng.IHttpService, $q: ng.IQService) {
+        static $inject = ['$http', '$q', 'NotifyingCache'];
+        constructor($http: ng.IHttpService, $q: ng.IQService, NotifyingCache: any) {
             //log.debug("BaseService consturctor called");
             //this.apiPath = 'token';
             this.httpService = $http;
             this.qService = $q;
+            this.notifyingCache = NotifyingCache;
         }
 
     }
@@ -43,8 +45,10 @@ module app.useraccount.services {
                 then(
                 function (result: any) {
                     self.data = result.data;
+                    self.notifyingCache.put(app.EVENTS.cacheKeyLoggedIn, true);
                     deferred.resolve(self.data);
                 }, function (error) {
+                    self.notifyingCache.put(app.EVENTS.cacheKeyLoggedIn, false);
                     deferred.reject(error);
                 });
 
@@ -88,8 +92,10 @@ module app.useraccount.services {
                 then(
                 function (result: any) {
                     self.data = result.data;
+                    self.notifyingCache.put(app.EVENTS.cacheKeyLoggedIn, true);
                     deferred.resolve(self.data);
                 }, function (error) {
+                    self.notifyingCache.put(app.EVENTS.cacheKeyLoggedIn, false);
                     deferred.reject(error);
                 });
 
@@ -118,21 +124,24 @@ module app.useraccount.services {
                 then(
                 function (result: any) {
                     self.data = result.data;
+                    self.notifyingCache.put(app.EVENTS.cacheKeyLoggedIn, true);
                     deferred.resolve(self.data);
                 }, function (error) {
+                    self.notifyingCache.put(app.EVENTS.cacheKeyLoggedIn, false);
                     deferred.reject(error);
                 });
 
             return deferred.promise;
         }
 
+        $logout() {
+            var self = this;
+            self.notifyingCache.put(app.EVENTS.cacheKeyLoggedIn, false);
+        }
 
-        static $inject = ['$http', '$q'];
-        constructor($http: ng.IHttpService, $q: ng.IQService) {
-            super($http, $q);
-            //log.debug("LoginService consturctor called");
-            //this.apiPath = 'token';
-
+        static $inject = ['$http', '$q', 'NotifyingCache'];
+        constructor($http: ng.IHttpService, $q: ng.IQService, NotifyingCache: any) {
+            super($http, $q, NotifyingCache);
         }
 
     }

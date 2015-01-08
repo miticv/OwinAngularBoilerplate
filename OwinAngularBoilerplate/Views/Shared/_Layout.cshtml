@@ -41,6 +41,9 @@
   <script src="~/app/blocks/logger/logger.module.js"></script>
   <script src="~/app/blocks/logger/logger.js"></script>
 
+  <script src="~/app/blocks/cache/cache.module.js"></script>
+  <script src="~/app/blocks/cache/cache.js"></script>
+
   <script src="~/app/blocks/exception/exception.module.js"></script>
   <script src="~/app/blocks/exception/exception.provider.js"></script>
   <script src="~/app/blocks/exception/exception.js"></script>
@@ -75,10 +78,9 @@
   <script src="~/app/layout/controllers.js"></script>
 
   <script>
-  
 
+    //Here is the value of the view model Name: @Model.Name
     $(document).ready(function () {
-      //var main = new app.App();
       angular.bootstrap(document, ['app']);
     });
 

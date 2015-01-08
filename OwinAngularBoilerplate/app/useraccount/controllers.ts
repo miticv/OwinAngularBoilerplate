@@ -10,30 +10,40 @@ module app.useraccount {
         private logger: ILogger;
         private location: any;
 
+        working: boolean;
+
         LogMeIn = function () {            
             var self = this;            
+            self.working = true;
             var model = new models.Login();
             model.username = self.username;
             model.password = self.password;
             self.dataSvc.$login(model).then(function (data) {
+                self.working = false;
                 self.tokenData = data;
                 self.tokenData.useRefreshTokens = true;
                 sessionStorage.setItem("authorizationData", JSON.stringify(self.tokenData));
                 self.logger.success("Logged in!");
                 self.location.path('/userhome');
+                
             }, function (err) {
+                self.working = false;
                 sessionStorage.removeItem("authorizationData");  
-                self.logger.error("Wrong credentials!");
+                self.logger.error("Wrong credentials!");               
             });
+
+
         }
 
 
         static $inject = ['$scope', 'accountService', 'logger', '$location'];
         constructor(scope: any, accountService: ng.IServiceProvider, logger: ILogger, location: any) {
-            var self = this;                                   
+            var self = this;   
+            self.working = false;
+
             self.dataSvc = accountService;
             self.logger = logger;
-            self.location = location;            
+            self.location = location;           
         }
     }  
   

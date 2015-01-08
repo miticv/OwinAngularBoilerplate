@@ -6,30 +6,36 @@
     </div>
     <div class="col-md-4" ng-form="loginForm">
       <h2 class="form-login-heading">Login</h2>
-      <input type="text" class="form-control" placeholder="Email address"
-             data-ng-model="login.username"
-             data-ng-required="true"
-             autofocus
-             ng-pattern="/^[a-zA-Z0-9][a-zA-Z0-9_.+\-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]{2,9}|^([nN](/)?[aA])$/">
-      <input type="password" class="form-control" placeholder="Password"
-             data-ng-model="login.password"
-             data-ng-required="true">
-      <!--<div class="checkbox">
-        <label>
-          <input type="checkbox"
-                 data-ng-model="login.useRefreshTokens"><strong> Use Refresh Tokens</strong>
-        </label>
-      </div>-->
-      <button class="btn btn-lg btn-info btn-block" type="submit"
-              ng-disabled="loginForm.$invalid"
-              data-ng-click="login.LogMeIn()">
-        Login
-      </button>
-      <div class="alert alert-danger"
-           data-ng-hide="login.message == null || login.message == undefined">
-        {{login.message}}
+      <div class="input-group margin-bottom-sm">
+        <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+        <input type="text" class="form-control" placeholder="Email address"
+               data-ng-model="login.username"
+               data-ng-required="true"
+               autofocus
+               ng-pattern="/^[a-zA-Z0-9][a-zA-Z0-9_.+\-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]{2,9}|^([nN](/)?[aA])$/">
       </div>
-    </div>
+      <div class="input-group  margin-bottom-sm">
+        <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+        <input type="password" class="form-control" placeholder="Password"
+               data-ng-model="login.password"
+               data-ng-required="true">
+      </div>
+        <!--<div class="checkbox">
+      <label>
+        <input type="checkbox"
+               data-ng-model="login.useRefreshTokens"><strong> Use Refresh Tokens</strong>
+      </label>
+    </div>-->
+        <button class="btn btn-lg btn-info btn-block" type="submit"
+                ng-disabled="loginForm.$invalid || login.working"
+                data-ng-click="login.LogMeIn()">
+          Login <i class="fa fa-refresh fa-spin animate" ng-class="{'vis-hidden': !login.working }"></i>
+        </button>
+        <div class="alert alert-danger"
+             data-ng-hide="login.message == null || login.message == undefined">
+          {{login.message}}
+        </div>
+      </div>
     <div class="col-md-4" data-ng-hide="true">
       <h2 class=" form-login-heading">
         Social Logins

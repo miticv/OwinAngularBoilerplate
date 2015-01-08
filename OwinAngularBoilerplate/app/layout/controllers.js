@@ -4,7 +4,7 @@ var app;
 (function (app) {
     (function (layout) {
         var LayoutController = (function () {
-            function LayoutController($timeout, logger, $scope, accountService) {
+            function LayoutController($timeout, logger, $scope, $location, accountService) {
                 this.activate = function () {
                     var self = this;
 
@@ -21,6 +21,7 @@ var app;
                     var self = this;
                     self.isLoggedIn = false;
                     sessionStorage.removeItem('authorizationData');
+                    self.dataSvc.$logout();
                     self.location.path('/login');
                 };
                 this.getData = function () {
@@ -52,6 +53,7 @@ var app;
                 //self.config = config;
                 self.timeout = $timeout;
                 self.scope = $scope;
+                self.location = $location;
                 self.dataSvc = accountService;
 
                 self.title = 'test'; //   config.appTitle;
@@ -59,9 +61,15 @@ var app;
                 self.isBusy = true;
                 self.showSplash = true;
                 self.getData();
+
                 //self.activate();
+                $scope.$on(app.EVENTS.cacheUpdated, function (e, kvp) {
+                    if (kvp.key === app.EVENTS.cacheKeyLoggedIn) {
+                        self.isLoggedIn = kvp.newValue;
+                    }
+                });
             }
-            LayoutController.$inject = ['$timeout', 'logger', '$scope', 'accountService'];
+            LayoutController.$inject = ['$timeout', 'logger', '$scope', '$location', 'accountService'];
             return LayoutController;
         })();
         layout.LayoutController = LayoutController;

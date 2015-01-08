@@ -1,8 +1,9 @@
 ﻿
-
-form input{
-  margin-top: 5px;
-  margin-bottom: 5px;
+.margin-bottom-sm {
+margin-bottom: 5px !important;
+}
+.margin-top-sm {
+margin-top: 5px !important;
 }
 
 
@@ -23,6 +24,9 @@ form input[disabled]:hover
   bottom: 50px; /* move it above footer */
 }
 
+.vis-hidden{
+  visibility: hidden;
+}
 
 /*#region "Hardcoded Animation for global ui-view change" *
 

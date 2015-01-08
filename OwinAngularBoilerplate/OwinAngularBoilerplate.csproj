@@ -135,6 +135,7 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="app\blocks\cache\cache.module.ts" />
     <TypeScriptCompile Include="app\blocks\exception\apiError.ts" />
     <TypeScriptCompile Include="app\blocks\exception\exception.module.ts" />
     <TypeScriptCompile Include="app\blocks\exception\exception.provider.ts" />
@@ -145,6 +146,7 @@
     <TypeScriptCompile Include="app\blocks\logger\logger.ts" />
     <TypeScriptCompile Include="app\blocks\router\router.module.ts" />
     <TypeScriptCompile Include="app\blocks\router\router.ts" />
+    <TypeScriptCompile Include="app\blocks\cache\cache.ts" />
     <TypeScriptCompile Include="app\core\config.ts" />
     <TypeScriptCompile Include="app\core\constants.ts" />
     <TypeScriptCompile Include="app\core\core.module.ts" />
