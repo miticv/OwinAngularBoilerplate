@@ -8,6 +8,9 @@ Startup boilerplate using lightweight [Owin](http://owin.org/), [Identity](http:
 ##Best practices
 * For angular it follows [angular js styleguide](https://github.com/johnpapa/angularjs-styleguide) organising modules by [features](http://www.pluralsight.com/courses/angularjs-patterns-clean-code).
 * For animation is using [animate.css](http://daneden.github.io/animate.css/)
+* For performance consider $watch vs $emit,$broadcast, $digest & $on event model [performance](http://jsperf.com/angualr-scope-watch-vs-scope-events/5)
+* Use [grunt](http://gruntjs.com/) based build [template](http://joshdmiller.github.io/ng-boilerplate/)
+* Use Service to pass state between Controllers [Passing State via Services](https://rclayton.silvrback.com/passing-state-via-services)
 
 ##Technologies
 * [Owin](http://owin.org/) ([Katana](https://katanaproject.codeplex.com/) - .NET implementation of OWIN)
