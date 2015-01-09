@@ -43,10 +43,8 @@ module app.useraccount {
             model.confirmPassword = self.confirmPassword;
             self.dataSvc.$register(model).then(function (data) {
                 self.tokenData = data;
-                self.tokenData.useRefreshTokens = true;
-                sessionStorage.setItem(app.CONST.sessionStorageKey, JSON.stringify(self.tokenData));
                 self.logger.success(app.LANG.Registered);
-                self.location.path('/userhome');
+                self.location.path('/successRegister');
             }, function (err: app.ApiError) {
                 sessionStorage.removeItem(app.CONST.sessionStorageKey); 
                     var returnArray = (new ApiErrorHelper()).getModelError(err.data);

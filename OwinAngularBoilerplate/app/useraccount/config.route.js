@@ -19,6 +19,11 @@ var app;
                 controller: 'app.useraccount.UserController',
                 controllerAs: 'register',
                 templateUrl: '/app/useraccount/register.html'
+            }).state("registerSuccess", {
+                url: '/registerSuccess',
+                controller: 'app.useraccount.UserController',
+                controllerAs: 'registerSuccess',
+                templateUrl: '/app/useraccount/registerSuccess.html'
             }).state("userhome", {
                 url: '/userhome',
                 controller: 'app.useraccount.UserController',

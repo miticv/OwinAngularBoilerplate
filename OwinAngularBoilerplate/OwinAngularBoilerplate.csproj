@@ -157,6 +157,7 @@
     <Content Include="app\useraccount\login.html" />
     <Content Include="app\test\test.html" />
     <Content Include="app\useraccount\register.html" />
+    <Content Include="app\useraccount\registerSuccess.html" />
     <Content Include="app\useraccount\userhome.html" />
     <Content Include="Content\animate.css" />
     <Content Include="Content\animate.min.css" />
@@ -1004,6 +1005,7 @@
     </None>
     <TypeScriptCompile Include="app\layout\controllers.ts" />
     <TypeScriptCompile Include="app\layout\layout.module.ts" />
+    <TypeScriptCompile Include="app\layout\config.route.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-translate\angular-translate.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui-bootstrap\angular-ui-bootstrap.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui\angular-ui-router.d.ts" />

@@ -15,7 +15,7 @@ var app;
         LANG.Loaded = 'loaded';
         LANG.PleaseWait = 'Please Wait';
 
-        LANG.login = 'login';
+        LANG.login = 'login!';
         LANG.test = 'test';
         LANG.logedinpage = 'loged in page';
         LANG.register = 'register';

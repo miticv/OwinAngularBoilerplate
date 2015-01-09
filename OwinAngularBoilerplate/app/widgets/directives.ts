@@ -37,13 +37,13 @@ module app.widgets {
         return directive;
     }
 }
-angular.module("app.widgets", []).directive('ngMatch', app.widgets.ngMatch);
+angular.module("app.widgets").directive('ngMatch', app.widgets.ngMatch);
 //#endregion
 
 //#region ng-ui-view-animate
 module app.widgets {
 
-    ngMatch.$inject = [];
+    ngUiViewAnimate.$inject = [];
     export function ngUiViewAnimate(): ng.IDirective {
         var directive: ng.IDirective = <ng.IDirective>{};
 
@@ -57,7 +57,7 @@ module app.widgets {
         return directive;
     }
 }
-angular.module("app.widgets", []).directive('ngUiViewAnimate', app.widgets.ngUiViewAnimate);
+angular.module("app.widgets").directive('ngUiViewAnimate', app.widgets.ngUiViewAnimate);
 //#endregion  
 
 //#region ngLangTranslate
@@ -77,7 +77,7 @@ module app.widgets {
         return directive;
     }
 }
-angular.module('app.widgets', []).directive('ngLangTranslate', app.widgets.ngLangTranslate);
+angular.module('app.widgets').directive('ngLangTranslate', app.widgets.ngLangTranslate);
 //#endregion
 
 
