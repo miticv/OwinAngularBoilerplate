@@ -3,12 +3,12 @@
 
 module app.useraccount {
 
-    export class LogInController implements IAccountController {
+    export class UserController implements IAccountController {
                                                              
         private dataSvc: ng.IServiceProvider;
         private tokenData: models.Token;
         private logger: ILogger;
-        private location: any;
+        private location: ng.ILocationService;
 
         working: boolean;
 
@@ -22,37 +22,18 @@ module app.useraccount {
                 self.working = false;
                 self.tokenData = data;
                 self.tokenData.useRefreshTokens = true;
-                sessionStorage.setItem("authorizationData", JSON.stringify(self.tokenData));
-                self.logger.success("Logged in!");
+                sessionStorage.setItem(app.CONST.sessionStorageKey, JSON.stringify(self.tokenData));
+                self.logger.success(app.LANG.LoggedIn);
                 self.location.path('/userhome');
                 
             }, function (err) {
                 self.working = false;
-                sessionStorage.removeItem("authorizationData");  
-                self.logger.error("Wrong credentials!");               
+                sessionStorage.removeItem(app.CONST.sessionStorageKey);  
+                self.logger.error(app.LANG.WrongCredentals);               
             });
 
 
         }
-
-
-        static $inject = ['$scope', 'accountService', 'logger', '$location'];
-        constructor(scope: any, accountService: ng.IServiceProvider, logger: ILogger, location: any) {
-            var self = this;   
-            self.working = false;
-
-            self.dataSvc = accountService;
-            self.logger = logger;
-            self.location = location;           
-        }
-    }  
-  
-    export class RegisterController implements IAccountController {
-
-        private dataSvc: ng.IServiceProvider;
-        private tokenData: models.Token;
-        private logger: ILogger;
-
 
         RegisterMe = function () {
             var self = this;
@@ -62,66 +43,47 @@ module app.useraccount {
             model.confirmPassword = self.confirmPassword;
             self.dataSvc.$register(model).then(function (data) {
                 self.tokenData = data;
-                self.logger.success("Registered!");
+                self.tokenData.useRefreshTokens = true;
+                sessionStorage.setItem(app.CONST.sessionStorageKey, JSON.stringify(self.tokenData));
+                self.logger.success(app.LANG.Registered);
+                self.location.path('/userhome');
             }, function (err: app.ApiError) {
-                var returnArray = (new ApiErrorHelper()).getModelError(err.data);
-                for(var error in returnArray)
-                {
-                    self.logger.error(returnArray[error].modelError, "Could not register!");
-                }
-            });
+                sessionStorage.removeItem(app.CONST.sessionStorageKey); 
+                    var returnArray = (new ApiErrorHelper()).getModelError(err.data);
+                    for (var error in returnArray) {
+                        self.logger.error(returnArray[error].modelError, app.LANG.CanNotRegister);
+                    }
+                });
         }
 
-
-        static $inject = ['$scope', 'accountService', 'logger'];
-        constructor(scope: any, accountService: ng.IServiceProvider, logger: ILogger) {
-            var self = this;
-            self.dataSvc = accountService;
-            self.logger = logger;
-            //var originalClientProfile = angular.copy($scope.clientProfile.item);
-            //function isClientFormChanged() {
-            //    return !angular.equals($scope.clientProfile.item, originalClientProfile);
-            //}
-            //SAVE: ng-disabled="readOnly || clientForm.$invalid || !isClientFormChanged()"
-        }
-    }  
-   
-    export class UserController implements IAccountController {
-
-        private dataSvc: ng.IServiceProvider;
-        private tokenData: models.Token;
-        private logger: ILogger;
-
-
-
-        getData = function () { 
+        getData = function () {
             var self = this;
             self.dataSvc.$userInfo().then(function (data) {
                 self.test = data;
             }, function (err: app.ApiError) {
-                var returnArray = (new ApiErrorHelper()).getModelError(err.data);
-                var errorVisible = false;
-                for (var error in returnArray) {
-                    self.logger.error(returnArray[error].modelError, "No Access");
-                    errorVisible = true;
-                }
-                if (!errorVisible) {
-                    self.logger.error("No Access");
-                }                   
-            });
+                    var returnArray = (new ApiErrorHelper()).getModelError(err.data);
+                    var errorVisible = false;
+                    for (var error in returnArray) {
+                        self.logger.error(returnArray[error].modelError, app.LANG.NoAccess);
+                        errorVisible = true;
+                    }
+                    if (!errorVisible) {
+                        self.logger.error(app.LANG.NoAccess);
+                    }
+                });
         }
 
 
-        static $inject = ['$scope', 'accountService', 'logger'];
-        constructor(scope: any, accountService: ng.IServiceProvider, logger: ILogger) {
-            var self = this;
+        static $inject = ['$scope', 'accountService', 'logger', '$location'];
+        constructor(scope: ng.IScope, accountService: ng.IServiceProvider, logger: ILogger, location: ng.ILocationService) {
+            var self = this;   
+            self.working = false;
+
             self.dataSvc = accountService;
             self.logger = logger;
-            self.getData();
+            self.location = location;           
         }
     }  
-    
+                
 }
-angular.module('app.useraccount').controller('loginController', app.useraccount.LogInController);
-angular.module('app.useraccount').controller('registerController', app.useraccount.RegisterController);
 angular.module('app.useraccount').controller('userController', app.useraccount.UserController);

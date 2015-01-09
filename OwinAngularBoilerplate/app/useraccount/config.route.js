@@ -11,12 +11,12 @@ var app;
         function UserAccountConfig($stateProvider) {
             $stateProvider.state("login", {
                 url: '/login',
-                controller: 'app.useraccount.LogInController',
+                controller: 'app.useraccount.UserController',
                 controllerAs: 'login',
                 templateUrl: '/app/useraccount/login.html'
             }).state("register", {
                 url: '/register',
-                controller: 'app.useraccount.RegisterController',
+                controller: 'app.useraccount.UserController',
                 controllerAs: 'register',
                 templateUrl: '/app/useraccount/register.html'
             }).state("userhome", {

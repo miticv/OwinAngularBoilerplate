@@ -7,15 +7,15 @@ module app.layout {
 
         private logger: ILogger;
         private config: any;
-        private timeout: any;
-        private scope: any;
-        private location: any;
+        private timeout: ng.ITimeoutService;
+        private scope: ng.IScope;
+        private location: ng.ILocationService;
         private dataSvc: ng.IServiceProvider;
 
         private title: string;
         private busyMessage: string;
         private isBusy: boolean;
-        private showSplash: boolean;
+        //private showSplash: boolean;
 
         public isLoggedIn: boolean;
 
@@ -24,19 +24,19 @@ module app.layout {
             var self = this;
 
             //t: string = self.config.appTitle + ' loaded!';
-            self.logger.success(self.title + ' loaded', null);
+            self.logger.success(self.title + ' ' + app.LANG.Loaded, null);
             //            Using a resolver on all routes or dataservice.ready in every controller
             //            dataservice.ready().then(function(){
             //                hideSplash();
             //            });
-            self.hideSplash();
+            //self.hideSplash();
 
         }
 
         logout = function () {
             var self = this;
-            self.isLoggedIn = false;
-            sessionStorage.removeItem('authorizationData');
+            //self.isLoggedIn = false;
+            sessionStorage.removeItem(app.CONST.sessionStorageKey);
             self.dataSvc.$logout();
             self.location.path('/login');
         }
@@ -45,28 +45,26 @@ module app.layout {
             var self = this;
             self.dataSvc.$userInfo().then(function (data) {
                 self.test = data;
-                self.logger.success(self.title + ' loaded', null);
-                self.hideSplash();
-                self.isLoggedIn = true;
+                self.logger.success(self.title + ' ' + app.LANG.Loaded, null);
+                //self.hideSplash();
             }, function (err: app.ApiError) {
-                self.logger.success(self.title + ' loaded', null);
-                self.hideSplash();
-                self.isLoggedIn = false;                    
+                self.logger.success(self.title + ' ' + app.LANG.Loaded, null);
+                //self.hideSplash();                  
             });
         }
 
-        hideSplash = function () {
-            var self = this;
-            //Force a 1 second delay so we can see the splash.
-            self.timeout(function () {
-                self.showSplash = false;
-            }, 1000);
-        }
+        //hideSplash = function () {
+        //    var self = this;
+        //    //Force a 1 second delay so we can see the splash.
+        //    self.timeout(function () {
+        //        self.showSplash = false;
+        //    }, 1000);
+        //}
 
 
 
         static $inject = ['$timeout', 'logger', '$scope', '$location', 'accountService'];
-        constructor($timeout: any, logger: ILogger, $scope: any, $location: any, accountService: ng.IServiceProvider) {
+        constructor($timeout: ng.ITimeoutService, logger: ILogger, $scope: ng.IScope, $location: ng.ILocationService, accountService: ng.IServiceProvider) {
             var self = this;
 
             self.isLoggedIn = false;
@@ -77,11 +75,11 @@ module app.layout {
             self.location = $location;
             self.dataSvc = accountService;
 
-            self.title = 'test';      //   config.appTitle; 
-            self.busyMessage = 'Please wait ...';
+            self.title = app.LANG.applicationName;      //   config.appTitle; 
+            self.busyMessage = app.LANG.PleaseWait + ' ...';
             self.isBusy = true;
-            self.showSplash = true;
-            self.getData();
+            //self.showSplash = true;
+            //self.getData();
             //self.activate();
 
             $scope.$on(app.EVENTS.cacheUpdated, function (e, kvp) {

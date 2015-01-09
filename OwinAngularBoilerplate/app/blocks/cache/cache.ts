@@ -3,16 +3,17 @@
 'use strict';
 module app {
 
+
     angular
         .module('blocks.cache')
         .factory('NotifyingCache', NotifyingCache);
 
     NotifyingCache.$inject = ['$rootScope'];
-    function NotifyingCache($rootScope) {
+    function NotifyingCache($rootScope): INotifyingCache {
 
         var cache = {};
 
-        this.put = function (key, value) {
+        this.put = function (key: string, value: any): void {
             var oldValue = this.get(key);
             cache[key] = value;
             $rootScope.$broadcast(
@@ -20,7 +21,7 @@ module app {
                 { key: key, newValue: value, oldValue: oldValue });
         }
 
-        this.remove = function (key) {
+        this.remove = function (key: string): void {
             var value = this.get(key);
             delete cache[key];
             $rootScope.$broadcast(
@@ -28,7 +29,7 @@ module app {
                 { key: key, value: value });
         }
 
-        this.get = function (key) {
+        this.get = function (key: string): string {
             return cache[key] || null;
         }      
 

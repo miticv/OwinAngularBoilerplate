@@ -4,7 +4,7 @@ module app {
 
 
     export interface ILogger extends Toastr {
-        log(string): void;
+        log(value: string): void;
     }
 
     export interface IController {
@@ -22,5 +22,12 @@ module app {
     export interface IService {
     }
 
+
+    export interface INotifyingCache {
+        cache: any;
+        put(key: string, value: any): void;
+        remove(key:string): void;
+        get(key:string): string;
+    }
 
 }

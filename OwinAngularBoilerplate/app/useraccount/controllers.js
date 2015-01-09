@@ -3,8 +3,8 @@
 var app;
 (function (app) {
     (function (useraccount) {
-        var LogInController = (function () {
-            function LogInController(scope, accountService, logger, location) {
+        var UserController = (function () {
+            function UserController(scope, accountService, logger, location) {
                 this.LogMeIn = function () {
                     var self = this;
                     self.working = true;
@@ -15,13 +15,49 @@ var app;
                         self.working = false;
                         self.tokenData = data;
                         self.tokenData.useRefreshTokens = true;
-                        sessionStorage.setItem("authorizationData", JSON.stringify(self.tokenData));
-                        self.logger.success("Logged in!");
+                        sessionStorage.setItem(app.CONST.sessionStorageKey, JSON.stringify(self.tokenData));
+                        self.logger.success(app.LANG.LoggedIn);
                         self.location.path('/userhome');
                     }, function (err) {
                         self.working = false;
-                        sessionStorage.removeItem("authorizationData");
-                        self.logger.error("Wrong credentials!");
+                        sessionStorage.removeItem(app.CONST.sessionStorageKey);
+                        self.logger.error(app.LANG.WrongCredentals);
+                    });
+                };
+                this.RegisterMe = function () {
+                    var self = this;
+                    var model = new useraccount.models.Register();
+                    model.email = self.username;
+                    model.password = self.password;
+                    model.confirmPassword = self.confirmPassword;
+                    self.dataSvc.$register(model).then(function (data) {
+                        self.tokenData = data;
+                        self.tokenData.useRefreshTokens = true;
+                        sessionStorage.setItem(app.CONST.sessionStorageKey, JSON.stringify(self.tokenData));
+                        self.logger.success(app.LANG.Registered);
+                        self.location.path('/userhome');
+                    }, function (err) {
+                        sessionStorage.removeItem(app.CONST.sessionStorageKey);
+                        var returnArray = (new app.ApiErrorHelper()).getModelError(err.data);
+                        for (var error in returnArray) {
+                            self.logger.error(returnArray[error].modelError, app.LANG.CanNotRegister);
+                        }
+                    });
+                };
+                this.getData = function () {
+                    var self = this;
+                    self.dataSvc.$userInfo().then(function (data) {
+                        self.test = data;
+                    }, function (err) {
+                        var returnArray = (new app.ApiErrorHelper()).getModelError(err.data);
+                        var errorVisible = false;
+                        for (var error in returnArray) {
+                            self.logger.error(returnArray[error].modelError, app.LANG.NoAccess);
+                            errorVisible = true;
+                        }
+                        if (!errorVisible) {
+                            self.logger.error(app.LANG.NoAccess);
+                        }
                     });
                 };
                 var self = this;
@@ -31,74 +67,12 @@ var app;
                 self.logger = logger;
                 self.location = location;
             }
-            LogInController.$inject = ['$scope', 'accountService', 'logger', '$location'];
-            return LogInController;
-        })();
-        useraccount.LogInController = LogInController;
-
-        var RegisterController = (function () {
-            function RegisterController(scope, accountService, logger) {
-                this.RegisterMe = function () {
-                    var self = this;
-                    var model = new useraccount.models.Register();
-                    model.email = self.username;
-                    model.password = self.password;
-                    model.confirmPassword = self.confirmPassword;
-                    self.dataSvc.$register(model).then(function (data) {
-                        self.tokenData = data;
-                        self.logger.success("Registered!");
-                    }, function (err) {
-                        var returnArray = (new app.ApiErrorHelper()).getModelError(err.data);
-                        for (var error in returnArray) {
-                            self.logger.error(returnArray[error].modelError, "Could not register!");
-                        }
-                    });
-                };
-                var self = this;
-                self.dataSvc = accountService;
-                self.logger = logger;
-                //var originalClientProfile = angular.copy($scope.clientProfile.item);
-                //function isClientFormChanged() {
-                //    return !angular.equals($scope.clientProfile.item, originalClientProfile);
-                //}
-                //SAVE: ng-disabled="readOnly || clientForm.$invalid || !isClientFormChanged()"
-            }
-            RegisterController.$inject = ['$scope', 'accountService', 'logger'];
-            return RegisterController;
-        })();
-        useraccount.RegisterController = RegisterController;
-
-        var UserController = (function () {
-            function UserController(scope, accountService, logger) {
-                this.getData = function () {
-                    var self = this;
-                    self.dataSvc.$userInfo().then(function (data) {
-                        self.test = data;
-                    }, function (err) {
-                        var returnArray = (new app.ApiErrorHelper()).getModelError(err.data);
-                        var errorVisible = false;
-                        for (var error in returnArray) {
-                            self.logger.error(returnArray[error].modelError, "No Access");
-                            errorVisible = true;
-                        }
-                        if (!errorVisible) {
-                            self.logger.error("No Access");
-                        }
-                    });
-                };
-                var self = this;
-                self.dataSvc = accountService;
-                self.logger = logger;
-                self.getData();
-            }
-            UserController.$inject = ['$scope', 'accountService', 'logger'];
+            UserController.$inject = ['$scope', 'accountService', 'logger', '$location'];
             return UserController;
         })();
         useraccount.UserController = UserController;
     })(app.useraccount || (app.useraccount = {}));
     var useraccount = app.useraccount;
 })(app || (app = {}));
-angular.module('app.useraccount').controller('loginController', app.useraccount.LogInController);
-angular.module('app.useraccount').controller('registerController', app.useraccount.RegisterController);
 angular.module('app.useraccount').controller('userController', app.useraccount.UserController);
 //# sourceMappingURL=controllers.js.map

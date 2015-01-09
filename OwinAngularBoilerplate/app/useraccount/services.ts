@@ -8,11 +8,11 @@ module app.useraccount.services {
         public data: any;
         public httpService: ng.IHttpService;
         public qService: ng.IQService;
-        public notifyingCache: any;
+        public notifyingCache: INotifyingCache;
 
 
         static $inject = ['$http', '$q', 'NotifyingCache'];
-        constructor($http: ng.IHttpService, $q: ng.IQService, NotifyingCache: any) {
+        constructor($http: ng.IHttpService, $q: ng.IQService, NotifyingCache: INotifyingCache) {
             //log.debug("BaseService consturctor called");
             //this.apiPath = 'token';
             this.httpService = $http;
@@ -140,7 +140,7 @@ module app.useraccount.services {
         }
 
         static $inject = ['$http', '$q', 'NotifyingCache'];
-        constructor($http: ng.IHttpService, $q: ng.IQService, NotifyingCache: any) {
+        constructor($http: ng.IHttpService, $q: ng.IQService, NotifyingCache: INotifyingCache) {
             super($http, $q, NotifyingCache);
         }
 

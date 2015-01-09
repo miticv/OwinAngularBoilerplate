@@ -28,6 +28,10 @@ form input[disabled]:hover
   visibility: hidden;
 }
 
+.ui-view-container {
+  margin-top: 50px;
+}
+
 /*#region "Hardcoded Animation for global ui-view change" *
 
 .ui-view-container {

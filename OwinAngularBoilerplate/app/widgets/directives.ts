@@ -60,7 +60,28 @@ module app.widgets {
 angular.module("app.widgets", []).directive('ngUiViewAnimate', app.widgets.ngUiViewAnimate);
 //#endregion  
 
-//#region Test Directive 1
+//#region ngLangTranslate
+module app.widgets {
+
+    ngLangTranslate.$inject = [];
+    export function ngLangTranslate(): ng.IDirective {
+        var directive: ng.IDirective = <ng.IDirective>{};
+
+        directive.restrict = 'A';
+        directive.link = function($scope: ng.IScope, elem: JQuery, attrs: ng.IAttributes) {
+            if (!attrs['ngLangTranslate']) return;
+            if (app.LANG[attrs['ngLangTranslate']]) {
+                elem.text(app.LANG[attrs['ngLangTranslate']]);
+            }
+        }
+        return directive;
+    }
+}
+angular.module('app.widgets', []).directive('ngLangTranslate', app.widgets.ngLangTranslate);
+//#endregion
+
+
+//#region Test Directive 1 (example of another way to directives)
 module app.widgets {
     export class MyDirective1 implements ng.IDirective {
 
@@ -74,7 +95,7 @@ module app.widgets {
 angular.module('app.widgets').directive('myDirective1', () => new app.widgets.MyDirective1());
 //#endregion
   
-//#region Test Directive 2
+//#region Test Directive 2 (example of another way to directives)
 angular.module('app.widgets').directive('myDirective2', function (): ng.IDirective {
     return {
         restrict: 'E',

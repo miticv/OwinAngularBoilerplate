@@ -1,18 +1,12 @@
 ﻿
-<div data-ng-controller="layoutController as lc">
+<div data-ng-controller="layoutController as layout" ng-init="layout.getData()">
 
   <div data-ng-include="'app/layout/header.html'"></div>
 
-  <div class="container body-content ui-view-container" style="margin-top:50px;">
-
-    <div data-ui-view ng-ui-view-animate="zoomIn"></div>
-
-    <footer class="navbar navbar-inverse navbar-fixed-bottom text-center">
-      <div class="container">
-        <ul class="nav navbar-nav animated fadeIn">
-          <li><a target="_blank" href="https://github.com/miticv/OwinAngularBoilerplate">&copy; 2015 - Owin Angular Boilerplate <i class="fa fa-external-link"></i></a></li>
-        </ul>
-      </div>
-</footer>
+  <div class="container body-content ui-view-container">
+    <div data-ui-view data-ng-ui-view-animate="zoomIn"></div>
   </div>
+
+  <div data-ng-include="'app/layout/footer.html'"></div>
+
 </div>

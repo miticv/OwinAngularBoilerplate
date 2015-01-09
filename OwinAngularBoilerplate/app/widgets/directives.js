@@ -69,7 +69,32 @@ angular.module("app.widgets", []).directive('ngUiViewAnimate', app.widgets.ngUiV
 var app;
 (function (app) {
     //#endregion
-    //#region Test Directive 1
+    //#region ngLangTranslate
+    (function (widgets) {
+        ngLangTranslate.$inject = [];
+        function ngLangTranslate() {
+            var directive = {};
+
+            directive.restrict = 'A';
+            directive.link = function ($scope, elem, attrs) {
+                if (!attrs['ngLangTranslate'])
+                    return;
+                if (app.LANG[attrs['ngLangTranslate']]) {
+                    elem.text(app.LANG[attrs['ngLangTranslate']]);
+                }
+            };
+            return directive;
+        }
+        widgets.ngLangTranslate = ngLangTranslate;
+    })(app.widgets || (app.widgets = {}));
+    var widgets = app.widgets;
+})(app || (app = {}));
+angular.module('app.widgets', []).directive('ngLangTranslate', app.widgets.ngLangTranslate);
+
+var app;
+(function (app) {
+    //#endregion
+    //#region Test Directive 1 (example of another way to directives)
     (function (widgets) {
         var MyDirective1 = (function () {
             function MyDirective1() {
@@ -90,7 +115,7 @@ angular.module('app.widgets').directive('myDirective1', function () {
 });
 
 //#endregion
-//#region Test Directive 2
+//#region Test Directive 2 (example of another way to directives)
 angular.module('app.widgets').directive('myDirective2', function () {
     return {
         restrict: 'E',

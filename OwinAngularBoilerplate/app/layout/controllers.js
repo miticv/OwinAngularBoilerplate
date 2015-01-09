@@ -9,18 +9,18 @@ var app;
                     var self = this;
 
                     //t: string = self.config.appTitle + ' loaded!';
-                    self.logger.success(self.title + ' loaded', null);
-
+                    self.logger.success(self.title + ' ' + app.LANG.Loaded, null);
                     //            Using a resolver on all routes or dataservice.ready in every controller
                     //            dataservice.ready().then(function(){
                     //                hideSplash();
                     //            });
-                    self.hideSplash();
+                    //self.hideSplash();
                 };
                 this.logout = function () {
                     var self = this;
-                    self.isLoggedIn = false;
-                    sessionStorage.removeItem('authorizationData');
+
+                    //self.isLoggedIn = false;
+                    sessionStorage.removeItem(app.CONST.sessionStorageKey);
                     self.dataSvc.$logout();
                     self.location.path('/login');
                 };
@@ -28,22 +28,12 @@ var app;
                     var self = this;
                     self.dataSvc.$userInfo().then(function (data) {
                         self.test = data;
-                        self.logger.success(self.title + ' loaded', null);
-                        self.hideSplash();
-                        self.isLoggedIn = true;
+                        self.logger.success(self.title + ' ' + app.LANG.Loaded, null);
+                        //self.hideSplash();
                     }, function (err) {
-                        self.logger.success(self.title + ' loaded', null);
-                        self.hideSplash();
-                        self.isLoggedIn = false;
+                        self.logger.success(self.title + ' ' + app.LANG.Loaded, null);
+                        //self.hideSplash();
                     });
-                };
-                this.hideSplash = function () {
-                    var self = this;
-
-                    //Force a 1 second delay so we can see the splash.
-                    self.timeout(function () {
-                        self.showSplash = false;
-                    }, 1000);
                 };
                 var self = this;
 
@@ -56,12 +46,12 @@ var app;
                 self.location = $location;
                 self.dataSvc = accountService;
 
-                self.title = 'test'; //   config.appTitle;
-                self.busyMessage = 'Please wait ...';
+                self.title = app.LANG.applicationName; //   config.appTitle;
+                self.busyMessage = app.LANG.PleaseWait + ' ...';
                 self.isBusy = true;
-                self.showSplash = true;
-                self.getData();
 
+                //self.showSplash = true;
+                //self.getData();
                 //self.activate();
                 $scope.$on(app.EVENTS.cacheUpdated, function (e, kvp) {
                     if (kvp.key === app.EVENTS.cacheKeyLoggedIn) {
