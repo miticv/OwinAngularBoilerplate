@@ -13,15 +13,22 @@ var app;
             /* returns array of "model name", "error message" */
             this.getModelError = function (data) {
                 var returnArray = [];
-                for (var property in data.ModelState) {
-                    if (data.ModelState.hasOwnProperty(property)) {
-                        for (var i = 0; data.ModelState[property].length > i; i++) {
-                            var el = new app.ApiErrorMessage();
-                            el.modelName = property;
-                            el.modelError = data.ModelState[property][i];
-                            returnArray.push(el);
+                if (data.ModelState) {
+                    for (var property in data.ModelState) {
+                        if (data.ModelState.hasOwnProperty(property)) {
+                            for (var i = 0; data.ModelState[property].length > i; i++) {
+                                var el = new app.ApiErrorMessage();
+                                el.modelName = property;
+                                el.modelError = data.ModelState[property][i];
+                                returnArray.push(el);
+                            }
                         }
                     }
+                } else if (data.error_description) {
+                    var el = new app.ApiErrorMessage();
+                    el.modelName = data.error;
+                    el.modelError = data.error_description;
+                    returnArray.push(el);
                 }
                 return returnArray;
             };

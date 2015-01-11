@@ -46,10 +46,8 @@ var app;
 
                     self.httpService(config).then(function (result) {
                         self.data = result.data;
-                        self.notifyingCache.put(app.EVENTS.cacheKeyLoggedIn, true);
                         deferred.resolve(self.data);
                     }, function (error) {
-                        self.notifyingCache.put(app.EVENTS.cacheKeyLoggedIn, false);
                         deferred.reject(error);
                     });
 
@@ -89,10 +87,11 @@ var app;
 
                     self.httpService(config).then(function (result) {
                         self.data = result.data;
-                        self.notifyingCache.put(app.EVENTS.cacheKeyLoggedIn, true);
+
+                        //self.notifyingCache.put(app.EVENTS.cacheKeyLoggedIn, true);
                         deferred.resolve(self.data);
                     }, function (error) {
-                        self.notifyingCache.put(app.EVENTS.cacheKeyLoggedIn, false);
+                        //self.notifyingCache.put(app.EVENTS.cacheKeyLoggedIn, false);
                         deferred.reject(error);
                     });
 
@@ -119,10 +118,10 @@ var app;
 
                     self.httpService(config).then(function (result) {
                         self.data = result.data;
-                        self.notifyingCache.put(app.EVENTS.cacheKeyLoggedIn, true);
+                        self.notifyingCache.put(app.EVENTS.loginSuccess, moment().toString());
                         deferred.resolve(self.data);
                     }, function (error) {
-                        self.notifyingCache.put(app.EVENTS.cacheKeyLoggedIn, false);
+                        self.notifyingCache.put(app.EVENTS.loginFailed, moment().toString());
                         deferred.reject(error);
                     });
 
@@ -131,7 +130,7 @@ var app;
 
                 AccountService.prototype.$logout = function () {
                     var self = this;
-                    self.notifyingCache.put(app.EVENTS.cacheKeyLoggedIn, false);
+                    self.notifyingCache.put(app.EVENTS.logoutSuccess, moment().toString());
                 };
 
                 AccountService.$inject = ['$http', '$q', 'NotifyingCache'];

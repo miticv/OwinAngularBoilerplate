@@ -13,17 +13,25 @@ module app {
        getModelError = function (data: ApiErrorModel) {
 
            var returnArray: app.ApiErrorMessage[] = [];
-            for (var property in data.ModelState) {
-                if (data.ModelState.hasOwnProperty(property)) {
-                    // do stuff
-                    for (var i = 0; data.ModelState[property].length > i; i++) {
-                        var el = new app.ApiErrorMessage();
-                        el.modelName = property;
-                        el.modelError = data.ModelState[property][i];
-                        returnArray.push(el);
-                    }
-                }
-            }
+           if (data.ModelState) {
+               for (var property in data.ModelState) {
+                   if (data.ModelState.hasOwnProperty(property)) {
+                       // do stuff
+                       for (var i = 0; data.ModelState[property].length > i; i++) {
+                           var el = new app.ApiErrorMessage();
+                           el.modelName = property;
+                           el.modelError = data.ModelState[property][i];
+                           returnArray.push(el);
+                       }
+                   }
+               }
+           } else if (data.error_description)
+           {
+               var el = new app.ApiErrorMessage();
+               el.modelName = data.error;
+               el.modelError = data.error_description;
+               returnArray.push(el);
+           }
            return returnArray;
         }
     }
@@ -36,7 +44,9 @@ module app {
 
     export class ApiErrorModel {
         ModelState: ApiErrorModelState;
-        Message: string;        
+        Message: string;   
+        error: string;
+        error_description: string;     
     }
 
     export class ApiErrorModelState {

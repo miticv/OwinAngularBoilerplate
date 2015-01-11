@@ -4,7 +4,7 @@ var app;
 (function (app) {
     (function (useraccount) {
         var UserController = (function () {
-            function UserController(scope, accountService, logger, location) {
+            function UserController(scope, accountService, logger, location, NotifyingCache) {
                 this.LogMeIn = function () {
                     var self = this;
                     self.working = true;
@@ -15,13 +15,19 @@ var app;
                         self.working = false;
                         self.tokenData = data;
                         self.tokenData.useRefreshTokens = true;
+                        self.tokenData.clientIssuedTime = moment().unix();
                         sessionStorage.setItem(app.CONST.sessionStorageKey, JSON.stringify(self.tokenData));
+                        self.notifyingCache.put(app.EVENTS.loginSuccess, moment().toString());
                         self.logger.success(app.LANG.LoggedIn);
                         self.location.path('/userhome');
                     }, function (err) {
                         self.working = false;
                         sessionStorage.removeItem(app.CONST.sessionStorageKey);
-                        self.logger.error(app.LANG.WrongCredentals);
+                        self.notifyingCache.put(app.EVENTS.loginFailed, moment().toString());
+                        var returnArray = (new app.ApiErrorHelper()).getModelError(err.data);
+                        for (var error in returnArray) {
+                            self.logger.error(returnArray[error].modelError, app.LANG.CanNotRegister);
+                        }
                     });
                 };
                 this.RegisterMe = function () {
@@ -64,8 +70,9 @@ var app;
                 self.dataSvc = accountService;
                 self.logger = logger;
                 self.location = location;
+                self.notifyingCache = NotifyingCache;
             }
-            UserController.$inject = ['$scope', 'accountService', 'logger', '$location'];
+            UserController.$inject = ['$scope', 'accountService', 'logger', '$location', 'NotifyingCache'];
             return UserController;
         })();
         useraccount.UserController = UserController;

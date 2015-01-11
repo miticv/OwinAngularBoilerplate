@@ -45,10 +45,8 @@ module app.useraccount.services {
                 then(
                 function (result: any) {
                     self.data = result.data;
-                    self.notifyingCache.put(app.EVENTS.cacheKeyLoggedIn, true);
                     deferred.resolve(self.data);
                 }, function (error) {
-                    self.notifyingCache.put(app.EVENTS.cacheKeyLoggedIn, false);
                     deferred.reject(error);
                 });
 
@@ -92,10 +90,10 @@ module app.useraccount.services {
                 then(
                 function (result: any) {
                     self.data = result.data;
-                    self.notifyingCache.put(app.EVENTS.cacheKeyLoggedIn, true);
+                    //self.notifyingCache.put(app.EVENTS.cacheKeyLoggedIn, true);
                     deferred.resolve(self.data);
                 }, function (error) {
-                    self.notifyingCache.put(app.EVENTS.cacheKeyLoggedIn, false);
+                    //self.notifyingCache.put(app.EVENTS.cacheKeyLoggedIn, false);
                     deferred.reject(error);
                 });
 
@@ -124,10 +122,10 @@ module app.useraccount.services {
                 then(
                 function (result: any) {
                     self.data = result.data;
-                    self.notifyingCache.put(app.EVENTS.cacheKeyLoggedIn, true);
+                    self.notifyingCache.put(app.EVENTS.loginSuccess, moment().toString());
                     deferred.resolve(self.data);
                 }, function (error) {
-                    self.notifyingCache.put(app.EVENTS.cacheKeyLoggedIn, false);
+                    self.notifyingCache.put(app.EVENTS.loginFailed, moment().toString());
                     deferred.reject(error);
                 });
 
@@ -136,7 +134,7 @@ module app.useraccount.services {
 
         $logout() {
             var self = this;
-            self.notifyingCache.put(app.EVENTS.cacheKeyLoggedIn, false);
+            self.notifyingCache.put(app.EVENTS.logoutSuccess, moment().toString());
         }
 
         static $inject = ['$http', '$q', 'NotifyingCache'];

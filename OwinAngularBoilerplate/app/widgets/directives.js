@@ -37,10 +37,16 @@ var app;
             return directive;
         }
         widgets.ngMatch = ngMatch;
+    })(app.widgets || (app.widgets = {}));
+    var widgets = app.widgets;
+})(app || (app = {}));
+angular.module("app.widgets").directive('ngMatch', app.widgets.ngMatch);
 
-        //#endregion
-        //#region ng-ui-view-animate
-        //module app.widgets {
+var app;
+(function (app) {
+    //#endregion
+    //#region ng-ui-view-animate
+    (function (widgets) {
         ngUiViewAnimate.$inject = [];
         function ngUiViewAnimate() {
             var directive = {};
@@ -59,28 +65,51 @@ var app;
     var widgets = app.widgets;
 })(app || (app = {}));
 angular.module("app.widgets").directive('ngUiViewAnimate', app.widgets.ngUiViewAnimate);
-angular.module("app.widgets").directive('ngMatch', app.widgets.ngMatch);
 
 var app;
 (function (app) {
     //#endregion
-    ////#region ngLangTranslate
+    //#region ngLangTranslate
+    (function (widgets) {
+        ngLangTranslate.$inject = [];
+        function ngLangTranslate() {
+            var directive = {};
+
+            directive.restrict = 'A';
+            directive.link = function ($scope, elem, attrs) {
+                if (!attrs['ngLangTranslate'])
+                    return;
+                if (app.LANG[attrs['ngLangTranslate']]) {
+                    elem.text(app.LANG[attrs['ngLangTranslate']]);
+                }
+            };
+            return directive;
+        }
+        widgets.ngLangTranslate = ngLangTranslate;
+    })(app.widgets || (app.widgets = {}));
+    var widgets = app.widgets;
+})(app || (app = {}));
+angular.module('app.widgets').directive('ngLangTranslate', app.widgets.ngLangTranslate);
+
+var app;
+(function (app) {
+    //#endregion
+    //#region ngCountDown
     //module app.widgets {
-    //    ngLangTranslate.$inject = [];
-    //    export function ngLangTranslate(): ng.IDirective {
+    //    ngCountDown.$inject = [];
+    //    export function ngCountDown(): ng.IDirective {
     //        var directive: ng.IDirective = <ng.IDirective>{};
     //        directive.restrict = 'A';
-    //        directive.link = function($scope: ng.IScope, elem: JQuery, attrs: ng.IAttributes) {
-    //            if (!attrs['ngLangTranslate']) return;
-    //            if (app.LANG[attrs['ngLangTranslate']]) {
-    //                elem.text(app.LANG[attrs['ngLangTranslate']]);
-    //            }
-    //        }
+    //        directive.link = function link(scope: ng.IScope, elem: JQuery, attrs: ng.IAttributes) {
+    //            if (!attrs['ngCountDown']) return;
+    //            $(elem.children()).addClass('animated');
+    //            $(elem.children()).addClass(attrs['ngUiViewAnimate']);
+    //        };
     //        return directive;
     //    }
     //}
-    //angular.module('app.widgets', []).directive('ngLangTranslate', app.widgets.ngLangTranslate);
-    ////#endregion
+    //angular.module("app.widgets").directive('ngCountDown', app.widgets.ngCountDown);
+    //#endregion
     //#region Test Directive 1 (example of another way to directives)
     (function (widgets) {
         var MyDirective1 = (function () {

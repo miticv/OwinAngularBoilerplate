@@ -9,6 +9,7 @@ module app.useraccount {
         private tokenData: models.Token;
         private logger: ILogger;
         private location: ng.ILocationService;
+        private notifyingCache: INotifyingCache;
 
         working: boolean;
 
@@ -22,14 +23,20 @@ module app.useraccount {
                 self.working = false;
                 self.tokenData = data;
                 self.tokenData.useRefreshTokens = true;
+                self.tokenData.clientIssuedTime = moment().unix();
                 sessionStorage.setItem(app.CONST.sessionStorageKey, JSON.stringify(self.tokenData));
+                self.notifyingCache.put(app.EVENTS.loginSuccess, moment().toString());
                 self.logger.success(app.LANG.LoggedIn);
                 self.location.path('/userhome');
                 
-            }, function (err) {
+            }, function (err: app.ApiError) {
                 self.working = false;
-                sessionStorage.removeItem(app.CONST.sessionStorageKey);  
-                self.logger.error(app.LANG.WrongCredentals);               
+                sessionStorage.removeItem(app.CONST.sessionStorageKey);
+                self.notifyingCache.put(app.EVENTS.loginFailed, moment().toString());
+                var returnArray = (new ApiErrorHelper()).getModelError(err.data);
+                for (var error in returnArray) {
+                    self.logger.error(returnArray[error].modelError, app.LANG.CanNotRegister);
+                }             
             });
 
 
@@ -72,14 +79,15 @@ module app.useraccount {
         }
 
 
-        static $inject = ['$scope', 'accountService', 'logger', '$location'];
-        constructor(scope: ng.IScope, accountService: ng.IServiceProvider, logger: ILogger, location: ng.ILocationService) {
+        static $inject = ['$scope', 'accountService', 'logger', '$location', 'NotifyingCache'];
+        constructor(scope: ng.IScope, accountService: ng.IServiceProvider, logger: ILogger, location: ng.ILocationService, NotifyingCache: INotifyingCache) {
             var self = this;   
             self.working = false;
 
             self.dataSvc = accountService;
             self.logger = logger;
-            self.location = location;           
+            self.location = location; 
+            self.notifyingCache = NotifyingCache;          
         }
     }  
                 

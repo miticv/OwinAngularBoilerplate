@@ -27,7 +27,7 @@ module app {
         cache: any;
         put(key: string, value: any): void;
         remove(key:string): void;
-        get(key:string): string;
+        get(key:string): any;
     }
 
 }

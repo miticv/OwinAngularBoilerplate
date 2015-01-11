@@ -15,7 +15,7 @@ var app;
         LANG.Loaded = 'loaded';
         LANG.PleaseWait = 'Please Wait';
 
-        LANG.login = 'login!';
+        LANG.login = 'login';
         LANG.test = 'test';
         LANG.logedinpage = 'loged in page';
         LANG.register = 'register';
@@ -26,20 +26,21 @@ var app;
 
     (function (CONST) {
         CONST.sessionStorageKey = 'authorizationData';
+        CONST.sessionSlackTime = 10;
+        CONST.sessionDisplaySessionEndWarningAtSecond = 50;
     })(app.CONST || (app.CONST = {}));
     var CONST = app.CONST;
 
     (function (EVENTS) {
-        //export var loginSuccess: string = 'auth-login-success';
-        //export var loginFailed: string = 'auth-login-failed';
-        //export var logoutSuccess: string = 'auth-logout-success';
+        EVENTS.loginSuccess = 'auth-login-success';
+        EVENTS.loginFailed = 'auth-login-failed';
+        EVENTS.logoutSuccess = 'auth-logout-success';
+
         //export var sessionTimeout: string = 'auth-session-timeout';
         //export var notAuthenticated: string = 'auth-not-authenticated';
         //export var notAuthorized: string = 'auth-not-authorized';
         EVENTS.cacheUpdated = 'cache-item-updated';
         EVENTS.cacheRemoved = 'cache-item-removed';
-
-        EVENTS.cacheKeyLoggedIn = 'cache-key-loggedIn';
     })(app.EVENTS || (app.EVENTS = {}));
     var EVENTS = app.EVENTS;
     ;

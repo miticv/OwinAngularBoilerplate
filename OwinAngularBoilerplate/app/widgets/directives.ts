@@ -80,6 +80,27 @@ module app.widgets {
 angular.module('app.widgets').directive('ngLangTranslate', app.widgets.ngLangTranslate);
 //#endregion
 
+//#region ngCountDown
+//module app.widgets {
+
+//    ngCountDown.$inject = [];
+//    export function ngCountDown(): ng.IDirective {
+//        var directive: ng.IDirective = <ng.IDirective>{};
+
+//        directive.restrict = 'A';
+//        directive.link = function link(scope: ng.IScope, elem: JQuery, attrs: ng.IAttributes) {
+//            if (!attrs['ngCountDown']) return;
+
+
+//            $(elem.children()).addClass('animated');
+//            $(elem.children()).addClass(attrs['ngUiViewAnimate']);
+
+//        };
+//        return directive;
+//    }
+//}
+//angular.module("app.widgets").directive('ngCountDown', app.widgets.ngCountDown);
+//#endregion  
 
 //#region Test Directive 1 (example of another way to directives)
 module app.widgets {

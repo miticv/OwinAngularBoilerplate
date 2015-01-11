@@ -31,6 +31,7 @@ module app.useraccount.models {
         '.issued': string;
         '.expires': string;
         'as:client_id': string;
+        clientIssuedTime: string;
     }
 
     export class UserInfo {
