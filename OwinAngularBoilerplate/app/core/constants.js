@@ -41,6 +41,11 @@ var app;
         //export var notAuthorized: string = 'auth-not-authorized';
         EVENTS.cacheUpdated = 'cache-item-updated';
         EVENTS.cacheRemoved = 'cache-item-removed';
+
+        EVENTS.loginRefreshTokenFailed = 'auth-refresh-failed';
+        EVENTS.loginRefreshTokenSuccess = 'auth-refresh-success';
+        EVENTS.sessionExpired = 'auth-session-expired';
+        EVENTS.sessionEnding = 'auth-session-ending';
     })(app.EVENTS || (app.EVENTS = {}));
     var EVENTS = app.EVENTS;
     ;

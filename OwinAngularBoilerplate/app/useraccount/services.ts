@@ -1,5 +1,5 @@
 ﻿/// <reference path="../_all.ts" />
-
+           
 'use strict';
 module app.useraccount.services {
 
@@ -45,8 +45,11 @@ module app.useraccount.services {
                 then(
                 function (result: any) {
                     self.data = result.data;
+                    self.data.clientIssuedTime = moment().unix();
+                    self.notifyingCache.put(app.EVENTS.loginSuccess, self.data);
                     deferred.resolve(self.data);
                 }, function (error) {
+                    self.notifyingCache.put(app.EVENTS.loginFailed, moment().toString());
                     deferred.reject(error);
                 });
 
@@ -64,7 +67,7 @@ module app.useraccount.services {
                 data: model
             };
 
-            self.httpService(config). //post(self.apiPath, model)
+            self.httpService(config).
                 then(
                 function (result: any) {
                     self.data = result.data;
@@ -90,10 +93,8 @@ module app.useraccount.services {
                 then(
                 function (result: any) {
                     self.data = result.data;
-                    //self.notifyingCache.put(app.EVENTS.cacheKeyLoggedIn, true);
                     deferred.resolve(self.data);
                 }, function (error) {
-                    //self.notifyingCache.put(app.EVENTS.cacheKeyLoggedIn, false);
                     deferred.reject(error);
                 });
 
@@ -122,19 +123,21 @@ module app.useraccount.services {
                 then(
                 function (result: any) {
                     self.data = result.data;
-                    self.notifyingCache.put(app.EVENTS.loginSuccess, moment().toString());
+                    self.data.clientIssuedTime = moment().unix();
+                    self.notifyingCache.put(app.EVENTS.loginRefreshTokenSuccess, self.data);
                     deferred.resolve(self.data);
                 }, function (error) {
-                    self.notifyingCache.put(app.EVENTS.loginFailed, moment().toString());
+                    self.notifyingCache.put(app.EVENTS.loginRefreshTokenFailed, error);
                     deferred.reject(error);
                 });
 
             return deferred.promise;
         }
 
+        //logout
         $logout() {
             var self = this;
-            self.notifyingCache.put(app.EVENTS.logoutSuccess, moment().toString());
+            self.notifyingCache.put(app.EVENTS.logoutSuccess, moment().toString());            
         }
 
         static $inject = ['$http', '$q', 'NotifyingCache'];

@@ -1,5 +1,5 @@
 ﻿/// <reference path="../_all.ts" />
-
+                 
 'use strict';
 module app {
 
@@ -46,6 +46,11 @@ module app {
 
         export var cacheUpdated: string = 'cache-item-updated';
         export var cacheRemoved: string = 'cache-item-removed';
+
+        export var loginRefreshTokenFailed: string = 'auth-refresh-failed';
+        export var loginRefreshTokenSuccess: string = 'auth-refresh-success';
+        export var sessionExpired: string = 'auth-session-expired';
+        export var sessionEnding: string = 'auth-session-ending';
 
         //export var cacheKeyLoggedIn: string = 'cache-key-loggedIn';
         };   

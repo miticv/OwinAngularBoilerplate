@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_all.ts" />
 'use strict';
-
+        
 module app.useraccount {
 
     export class UserController implements IAccountController {
@@ -23,16 +23,11 @@ module app.useraccount {
                 self.working = false;
                 self.tokenData = data;
                 self.tokenData.useRefreshTokens = true;
-                self.tokenData.clientIssuedTime = moment().unix();
-                sessionStorage.setItem(app.CONST.sessionStorageKey, JSON.stringify(self.tokenData));
-                self.notifyingCache.put(app.EVENTS.loginSuccess, moment().toString());
                 self.logger.success(app.LANG.LoggedIn);
                 self.location.path('/userhome');
                 
             }, function (err: app.ApiError) {
                 self.working = false;
-                sessionStorage.removeItem(app.CONST.sessionStorageKey);
-                self.notifyingCache.put(app.EVENTS.loginFailed, moment().toString());
                 var returnArray = (new ApiErrorHelper()).getModelError(err.data);
                 for (var error in returnArray) {
                     self.logger.error(returnArray[error].modelError, app.LANG.CanNotRegister);
@@ -52,13 +47,12 @@ module app.useraccount {
                 self.tokenData = data;
                 self.logger.success(app.LANG.Registered);
                 self.location.path('/successRegister');
-            }, function (err: app.ApiError) {
-                sessionStorage.removeItem(app.CONST.sessionStorageKey); 
-                    var returnArray = (new ApiErrorHelper()).getModelError(err.data);
-                    for (var error in returnArray) {
-                        self.logger.error(returnArray[error].modelError, app.LANG.CanNotRegister);
-                    }
-                });
+            }, function (err: app.ApiError) {                
+                var returnArray = (new ApiErrorHelper()).getModelError(err.data);
+                for (var error in returnArray) {
+                    self.logger.error(returnArray[error].modelError, app.LANG.CanNotRegister);
+                }
+            });
         }
 
         getData = function () {

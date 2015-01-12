@@ -7,16 +7,13 @@ var app;
             function LayoutController($timeout, logger, $scope, $location, accountService, $interval, NotifyingCache) {
                 this.logout = function () {
                     var self = this;
-
-                    //self.isLoggedIn = false;
-                    sessionStorage.removeItem(app.CONST.sessionStorageKey);
                     self.dataSvc.$logout();
                     self.location.path('/login');
                 };
                 this.refreshToken = function () {
                     var self = this;
                     var model = new app.useraccount.models.Refresh();
-                    self.tokenData = self.getAuthTokenData();
+                    self.tokenData = self.notifyingCache.get(app.CONST.sessionStorageKey);
                     if (!self.tokenData) {
                         self.logger.warning('refresh token expired');
                         return;
@@ -28,9 +25,6 @@ var app;
                     self.dataSvc.$refresh(model).then(function (data) {
                         self.tokenData = data;
                         self.tokenData.useRefreshTokens = true;
-                        self.tokenData.clientIssuedTime = moment().unix();
-                        sessionStorage.setItem(app.CONST.sessionStorageKey, JSON.stringify(self.tokenData));
-                        self.notifyingCache.put(app.EVENTS.loginSuccess, moment().toString());
                         self.logger.success('session refreshed');
                         self.fetchingRefreshToken = false;
                     }, function (err) {
@@ -51,10 +45,10 @@ var app;
                 this.countdown = function () {
                     var self = this;
 
-                    self.tokenData = self.getAuthTokenData();
-                    if (self.tokenData) {
+                    self.tokenData = self.notifyingCache.get(app.CONST.sessionStorageKey);
+                    if (self.tokenData && self.isLoggedIn) {
                         var refreshId = self.interval(function () {
-                            if (self.fetchingRefreshToken)
+                            if (self.fetchingRefreshToken || !self.isLoggedIn)
                                 self.interval.cancel(refreshId);
                             self.expiresIn = self.calculateExpiredSeconds();
                             if (self.expiresIn <= 0) {
@@ -63,14 +57,6 @@ var app;
                             }
                             self.expiresInShow = self.expiresIn <= app.CONST.sessionDisplaySessionEndWarningAtSecond;
                         }, 1000);
-                    }
-                };
-                this.getAuthTokenData = function () {
-                    var authData = sessionStorage.getItem(app.CONST.sessionStorageKey);
-                    if (authData) {
-                        return JSON.parse(authData);
-                    } else {
-                        return null;
                     }
                 };
                 this.calculateExpiredSeconds = function (refreshId) {
@@ -84,8 +70,6 @@ var app;
 
                 self.isLoggedIn = false;
                 self.logger = logger;
-
-                //self.config = config;
                 self.timeout = $timeout;
                 self.scope = $scope;
                 self.location = $location;
@@ -99,28 +83,19 @@ var app;
                 self.isBusy = true;
                 self.expiresInShow = false;
 
-                //self.showSplash = true;
-                //self.getData();
-                //self.activate();
-                $scope.$on(app.EVENTS.cacheUpdated, function (e, kvp) {
-                    if (kvp.key === app.EVENTS.loginSuccess) {
-                        self.isLoggedIn = true;
-                        self.countdown();
-                    } else if (kvp.key === app.EVENTS.logoutSuccess) {
-                        self.isLoggedIn = false;
-                        self.expiresIn = null;
-                        self.refresh_token = null;
-                        self.userName = null;
-                    }
+                $scope.$on(app.EVENTS.loginSuccess, function (e, kvp) {
+                    self.isLoggedIn = true;
+                    self.countdown();
                 });
 
-                $scope.$on(app.EVENTS.cacheRemoved, function (e, kvp) {
-                    if (kvp.key === app.EVENTS.logoutSuccess) {
-                        self.isLoggedIn = false;
-                        self.expiresIn = null;
-                        self.refresh_token = null;
-                        self.userName = null;
-                    }
+                $scope.$on(app.EVENTS.loginRefreshTokenSuccess, function (e, kvp) {
+                    self.isLoggedIn = true;
+                    self.countdown();
+                });
+
+                $scope.$on(app.EVENTS.logoutSuccess, function (e, kvp) {
+                    self.isLoggedIn = false;
+                    self.expiresIn = null;
                 });
             }
             LayoutController.$inject = ['$timeout', 'logger', '$scope', '$location', 'accountService', '$interval', 'NotifyingCache'];

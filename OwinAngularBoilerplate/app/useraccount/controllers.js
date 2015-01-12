@@ -15,15 +15,10 @@ var app;
                         self.working = false;
                         self.tokenData = data;
                         self.tokenData.useRefreshTokens = true;
-                        self.tokenData.clientIssuedTime = moment().unix();
-                        sessionStorage.setItem(app.CONST.sessionStorageKey, JSON.stringify(self.tokenData));
-                        self.notifyingCache.put(app.EVENTS.loginSuccess, moment().toString());
                         self.logger.success(app.LANG.LoggedIn);
                         self.location.path('/userhome');
                     }, function (err) {
                         self.working = false;
-                        sessionStorage.removeItem(app.CONST.sessionStorageKey);
-                        self.notifyingCache.put(app.EVENTS.loginFailed, moment().toString());
                         var returnArray = (new app.ApiErrorHelper()).getModelError(err.data);
                         for (var error in returnArray) {
                             self.logger.error(returnArray[error].modelError, app.LANG.CanNotRegister);
@@ -41,7 +36,6 @@ var app;
                         self.logger.success(app.LANG.Registered);
                         self.location.path('/successRegister');
                     }, function (err) {
-                        sessionStorage.removeItem(app.CONST.sessionStorageKey);
                         var returnArray = (new app.ApiErrorHelper()).getModelError(err.data);
                         for (var error in returnArray) {
                             self.logger.error(returnArray[error].modelError, app.LANG.CanNotRegister);
