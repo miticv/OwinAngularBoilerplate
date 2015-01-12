@@ -27,7 +27,7 @@ var app;
     (function (CONST) {
         CONST.sessionStorageKey = 'authorizationData';
         CONST.sessionSlackTime = 10;
-        CONST.sessionDisplaySessionEndWarningAtSecond = 50;
+        CONST.sessionDisplaySessionEndWarningAtSecond = 30;
     })(app.CONST || (app.CONST = {}));
     var CONST = app.CONST;
 

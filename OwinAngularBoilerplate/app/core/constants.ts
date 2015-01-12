@@ -32,7 +32,7 @@ module app {
     export module CONST {
         export var sessionStorageKey: string = 'authorizationData';
         export var sessionSlackTime: number = 10; //kill session 10s before expires - if user want to renew session at 0 sec countdown, give server some slack time   
-        export var sessionDisplaySessionEndWarningAtSecond: number = 50; //show warning 50sec before session expires       
+        export var sessionDisplaySessionEndWarningAtSecond: number = 30; //show warning 50sec before session expires       
     }
 
     export module EVENTS {

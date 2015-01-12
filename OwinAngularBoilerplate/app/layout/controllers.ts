@@ -12,7 +12,8 @@ module app.layout {
         private location: ng.ILocationService;
         private dataSvc: ng.IServiceProvider;
         private interval: ng.IIntervalService;
-        private token: app.useraccount.models.Token;
+        private tokenData: app.useraccount.models.Token;
+        private notifyingCache: INotifyingCache;
 
         private title: string;
         private busyMessage: string;
@@ -24,12 +25,42 @@ module app.layout {
         public refresh_token: string;
         public userName: string;
 
+        private fetchingRefreshToken : boolean;
+
         logout = function () {
             var self = this;
             //self.isLoggedIn = false;
             sessionStorage.removeItem(app.CONST.sessionStorageKey);
             self.dataSvc.$logout();
             self.location.path('/login');
+        }
+
+        refreshToken = function () {
+            var self = this;            
+            var model = new app.useraccount.models.Refresh();
+            self.tokenData = self.getAuthTokenData(); 
+            if (!self.tokenData) {
+                self.logger.warning('refresh token expired');
+                return;
+            }
+            self.fetchingRefreshToken = true;
+            model.username = self.tokenData.userName;
+            model.refresh_token = self.tokenData.refresh_token;
+
+            self.dataSvc.$refresh(model).then(function (data) {
+
+                self.tokenData = data;
+                self.tokenData.useRefreshTokens = true;
+                self.tokenData.clientIssuedTime = moment().unix();
+                sessionStorage.setItem(app.CONST.sessionStorageKey, JSON.stringify(self.tokenData));
+                self.notifyingCache.put(app.EVENTS.loginSuccess, moment().toString());
+                self.logger.success('session refreshed');
+                self.fetchingRefreshToken = false;
+            }, function (err: app.ApiError) {                
+                self.fetchingRefreshToken = false;
+            });
+
+
         }
 
         getData = function () {
@@ -46,35 +77,44 @@ module app.layout {
 
 
         countdown = function () {
-            var self = this;       
-            var authData = sessionStorage.getItem(app.CONST.sessionStorageKey);
-            if (authData) {
+            var self = this;  
 
-                self.token = JSON.parse(authData);                                
-                self.expiresIn = self.calculateExpiredSeconds();
-
+            self.tokenData = self.getAuthTokenData();            
+            if (self.tokenData) {                
                 var refreshId = self.interval(function () {
+                    if (self.fetchingRefreshToken) self.interval.cancel(refreshId);
                     self.expiresIn = self.calculateExpiredSeconds();
                     if (self.expiresIn <= 0)
                     {
                         self.logout();              
                         self.interval.cancel(refreshId);
                     }
-                    if (self.expiresIn <= app.CONST.sessionDisplaySessionEndWarningAtSecond) {
-                        self.expiresInShow = true;
-                    }
+                    self.expiresInShow = self.expiresIn <= app.CONST.sessionDisplaySessionEndWarningAtSecond;
+
                 }, 1000);
+
           }
         }
 
-        calculateExpiredSeconds = function () {
+        getAuthTokenData = function () {
+            var authData = sessionStorage.getItem(app.CONST.sessionStorageKey);
+            if (authData) {
+                return JSON.parse(authData);
+            } else {
+                return null;
+            }
+
+        }
+
+        calculateExpiredSeconds = function (refreshId) {
             var self = this; 
-            var sessionEndTime = moment.unix(self.token.clientIssuedTime).add(self.token.expires_in - app.CONST.sessionSlackTime, 'seconds');
+            if (self.fetchingRefreshToken) return self.expiresIn; //freeze time if refreshing token.
+            var sessionEndTime = moment.unix(self.tokenData.clientIssuedTime).add(self.tokenData.expires_in - app.CONST.sessionSlackTime, 'seconds');
             return sessionEndTime.diff(moment(), 'seconds');
         }
 
-        static $inject = ['$timeout', 'logger', '$scope', '$location', 'accountService', '$interval'];
-        constructor($timeout: ng.ITimeoutService, logger: ILogger, $scope: ng.IScope, $location: ng.ILocationService, accountService: ng.IServiceProvider, $interval: ng.IIntervalService) {
+        static $inject = ['$timeout', 'logger', '$scope', '$location', 'accountService', '$interval', 'NotifyingCache'];
+        constructor($timeout: ng.ITimeoutService, logger: ILogger, $scope: ng.IScope, $location: ng.ILocationService, accountService: ng.IServiceProvider, $interval: ng.IIntervalService, NotifyingCache: INotifyingCache) {
             var self = this;
 
             self.isLoggedIn = false;
@@ -85,8 +125,9 @@ module app.layout {
             self.location = $location;
             self.dataSvc = accountService;
             self.interval = $interval;
+            self.notifyingCache = NotifyingCache; 
 
-
+            self.fetchingRefreshToken = false;
             self.title = app.LANG.applicationName;      //   config.appTitle; 
             self.busyMessage = app.LANG.PleaseWait + ' ...';
             self.isBusy = true;

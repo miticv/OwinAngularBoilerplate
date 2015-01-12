@@ -2,7 +2,7 @@
   <div class="container">
     <ul class="nav navbar-nav animated fadeIn">
       <li><a target="_blank" href="https://github.com/miticv/OwinAngularBoilerplate">&copy; 2015 - Owin Angular Boilerplate <i class="fa fa-external-link"></i></a></li>
-      <li ng-show="layout.isLoggedIn && layout.expiresInShow" class="alert-danger animated" ng-class="{ fadeIn: layout.expiresInShow }">Your session expires in {{layout.expiresIn}} sec. Click here to <a>keep logged in!</a></li>
+      <li ng-show="layout.isLoggedIn && layout.expiresInShow" class="alert-danger animated" ng-click="layout.refreshToken()" ng-class="{ fadeIn: layout.expiresInShow }"><a class="label text-success">Click to stay logged in! Your session expires in {{layout.expiresIn}} sec. </a></li>
     </ul>    
   </div> 
 </footer>
