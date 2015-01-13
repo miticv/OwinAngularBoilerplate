@@ -14,6 +14,7 @@ module app.layout {
         private interval: ng.IIntervalService;
         private tokenData: app.useraccount.models.Token;
         private notifyingCache: INotifyingCache;
+        private i18next: I18nextStatic;
 
         private title: string;
         private busyMessage: string;
@@ -67,6 +68,11 @@ module app.layout {
             });
         }
 
+        changeLanguage = function (lng) {
+            var self = this;
+            self.i18next.options.lng = lng;
+
+        }
 
         countdown = function () {
             var self = this;  
@@ -95,8 +101,8 @@ module app.layout {
             return sessionEndTime.diff(moment(), 'seconds');
         }
 
-        static $inject = ['$timeout', 'logger', '$scope', '$location', 'accountService', '$interval', 'NotifyingCache'];
-        constructor($timeout: ng.ITimeoutService, logger: ILogger, $scope: ng.IScope, $location: ng.ILocationService, accountService: ng.IServiceProvider, $interval: ng.IIntervalService, NotifyingCache: INotifyingCache) {
+        static $inject = ['$timeout', 'logger', '$scope', '$location', 'accountService', '$interval', 'NotifyingCache','$i18next'];
+        constructor($timeout: ng.ITimeoutService, logger: ILogger, $scope: ng.IScope, $location: ng.ILocationService, accountService: ng.IServiceProvider, $interval: ng.IIntervalService, NotifyingCache: INotifyingCache, $i18next: I18nextStatic) {
             var self = this;
 
             self.isLoggedIn = false;
@@ -107,6 +113,7 @@ module app.layout {
             self.dataSvc = accountService;
             self.interval = $interval;
             self.notifyingCache = NotifyingCache; 
+            self.i18next = $i18next;
 
             self.fetchingRefreshToken = false;
             self.title = app.LANG.applicationName;      //   config.appTitle; 

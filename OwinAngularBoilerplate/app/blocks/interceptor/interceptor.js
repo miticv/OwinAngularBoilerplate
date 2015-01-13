@@ -9,6 +9,7 @@ var app;
         var _request = function (config) {
             config.headers = config.headers || {};
 
+            //use this?: self.notifyingCache.get(app.CONST.sessionStorageKey);
             var authData = sessionStorage.getItem('authorizationData');
             if (authData && config.url != 'token') {
                 config.headers.Authorization = 'Bearer ' + JSON.parse(authData).access_token;

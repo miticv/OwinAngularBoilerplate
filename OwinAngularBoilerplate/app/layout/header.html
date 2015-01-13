@@ -3,7 +3,9 @@
   <div class="container">
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li><a href="/#/test" ng-lang-translate="test">test</a></li>
+        <li><a ng-i18next="word" ng-click="layout.changeLanguage('en-ca')"></a></li>
+        <li><a ng-i18next="word" ng-click="layout.changeLanguage('en-us')"></a></li>
+        <li><a href="/#/test" ng-i18next="word">test </a></li>
         <li><a ng-hide="layout.isLoggedIn" href="/#/login" ng-lang-translate="login">login</a></li>
         <li><a ng-show="layout.isLoggedIn" href="/#/userhome" ng-lang-translate="logedinpage">loged in page</a></li>
         <li><a ng-hide="layout.isLoggedIn" href="/#/register" ng-lang-translate="register">register</a></li>

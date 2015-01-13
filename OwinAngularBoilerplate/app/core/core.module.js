@@ -3,8 +3,10 @@
 var app;
 (function (app) {
     angular.module('app.core', [
+        'ngSanitize',
         'ngAnimate',
         'ui.router',
+        'jm.i18next',
         'blocks.cache',
         'blocks.logger',
         'blocks.interceptor',

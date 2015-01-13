@@ -242,6 +242,8 @@
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-1.9.0.intellisense.js" />
+    <Content Include="Scripts\i18next-1.7.4.js" />
+    <Content Include="Scripts\i18next-1.7.4.min.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-dj.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-er.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-et.js" />
@@ -986,6 +988,8 @@
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\ng-i18next.js" />
+    <Content Include="Scripts\ng-i18next.min.js" />
     <Content Include="Scripts\ngplus\ngplus-overlay.js" />
     <Content Include="Scripts\r.js" />
     <Content Include="Scripts\require.js" />
@@ -1010,6 +1014,7 @@
     <TypeScriptCompile Include="Scripts\typings\angular-ui-bootstrap\angular-ui-bootstrap.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui\angular-ui-router.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\bootbox\bootbox.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\i18next\i18next.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\marked\marked.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\requirejs\require.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\toastr\toastr.d.ts" />
@@ -1021,6 +1026,7 @@
     <Compile Include="ApiControllers\AccountController.cs" />
     <Compile Include="ApiControllers\OrdersController.cs" />
     <Compile Include="ApiControllers\TestController.cs" />
+    <Compile Include="ApiControllers\TranslateController.cs" />
     <Compile Include="App_Start\Auth.Startup.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\Nancy.Startup.cs" />

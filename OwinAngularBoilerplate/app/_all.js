@@ -8,6 +8,7 @@
 /// <reference path="../scripts/typings/angular-ui/angular-ui-router.d.ts" />
 /// <reference path="../scripts/typings/toastr/toastr.d.ts" />
 /// <reference path="../scripts/typings/moment/moment.d.ts" />
+/// <reference path="../scripts/typings/i18next/i18next.d.ts" />
 //#######  core #######
 /// <reference path="core/constants.ts" />
 /// <reference path="core/config.ts" />

@@ -1,4 +1,4 @@
-﻿
+﻿                                                               
 /*
  * Typescript files that do not encapsulate any class or interface 
  * do not need to be included in here
@@ -10,6 +10,7 @@
 /// <reference path="../scripts/typings/angular-ui/angular-ui-router.d.ts" />
 /// <reference path="../scripts/typings/toastr/toastr.d.ts" />
 /// <reference path="../scripts/typings/moment/moment.d.ts" />
+/// <reference path="../scripts/typings/i18next/i18next.d.ts" />
 
 //#######  core #######
 /// <reference path="core/constants.ts" />

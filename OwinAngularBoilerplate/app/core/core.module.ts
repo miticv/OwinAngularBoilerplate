@@ -7,10 +7,12 @@ module app {
         /*
          *  Angular Modules
          */
-        //'ngResource', 'ngRoute', 'ngSanitize',
+        //'ngResource', 'ngRoute', 
+        'ngSanitize',
         'ngAnimate',
         //'ngplus',
-        'ui.router', 
+        'ui.router',
+        'jm.i18next', 
         /*
          * Our reusable cross app code modules
          */

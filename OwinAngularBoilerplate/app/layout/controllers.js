@@ -4,7 +4,7 @@ var app;
 (function (app) {
     (function (layout) {
         var LayoutController = (function () {
-            function LayoutController($timeout, logger, $scope, $location, accountService, $interval, NotifyingCache) {
+            function LayoutController($timeout, logger, $scope, $location, accountService, $interval, NotifyingCache, $i18next) {
                 this.logout = function () {
                     var self = this;
                     self.dataSvc.$logout();
@@ -42,6 +42,10 @@ var app;
                         self.logger.success(self.title + ' ' + app.LANG.Loaded, null);
                     });
                 };
+                this.changeLanguage = function (lng) {
+                    var self = this;
+                    self.i18next.options.lng = lng;
+                };
                 this.countdown = function () {
                     var self = this;
 
@@ -76,6 +80,7 @@ var app;
                 self.dataSvc = accountService;
                 self.interval = $interval;
                 self.notifyingCache = NotifyingCache;
+                self.i18next = $i18next;
 
                 self.fetchingRefreshToken = false;
                 self.title = app.LANG.applicationName; //   config.appTitle;
@@ -98,7 +103,7 @@ var app;
                     self.expiresIn = null;
                 });
             }
-            LayoutController.$inject = ['$timeout', 'logger', '$scope', '$location', 'accountService', '$interval', 'NotifyingCache'];
+            LayoutController.$inject = ['$timeout', 'logger', '$scope', '$location', 'accountService', '$interval', 'NotifyingCache', '$i18next'];
             return LayoutController;
         })();
         layout.LayoutController = LayoutController;
