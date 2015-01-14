@@ -47,6 +47,18 @@ namespace OwinAngularBoilerplate.Models
         public DbSet<RefreshToken> RefreshTokens { get; set; }
     }
 
+    public class ResourceContext : IdentityDbContext<ApplicationUser, CustomRole, int, CustomUserLogin, CustomUserRole, CustomUserClaim>
+    {
+
+        public ResourceContext()
+            : base("DefaultConnection")
+        {
+
+        }
+
+        public DbSet<Resource> Resources { get; set; }
+    }
+
 
     //New drived classes 
     public class CustomUserRole : IdentityUserRole<int> { }
