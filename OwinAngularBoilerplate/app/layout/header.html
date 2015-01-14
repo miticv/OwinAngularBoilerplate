@@ -2,15 +2,23 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
   <div class="container">
     <div class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li><a ng-i18next="word" ng-click="layout.changeLanguage('en-ca')"></a></li>
-        <li><a ng-i18next="word" ng-click="layout.changeLanguage('en-us')"></a></li>
-        <li><a href="/#/test" ng-i18next="word">test </a></li>
-        <li><a ng-hide="layout.isLoggedIn" href="/#/login" ng-lang-translate="login">login</a></li>
-        <li><a ng-show="layout.isLoggedIn" href="/#/userhome" ng-lang-translate="logedinpage">loged in page</a></li>
-        <li><a ng-hide="layout.isLoggedIn" href="/#/register" ng-lang-translate="register">register</a></li>
-        <li><a href="/#/notexist" ng-lang-translate="invalidpage">invalid page</a></li>
-        <li><a ng-show="layout.isLoggedIn" ng-click="layout.logout()" href="javascript:void(0)" ng-lang-translate="logout">logout</a></li>
+      <ul class="nav navbar-nav">        
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" role="button" href="#"><i class="fa fa-globe" /> <span ng-i18next="menu.language">language</span><span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a ng-click="layout.changeLanguage('en-US')"><img class="langImage" src="/Content/images/usa.png" /><span ng-i18next="menu.english">English</span></a></li>
+            <li><a ng-click="layout.changeLanguage('sr-Latn-RS')"><img class="langImage" src="/Content/images/rs.png" /><span ng-i18next="menu.serbian">Serbian</span></a></li>
+            <li><a ng-click="layout.changeLanguage('sr-Cyrl-RS')"><img class="langImage" src="/Content/images/rsl.png" /><span ng-i18next="menu.serbiancyrilic">Serbian Cyrilic</span></a></li>
+            <li><a ng-click="layout.changeLanguage('zh-CN')"><img class="langImage" src="/Content/images/cn.png" /><span ng-i18next="menu.chinese">Chinese</span></a></li>
+            <li><a ng-click="layout.changeLanguage('it-IT')"><img class="langImage" src="/Content/images/it.png" /><span ng-i18next="menu.italian">Italian</span></a></li>
+          </ul>
+        </li>
+        <li><a href="/#/test" ng-i18next="menu.test">test </a></li>
+        <li><a ng-hide="layout.isLoggedIn" href="/#/login" ng-i18next="menu.login">login</a></li>
+        <li><a ng-show="layout.isLoggedIn" href="/#/userhome" ng-i18next="menu.logedinpage">loged in page</a></li>
+        <li><a ng-hide="layout.isLoggedIn" href="/#/register" ng-i18next="menu.register">register</a></li>
+        <li><a href="/#/notexist" ng-i18next="menu.invalidpage">invalid page</a></li>
+        <li><a ng-show="layout.isLoggedIn" ng-click="layout.logout()" href="javascript:void(0)" ng-i18next="menu.logout">logout</a></li>
       </ul>
     </div>
   </div>

@@ -60,25 +60,25 @@ module app.widgets {
 angular.module("app.widgets").directive('ngUiViewAnimate', app.widgets.ngUiViewAnimate);
 //#endregion  
 
-//#region ngLangTranslate
-module app.widgets {
+////#region ngLangTranslate
+//module app.widgets {
 
-    ngLangTranslate.$inject = [];
-    export function ngLangTranslate(): ng.IDirective {
-        var directive: ng.IDirective = <ng.IDirective>{};
+//    ngLangTranslate.$inject = [];
+//    export function ngLangTranslate(): ng.IDirective {
+//        var directive: ng.IDirective = <ng.IDirective>{};
 
-        directive.restrict = 'A';
-        directive.link = function($scope: ng.IScope, elem: JQuery, attrs: ng.IAttributes) {
-            if (!attrs['ngLangTranslate']) return;
-            if (app.LANG[attrs['ngLangTranslate']]) {
-                elem.text(app.LANG[attrs['ngLangTranslate']]);
-            }
-        }
-        return directive;
-    }
-}
-angular.module('app.widgets').directive('ngLangTranslate', app.widgets.ngLangTranslate);
-//#endregion
+//        directive.restrict = 'A';
+//        directive.link = function($scope: ng.IScope, elem: JQuery, attrs: ng.IAttributes) {
+//            if (!attrs['ngLangTranslate']) return;
+//            if (app.LANG[attrs['ngLangTranslate']]) {
+//                elem.text(app.LANG[attrs['ngLangTranslate']]);
+//            }
+//        }
+//        return directive;
+//    }
+//}
+//angular.module('app.widgets').directive('ngLangTranslate', app.widgets.ngLangTranslate);
+////#endregion
 
 //#region ngCountDown
 //module app.widgets {

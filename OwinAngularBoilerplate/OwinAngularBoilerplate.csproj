@@ -169,6 +169,11 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\images\busy.gif" />
+    <Content Include="Content\images\cn.png" />
+    <Content Include="Content\images\gb.png" />
+    <Content Include="Content\images\it.png" />
+    <Content Include="Content\images\rs.png" />
+    <Content Include="Content\images\rsl.png" />
     <Content Include="Content\jasmine\jasmine.css" />
     <Content Include="Content\jasmine\jasmine_favicon.png" />
     <Content Include="Content\toastr.css" />
@@ -242,8 +247,8 @@
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-1.9.0.intellisense.js" />
-    <Content Include="Scripts\i18next-1.7.4.js" />
-    <Content Include="Scripts\i18next-1.7.4.min.js" />
+    <Content Include="Scripts\i18next-1.7.7.js" />
+    <Content Include="Scripts\i18next-1.7.7.min.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-dj.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-er.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-et.js" />

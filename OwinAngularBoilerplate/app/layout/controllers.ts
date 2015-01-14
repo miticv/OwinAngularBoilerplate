@@ -14,7 +14,7 @@ module app.layout {
         private interval: ng.IIntervalService;
         private tokenData: app.useraccount.models.Token;
         private notifyingCache: INotifyingCache;
-        private i18next: I18nextStatic;
+        private i18next: any;
 
         private title: string;
         private busyMessage: string;
@@ -36,7 +36,7 @@ module app.layout {
             var model = new app.useraccount.models.Refresh();
             self.tokenData = self.notifyingCache.get(app.CONST.sessionStorageKey); 
             if (!self.tokenData) {
-                self.logger.warning('refresh token expired');
+                self.logger.warning(self.i18next('refreshtokenexpired'));
                 return;
             }
             self.fetchingRefreshToken = true;
@@ -47,7 +47,7 @@ module app.layout {
 
                 self.tokenData = data;
                 self.tokenData.useRefreshTokens = true;
-                self.logger.success('session refreshed');
+                self.logger.success(self.i18next('sessionrefreshed'));
                 self.fetchingRefreshToken = false;
             }, function (err: app.ApiError) {                
                 self.fetchingRefreshToken = false;
@@ -60,11 +60,9 @@ module app.layout {
             var self = this;
             self.dataSvc.$userInfo().then(function (data) {
                 self.test = data;
-                self.logger.success(self.title + ' ' + app.LANG.Loaded, null);
                 self.isLoggedIn = true;
                 self.countdown();
-            }, function (err: app.ApiError) {
-                self.logger.success(self.title + ' ' + app.LANG.Loaded, null);                 
+            }, function (err: app.ApiError) {               
             });
         }
 
@@ -102,7 +100,7 @@ module app.layout {
         }
 
         static $inject = ['$timeout', 'logger', '$scope', '$location', 'accountService', '$interval', 'NotifyingCache','$i18next'];
-        constructor($timeout: ng.ITimeoutService, logger: ILogger, $scope: ng.IScope, $location: ng.ILocationService, accountService: ng.IServiceProvider, $interval: ng.IIntervalService, NotifyingCache: INotifyingCache, $i18next: I18nextStatic) {
+        constructor($timeout: ng.ITimeoutService, logger: ILogger, $scope: ng.IScope, $location: ng.ILocationService, accountService: ng.IServiceProvider, $interval: ng.IIntervalService, NotifyingCache: INotifyingCache, $i18next: any) {
             var self = this;
 
             self.isLoggedIn = false;
@@ -115,9 +113,7 @@ module app.layout {
             self.notifyingCache = NotifyingCache; 
             self.i18next = $i18next;
 
-            self.fetchingRefreshToken = false;
-            self.title = app.LANG.applicationName;      //   config.appTitle; 
-            self.busyMessage = app.LANG.PleaseWait + ' ...';
+            self.fetchingRefreshToken = false;            
             self.isBusy = true;
             self.expiresInShow = false;
 
@@ -136,6 +132,11 @@ module app.layout {
                     self.expiresIn = null;            
             });
 
+            $scope.$on(app.EVENTS.i18LanguageChange, function () {
+                self.title = self.i18next('applicationname');      //   config.appTitle; 
+                //self.busyMessage = self.i18next('pleasewait') + ' ...';
+                self.logger.success(self.title + ' ' + self.i18next('loaded'), null);
+            });
 
         }     
     }

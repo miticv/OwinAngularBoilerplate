@@ -4,26 +4,6 @@ var app;
 (function (app) {
     angular.module('app.core').constant('toastr', toastr).constant('moment', moment);
 
-    /* move this section into the API to enable multiple languages */
-    (function (LANG) {
-        LANG.applicationName = 'Boilerplate';
-        LANG.LoggedIn = 'Logged in!';
-        LANG.Registered = 'Registered!';
-        LANG.WrongCredentals = 'Wrong credentials!';
-        LANG.CanNotRegister = 'Cannot register!';
-        LANG.NoAccess = 'No Access';
-        LANG.Loaded = 'loaded';
-        LANG.PleaseWait = 'Please Wait';
-
-        LANG.login = 'login';
-        LANG.test = 'test';
-        LANG.logedinpage = 'loged in page';
-        LANG.register = 'register';
-        LANG.invalidpage = 'invalid page';
-        LANG.logout = 'logout';
-    })(app.LANG || (app.LANG = {}));
-    var LANG = app.LANG;
-
     (function (CONST) {
         CONST.sessionStorageKey = 'authorizationData';
         CONST.sessionSlackTime = 10;
@@ -32,6 +12,8 @@ var app;
     var CONST = app.CONST;
 
     (function (EVENTS) {
+        EVENTS.i18LanguageChange = 'i18nextLanguageChange';
+
         EVENTS.loginSuccess = 'auth-login-success';
         EVENTS.loginFailed = 'auth-login-failed';
         EVENTS.logoutSuccess = 'auth-logout-success';

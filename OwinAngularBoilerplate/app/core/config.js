@@ -27,7 +27,7 @@ var app;
             fallbackLng: 'dev',
             lowerCaseLng: true,
             //dynamicLoad: false,
-            //getAsync: true,
+            getAsync: true,
             resGetPath: '/api/translate/__lng__/',
             defaultLoadingValue: ''
         };

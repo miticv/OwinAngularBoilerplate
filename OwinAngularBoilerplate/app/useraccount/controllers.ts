@@ -10,6 +10,7 @@ module app.useraccount {
         private logger: ILogger;
         private location: ng.ILocationService;
         private notifyingCache: INotifyingCache;
+        private i18next: I18nextStatic;
 
         working: boolean;
 
@@ -23,14 +24,14 @@ module app.useraccount {
                 self.working = false;
                 self.tokenData = data;
                 self.tokenData.useRefreshTokens = true;
-                self.logger.success(app.LANG.LoggedIn);
+                self.logger.success(self.i18next('loggedin'));
                 self.location.path('/userhome');
                 
             }, function (err: app.ApiError) {
                 self.working = false;
                 var returnArray = (new ApiErrorHelper()).getModelError(err.data);
                 for (var error in returnArray) {
-                    self.logger.error(returnArray[error].modelError, app.LANG.CanNotRegister);
+                    self.logger.error(returnArray[error].modelError, self.i18next('cannotregister'));
                 }             
             });
 
@@ -45,12 +46,12 @@ module app.useraccount {
             model.confirmPassword = self.confirmPassword;
             self.dataSvc.$register(model).then(function (data) {
                 self.tokenData = data;
-                self.logger.success(app.LANG.Registered);
+                self.logger.success(self.i18next('registered'));
                 self.location.path('/successRegister');
             }, function (err: app.ApiError) {                
                 var returnArray = (new ApiErrorHelper()).getModelError(err.data);
                 for (var error in returnArray) {
-                    self.logger.error(returnArray[error].modelError, app.LANG.CanNotRegister);
+                    self.logger.error(returnArray[error].modelError, self.i18next('cannotregister'));
                 }
             });
         }
@@ -63,25 +64,26 @@ module app.useraccount {
                     var returnArray = (new ApiErrorHelper()).getModelError(err.data);
                     var errorVisible = false;
                     for (var error in returnArray) {
-                        self.logger.error(returnArray[error].modelError, app.LANG.NoAccess);
+                        self.logger.error(returnArray[error].modelError, self.i18next('noaccess'));
                         errorVisible = true;
                     }
                     if (!errorVisible) {
-                        self.logger.error(app.LANG.NoAccess);
+                        self.logger.error(self.i18next.t('noaccess'));
                     }
                 });
         }
 
 
-        static $inject = ['$scope', 'accountService', 'logger', '$location', 'NotifyingCache'];
-        constructor(scope: ng.IScope, accountService: ng.IServiceProvider, logger: ILogger, location: ng.ILocationService, NotifyingCache: INotifyingCache) {
+        static $inject = ['$scope', 'accountService', 'logger', '$location', 'NotifyingCache', '$i18next'];
+        constructor(scope: ng.IScope, accountService: ng.IServiceProvider, logger: ILogger, location: ng.ILocationService, NotifyingCache: INotifyingCache, $i18next: I18nextStatic) {
             var self = this;   
             self.working = false;
 
             self.dataSvc = accountService;
             self.logger = logger;
             self.location = location; 
-            self.notifyingCache = NotifyingCache;          
+            self.notifyingCache = NotifyingCache; 
+            self.i18next = $i18next;                                 
         }
     }  
                 

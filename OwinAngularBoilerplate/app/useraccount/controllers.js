@@ -4,7 +4,7 @@ var app;
 (function (app) {
     (function (useraccount) {
         var UserController = (function () {
-            function UserController(scope, accountService, logger, location, NotifyingCache) {
+            function UserController(scope, accountService, logger, location, NotifyingCache, $i18next) {
                 this.LogMeIn = function () {
                     var self = this;
                     self.working = true;
@@ -15,13 +15,13 @@ var app;
                         self.working = false;
                         self.tokenData = data;
                         self.tokenData.useRefreshTokens = true;
-                        self.logger.success(app.LANG.LoggedIn);
+                        self.logger.success(self.i18next('loggedin'));
                         self.location.path('/userhome');
                     }, function (err) {
                         self.working = false;
                         var returnArray = (new app.ApiErrorHelper()).getModelError(err.data);
                         for (var error in returnArray) {
-                            self.logger.error(returnArray[error].modelError, app.LANG.CanNotRegister);
+                            self.logger.error(returnArray[error].modelError, self.i18next('cannotregister'));
                         }
                     });
                 };
@@ -33,12 +33,12 @@ var app;
                     model.confirmPassword = self.confirmPassword;
                     self.dataSvc.$register(model).then(function (data) {
                         self.tokenData = data;
-                        self.logger.success(app.LANG.Registered);
+                        self.logger.success(self.i18next('registered'));
                         self.location.path('/successRegister');
                     }, function (err) {
                         var returnArray = (new app.ApiErrorHelper()).getModelError(err.data);
                         for (var error in returnArray) {
-                            self.logger.error(returnArray[error].modelError, app.LANG.CanNotRegister);
+                            self.logger.error(returnArray[error].modelError, self.i18next('cannotregister'));
                         }
                     });
                 };
@@ -50,11 +50,11 @@ var app;
                         var returnArray = (new app.ApiErrorHelper()).getModelError(err.data);
                         var errorVisible = false;
                         for (var error in returnArray) {
-                            self.logger.error(returnArray[error].modelError, app.LANG.NoAccess);
+                            self.logger.error(returnArray[error].modelError, self.i18next('noaccess'));
                             errorVisible = true;
                         }
                         if (!errorVisible) {
-                            self.logger.error(app.LANG.NoAccess);
+                            self.logger.error(self.i18next.t('noaccess'));
                         }
                     });
                 };
@@ -65,8 +65,9 @@ var app;
                 self.logger = logger;
                 self.location = location;
                 self.notifyingCache = NotifyingCache;
+                self.i18next = $i18next;
             }
-            UserController.$inject = ['$scope', 'accountService', 'logger', '$location', 'NotifyingCache'];
+            UserController.$inject = ['$scope', 'accountService', 'logger', '$location', 'NotifyingCache', '$i18next'];
             return UserController;
         })();
         useraccount.UserController = UserController;

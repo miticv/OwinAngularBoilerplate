@@ -32,6 +32,13 @@ form input[disabled]:hover
   margin-top: 50px;
 }
 
+
+.langImage {
+margin-right:15px;
+width: 15px;
+height: 15px;
+}
+
 /*#region "Hardcoded Animation for global ui-view change" *
 
 .ui-view-container {

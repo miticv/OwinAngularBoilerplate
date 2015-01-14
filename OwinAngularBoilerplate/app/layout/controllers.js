@@ -15,7 +15,7 @@ var app;
                     var model = new app.useraccount.models.Refresh();
                     self.tokenData = self.notifyingCache.get(app.CONST.sessionStorageKey);
                     if (!self.tokenData) {
-                        self.logger.warning('refresh token expired');
+                        self.logger.warning(self.i18next('refreshtokenexpired'));
                         return;
                     }
                     self.fetchingRefreshToken = true;
@@ -25,7 +25,7 @@ var app;
                     self.dataSvc.$refresh(model).then(function (data) {
                         self.tokenData = data;
                         self.tokenData.useRefreshTokens = true;
-                        self.logger.success('session refreshed');
+                        self.logger.success(self.i18next('sessionrefreshed'));
                         self.fetchingRefreshToken = false;
                     }, function (err) {
                         self.fetchingRefreshToken = false;
@@ -35,11 +35,9 @@ var app;
                     var self = this;
                     self.dataSvc.$userInfo().then(function (data) {
                         self.test = data;
-                        self.logger.success(self.title + ' ' + app.LANG.Loaded, null);
                         self.isLoggedIn = true;
                         self.countdown();
                     }, function (err) {
-                        self.logger.success(self.title + ' ' + app.LANG.Loaded, null);
                     });
                 };
                 this.changeLanguage = function (lng) {
@@ -83,8 +81,6 @@ var app;
                 self.i18next = $i18next;
 
                 self.fetchingRefreshToken = false;
-                self.title = app.LANG.applicationName; //   config.appTitle;
-                self.busyMessage = app.LANG.PleaseWait + ' ...';
                 self.isBusy = true;
                 self.expiresInShow = false;
 
@@ -101,6 +97,13 @@ var app;
                 $scope.$on(app.EVENTS.logoutSuccess, function (e, kvp) {
                     self.isLoggedIn = false;
                     self.expiresIn = null;
+                });
+
+                $scope.$on(app.EVENTS.i18LanguageChange, function () {
+                    self.title = self.i18next('applicationname'); //   config.appTitle;
+
+                    //self.busyMessage = self.i18next('pleasewait') + ' ...';
+                    self.logger.success(self.title + ' ' + self.i18next('loaded'), null);
                 });
             }
             LayoutController.$inject = ['$timeout', 'logger', '$scope', '$location', 'accountService', '$interval', 'NotifyingCache', '$i18next'];
