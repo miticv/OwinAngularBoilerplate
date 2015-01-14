@@ -48,8 +48,7 @@ namespace OwinAngularBoilerplate.ApiControllers
                   'inp_password': 'Password',
                   'inp_passwordconfirm': 'Confirm Password',
                   'btn_login':'Login', 
-                  'btn_submit':'Register', 
-
+                  'btn_register':'Register', 
 
                   'applicationname': 'Boilerplate',
                   'loggedin': 'Logged in!',
@@ -58,13 +57,7 @@ namespace OwinAngularBoilerplate.ApiControllers
                   'cannotregister':'Cannot register!',
                   'noaccess':'No Access',
                   'loaded':'loaded',
-                  'pleasewait':'Please Wait',
-                  
-                  'test':'test',
-                  'logedinpage':'loged in page',
-                  'register':'register',
-                  'invalidpage':'invalid page',
-                  'logout':'logout',
+                  'pleasewait':'Please Wait',                  
                   'sessionrefreshed': 'session refreshed',
                   'refreshtokenexpired': 'refresh token expired'
                 }"
@@ -102,22 +95,16 @@ namespace OwinAngularBoilerplate.ApiControllers
                   'btn_register':'Региструј се', 
 
 
-                  'applicationname': 'Boilerplate',
-                  'loggedin': 'Ulogovan!',
-                  'registered':'Registrovan!',
-                  'wrongcredentals':'Wrong credentials!',
-                  'cannotregister':'Cannot register!',
-                  'noaccess':'Restrikt',
-                  'loaded':'loaded',
-                  'pleasewait':'Please Wait',
-                  'login':'uloguj se',
-                  'test':'test',
-                  'logedinpage':'loged in page',
-                  'register':'register',
-                  'invalidpage':'invalid page',
-                  'logout':'logout',
-                  'sessionrefreshed': 'session refreshed',
-                  'refreshtokenexpired': 'refresh token expired'
+                  'applicationname': 'Темплејт',
+                  'loggedin': 'Улогован!',
+                  'registered':'Регистрован!',
+                  'wrongcredentals':'Нетачна креденција!',
+                  'cannotregister':'Регистрација неуспешна!',
+                  'noaccess':'Немате приступ',
+                  'loaded':'учитан',
+                  'pleasewait':'Молимо чекајте',
+                  'sessionrefreshed': 'сесија је освежена',
+                  'refreshtokenexpired': 'токен је истеко'
                 }"
             );
             return json;
@@ -154,22 +141,16 @@ namespace OwinAngularBoilerplate.ApiControllers
                   'btn_login':'Uloguj se', 
                   'btn_register':'Registruj se', 
 
-                  'applicationname': 'Boilerplate',
+                  'applicationname': 'Templejt',
                   'loggedin': 'Ulogovan!',
                   'registered':'Registrovan!',
-                  'wrongcredentals':'Wrong credentials!',
-                  'cannotregister':'Cannot register!',
-                  'noaccess':'Restrikt',
-                  'loaded':'loaded',
-                  'pleasewait':'Please Wait',
-                  'login':'uloguj se',
-                  'test':'test',
-                  'logedinpage':'loged in page',
-                  'register':'register',
-                  'invalidpage':'invalid page',
-                  'logout':'logout',
-                  'sessionrefreshed': 'session refreshed',
-                  'refreshtokenexpired': 'refresh token expired'
+                  'wrongcredentals':'Netačna kredencija!',
+                  'cannotregister':'Registracija neuspešna!',
+                  'noaccess':'Nemate pristup',
+                  'loaded':'učitan',
+                  'pleasewait':'Molimo sačekajte',
+                  'sessionrefreshed': 'sesija je osvezena',
+                  'refreshtokenexpired': 'token je istekao'
                 }"
             );
             return json;
@@ -207,22 +188,16 @@ namespace OwinAngularBoilerplate.ApiControllers
 
                   
 
-                  'applicationname': 'Boilerplate',
-                  'loggedin': 'Ulogovan!',
-                  'registered':'Registrovan!',
-                  'wrongcredentals':'Wrong credentials!',
-                  'cannotregister':'Cannot register!',
-                  'noaccess':'Restrikt',
-                  'loaded':'loaded',
-                  'pleasewait':'Please Wait',
-                  'login':'uloguj se',
-                  
-                  'logedinpage':'loged in page',
-                  'register':'register',
-                  'invalidpage':'invalid page',
-                  'logout':'logout',
-                  'sessionrefreshed': 'session refreshed',
-                  'refreshtokenexpired': 'refresh token expired'
+                  'applicationname': '模板',
+                  'loggedin': '登录!',
+                  'registered':'注册!',
+                  'wrongcredentals':'错误的凭据!',
+                  'cannotregister':'甘特寄存器!',
+                  'noaccess':'没有访问',
+                  'loaded':'加载',
+                  'pleasewait':'请稍候',                                    
+                  'sessionrefreshed': '会话刷新',
+                  'refreshtokenexpired': '刷新令牌过期'
                 }"
             );
             return json;
@@ -258,22 +233,17 @@ namespace OwinAngularBoilerplate.ApiControllers
                   'btn_login':'Logare', 
                   'btn_register':'Registro', 
 
-                  'applicationname': 'Boilerplate',
-                  'loggedin': 'Ulogovan!',
-                  'registered':'Registrovan!',
-                  'wrongcredentals':'Wrong credentials!',
-                  'cannotregister':'Cannot register!',
-                  'noaccess':'Restrikt',
-                  'loaded':'loaded',
-                  'pleasewait':'Please Wait',
-                  'login':'uloguj se',
-                  'test':'test',
-                  'logedinpage':'loged in page',
-                  'register':'register',
-                  'invalidpage':'invalid page',
-                  'logout':'logout',
-                  'sessionrefreshed': 'session refreshed',
-                  'refreshtokenexpired': 'refresh token expired'
+                  'applicationname': 'sagoma',
+                  'loggedin': 'Connesso!',
+                  'registered':'registrato!',
+                  'wrongcredentals':'Credenziali errate!',
+                  'cannotregister':'Impossibile registrare!',
+                  'noaccess':'nessun accesso',
+                  'loaded':'caricato',
+                  'pleasewait':'attendere prego',
+ 
+                  'sessionrefreshed': 'sessione aggiornato',
+                  'refreshtokenexpired': 'aggiornare gettone scaduto'
                 }"
             );
             return json;
