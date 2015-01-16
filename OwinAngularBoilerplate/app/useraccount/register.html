@@ -1,41 +1,42 @@
 ﻿<form class="form-login" role="form" novalidate>
   <div class="row">
-    <div class="col-md-2">
+    <!--<div class="col-md-2">
       &nbsp;
-    </div>
+    </div>-->
+    
     <div class="col-md-4"
          ng-form="registerForm">
-      <h2 class="form-login-heading" ng-i18next="title_register">Register</h2>
+      <h2 class="form-login-heading" ng-i18next="login.registertitle">Register</h2>
       <div class="input-group margin-bottom-sm">
         <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
-        <input type="text" class="form-control" ng-i18next="[placeholder]inp_email" placeholder="Email address"
+        <input type="text" class="form-control" ng-i18next="[placeholder]login.email" placeholder="Email address"
                data-ng-model="register.username"
                data-ng-required="true"
                autofocus
                data-ng-pattern="/^[a-zA-Z0-9][a-zA-Z0-9_.+\-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]{2,9}|^([nN](/)?[aA])$/" />
-        </div>
-        <div class="input-group margin-bottom-sm">
-        <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
-          <input type="password" class="form-control" ng-i18next="[placeholder]inp_password" placeholder="Password"
-                 data-ng-model="register.password"
-                 data-ng-required="true" />
-        </div>
-       <div class="input-group margin-bottom-sm">
-        <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
-         <input type="password" class="form-control" ng-i18next="[placeholder]inp_passwordconfirm" placeholder="Confirm Password"
-                data-ng-model="register.confirmPassword"
-                data-ng-required="true"
-                data-ng-match="register.password" />
-        </div>
-        <button class="btn btn-lg btn-info btn-block" type="submit"
-                data-ng-disabled="registerForm.$invalid"
-                data-ng-click="register.RegisterMe()">
-          <span ng-i18next="btn_register">Register</span>
-        </button>
-        <div data-ng-hide="register.message == null || register.message == undefined"
-             data-ng-class="(register.savedSuccessfully) ? 'alert alert-success' : 'alert alert-danger'">
-          {{register.message}}
-        </div>
       </div>
+      <div class="input-group margin-bottom-sm">
+        <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+        <input type="password" class="form-control" ng-i18next="[placeholder]login.password" placeholder="Password"
+               data-ng-model="register.password"
+               data-ng-required="true" />
+      </div>
+      <div class="input-group margin-bottom-sm">
+        <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+        <input type="password" class="form-control" ng-i18next="[placeholder]login.confirmpassword" placeholder="Confirm Password"
+               data-ng-model="register.confirmPassword"
+               data-ng-required="true"
+               data-ng-match="register.password" />
+      </div>
+      <button class="btn btn-lg btn-info btn-block" type="submit"
+              data-ng-disabled="registerForm.$invalid"
+              data-ng-click="register.RegisterMe()">
+        <span ng-i18next="menu.register">Register</span>
+      </button>
+      <div data-ng-hide="register.message == null || register.message == undefined"
+           data-ng-class="(register.savedSuccessfully) ? 'alert alert-success' : 'alert alert-danger'">
+        {{register.message}}
+      </div>
+    </div>
   </div>
 </form>

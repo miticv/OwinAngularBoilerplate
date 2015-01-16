@@ -23,7 +23,7 @@ module app.layout {
 
         public isLoggedIn: boolean;
         public expiresIn: number;
-        private fetchingRefreshToken : boolean;
+        private fetchingRefreshToken: boolean;
 
         logout = function () {
             var self = this;
@@ -43,12 +43,9 @@ module app.layout {
             model.username = self.tokenData.userName;
             model.refresh_token = self.tokenData.refresh_token;
 
-            self.dataSvc.$refresh(model).then(function (data) {
-
+            self.dataSvc.$refresh(model).then(function (data) {               
                 self.tokenData = data;
-                self.tokenData.useRefreshTokens = true;
-                self.logger.success(self.i18next('sessionrefreshed'));
-                self.fetchingRefreshToken = false;
+                self.logger.success(self.i18next('sessionrefreshed'));                
             }, function (err: app.ApiError) {                
                 self.fetchingRefreshToken = false;
             });
@@ -68,8 +65,7 @@ module app.layout {
 
         changeLanguage = function (lng) {
             var self = this;
-            self.i18next.options.lng = lng;
-
+            self.i18next.options.lng = lng;            
         }
 
         countdown = function () {
@@ -89,10 +85,11 @@ module app.layout {
 
                 }, 1000);
 
-          }
+            }
+            self.fetchingRefreshToken = false;
         }
 
-        calculateExpiredSeconds = function (refreshId) {
+        calculateExpiredSeconds = function () {
             var self = this; 
             if (self.fetchingRefreshToken) return self.expiresIn; //freeze time if refreshing token.
             var sessionEndTime = moment.unix(self.tokenData.clientIssuedTime).add(self.tokenData.expires_in - app.CONST.sessionSlackTime, 'seconds');
@@ -123,6 +120,8 @@ module app.layout {
             });
 
             $scope.$on(app.EVENTS.loginRefreshTokenSuccess, function (e, kvp) {
+                self.expiresInShow = false; 
+                self.fetchingRefreshToken = false;                 
                 self.isLoggedIn = true;
                 self.countdown();
             });

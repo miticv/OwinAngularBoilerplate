@@ -24,9 +24,7 @@ var app;
 
                     self.dataSvc.$refresh(model).then(function (data) {
                         self.tokenData = data;
-                        self.tokenData.useRefreshTokens = true;
                         self.logger.success(self.i18next('sessionrefreshed'));
-                        self.fetchingRefreshToken = false;
                     }, function (err) {
                         self.fetchingRefreshToken = false;
                     });
@@ -60,8 +58,9 @@ var app;
                             self.expiresInShow = self.expiresIn <= app.CONST.sessionDisplaySessionEndWarningAtSecond;
                         }, 1000);
                     }
+                    self.fetchingRefreshToken = false;
                 };
-                this.calculateExpiredSeconds = function (refreshId) {
+                this.calculateExpiredSeconds = function () {
                     var self = this;
                     if (self.fetchingRefreshToken)
                         return self.expiresIn;
@@ -90,6 +89,8 @@ var app;
                 });
 
                 $scope.$on(app.EVENTS.loginRefreshTokenSuccess, function (e, kvp) {
+                    self.expiresInShow = false;
+                    self.fetchingRefreshToken = false;
                     self.isLoggedIn = true;
                     self.countdown();
                 });

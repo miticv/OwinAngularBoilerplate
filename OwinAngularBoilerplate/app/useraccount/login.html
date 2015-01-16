@@ -1,14 +1,15 @@
 ﻿
 <form role="form" novalidate>
   <div class="row">
-    <div class="col-md-2">
+    <!--<div class="col-md-2">
       &nbsp;
-    </div>
+    </div>-->
+    
     <div class="col-md-4" ng-form="loginForm">
-      <h2 class="form-login-heading" ng-i18next="title_login">Login</h2>
+      <h2 class="form-login-heading" ng-i18next="login.logintitle">Login</h2>
       <div class="input-group margin-bottom-sm">
         <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
-        <input type="text" class="form-control" ng-i18next="[placeholder]inp_email" placeholder="Email address"
+        <input type="text" class="form-control" ng-i18next="[placeholder]login.email" placeholder="Email address"
                data-ng-model="login.username"
                data-ng-required="true"
                autofocus
@@ -16,7 +17,7 @@
       </div>
       <div class="input-group  margin-bottom-sm">
         <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
-        <input type="password" class="form-control" ng-i18next="[placeholder]inp_password" placeholder="Password"
+        <input type="password" class="form-control" ng-i18next="[placeholder]login.password" placeholder="Password"
                data-ng-model="login.password"
                data-ng-required="true">
       </div>
@@ -29,7 +30,7 @@
         <button class="btn btn-lg btn-info btn-block" type="submit"
                 ng-disabled="loginForm.$invalid || login.working"
                 data-ng-click="login.LogMeIn()">
-          <span ng-i18next="btn_login">Login</span><i class="fa fa-refresh fa-spin animate" ng-class="{'vis-hidden': !login.working }"></i>
+          <span ng-i18next="menu.login">Login</span><i class="fa fa-refresh fa-spin animate" ng-class="{'vis-hidden': !login.working }"></i>
         </button>
         <div class="alert alert-danger"
              data-ng-hide="login.message == null || login.message == undefined">
@@ -44,8 +45,8 @@
       <button class="btn btn-large btn-facebook btn-block" type="button" data-ng-click="login.authExternalProvider('Facebook')"><i class="fa fa-facebook"></i> | Connect with Facebook</button>
       <button class="btn btn-large btn-google-plus btn-block" type="button" data-ng-click="login.authExternalProvider('Google')"><i class="fa fa-google-plus"></i> | Connect with Google+</button>
     </div>
-    <div class="col-md-2">
+    <!--<div class="col-md-2">
       &nbsp;
-    </div>
+    </div>-->
   </div>
 </form>

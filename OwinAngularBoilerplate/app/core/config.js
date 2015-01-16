@@ -18,7 +18,7 @@ var app;
     configureTranslation.$inject = ['$i18nextProvider'];
     function configureTranslation($i18nextProvider) {
         $i18nextProvider.options = {
-            lng: 'en-us',
+            lng: 'en-US',
             useCookie: false,
             //cookieName: 'lang',  /* default 'i18next' */
             useLocalStorage: false,
